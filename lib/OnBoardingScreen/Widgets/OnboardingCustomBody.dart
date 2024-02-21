@@ -6,6 +6,8 @@ import 'package:task_manger/OnBoardingScreen/OnBoardScreen.dart';
 import 'package:task_manger/constants.dart';
 import 'package:task_manger/OnBoardingScreen/Widgets/chatItem.dart';
 
+import '../../screens/controller_screen/controller_screen.dart';
+
 class OnBoardCustomBody extends StatelessWidget {
   const OnBoardCustomBody({super.key});
 
@@ -71,7 +73,7 @@ class OnBoardCustomBody extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (ctx) => OnBoardScreen()),
+                                      builder: (ctx) => ControllerScreen()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(

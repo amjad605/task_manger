@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/OnBoardingScreen/OnBoardScreen.dart';
-import 'package:task_manger/constants.dart';
+import 'package:task_manger/theme.dart';
+import 'cubits/change_screen_bottom_nav.dart';
 
 void main() {
   runApp(const MyTaskManger());
@@ -12,12 +13,17 @@ class MyTaskManger extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-          scaffoldBackgroundColor: kBackgroungColor,
-          textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme)),
-      home: const OnBoardScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ChangeScreenBottomNav(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        home: const OnBoardScreen(),
+      ),
     );
   }
 }
