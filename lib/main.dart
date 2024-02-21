@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_manger/OnBoardingScreen/OnBoardScreen.dart';
 import 'package:task_manger/constants.dart';
-import 'OnBoardingScreen/onBoardingScreen.dart';
 
 void main() {
   runApp(const MyTaskManger());
@@ -17,7 +17,7 @@ class MyTaskManger extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
           scaffoldBackgroundColor: kBackgroungColor,
           textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme)),
-      home: const OnBoardingScreen(),
+      home: const OnBoardScreen(),
     );
   }
 }
