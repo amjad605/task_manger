@@ -17,7 +17,7 @@ class OnboardItem extends StatelessWidget {
             ? const DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage(
-                    "/Users/amjadayman/StudioProjects/task_manger/assets/images/photo-1590272456521-1bbe160a18ce.webp"),
+                    "assets/images/HD-wallpaper-black-space-black-star-stars.jpg"),
               )
             : null,
       ),
@@ -25,9 +25,9 @@ class OnboardItem extends StatelessWidget {
         children: [
           ShakeY(
             infinite: true,
-            from: 3,
-            delay: const Duration(milliseconds: 100),
-            duration: const Duration(seconds: 6),
+            from: 4,
+            delay: const Duration(milliseconds: 0),
+            duration: const Duration(seconds: 5),
             child: Image.asset(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.5,
