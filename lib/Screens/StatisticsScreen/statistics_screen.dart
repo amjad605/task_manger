@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/Screens/StatisticsScreen/overall_chart_class.dart';
 import 'package:task_manger/Screens/StatisticsScreen/overall_info_class.dart';
 
 class StatisticsScreen extends StatelessWidget {
@@ -14,10 +16,11 @@ class StatisticsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kItemsBackgroundColor,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
@@ -33,33 +36,73 @@ class StatisticsScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-          Padding(
-            padding:  EdgeInsets.all(screenWidth * 0.03),
-            child: SizedBox(
-              width: screenWidth,
-              height: screenHeight * 0.5,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: kItemsBackgroundColor,
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.05),
-                  child: Text(
-                      "Tasks Done",
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: screenWidth * 0.03,
+            Padding(
+              padding: EdgeInsets.all(screenWidth * 0.03),
+              child: SizedBox(
+                width: screenWidth,
+                height: screenHeight * 0.6,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: kItemsBackgroundColor,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(screenWidth * 0.055),
+                    child: Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Tasks Done",
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: screenWidth * 0.04,
+                            ),
+                          ),
+                          SizedBox(
+                            height: screenHeight * 0.02,
+                          ),
+                          SfCartesianChart(
+                            primaryXAxis: const CategoryAxis(
+                              majorGridLines:MajorGridLines(width: 0, color: Color.fromRGBO(69, 69, 73, 0.546)),
+                            ),
+                            legend: const Legend(
+                                isVisible: true,
+                                position: LegendPosition.bottom),
+                            series: <CartesianSeries>[
+                              SplineSeries<ChartData, String>(
+                                  dataSource: chartData1,
+                                  name: "Projects",
+                                  splineType: SplineType.cardinal,
+                                  cardinalSplineTension: 0.9,
+                                  color: kMainColor,
+                                  xValueMapper: (ChartData data, _) => data.x,
+                                  yValueMapper: (ChartData data, _) => data.y!,
+                                  markerSettings:
+                                      const MarkerSettings(isVisible: true)),
+                              SplineSeries<ChartData, String>(
+                                  dataSource: chartData2,
+                                  name: "Tasks",
+                                  splineType: SplineType.cardinal,
+                                  cardinalSplineTension: 0.9,
+                                  color: kLightblue,
+                                  xValueMapper: (ChartData data, _) => data.x,
+                                  yValueMapper: (ChartData data, _) => data.y!,
+                                  markerSettings:
+                                      const MarkerSettings(isVisible: true)),
+                            ],
+                          )
+                        ],
                       ),
                     ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
