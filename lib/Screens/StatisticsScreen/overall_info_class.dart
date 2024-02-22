@@ -19,21 +19,21 @@ List<Info> info = [
     icon: Icons.star_border_outlined,
     title: 'Tasks Completed',
     graph:
-        "Assets/Icons/sine blue.png",
+        "Assets/icons/sine blue.png",
     text: '8+ more\nfrom last week',
   ),
   Info(
     icon: Icons.assignment_outlined,
     title: 'Projects Done',
     graph:
-        "Assets/Icons/sine red.png",
+        "Assets/icons/sine red.png",
     text: '10+ more\nfrom last week',
   ),
   Info(
     icon: Icons.description_outlined,
     title: 'New Tasks',
     graph:
-        "Assets/Icons/sine violet.png",
+        "Assets/icons/sine violet.png",
     text: '10+ more\nfrom last week',
   ),
 ];

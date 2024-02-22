@@ -71,105 +71,103 @@ class StatisticsScreenContent extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: EdgeInsets.all(screenWidth * 0.055),
-                        child: Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    "Tasks Done",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: screenWidth * 0.04,
-                                    ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Tasks Done",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: screenWidth * 0.04,
                                   ),
-                                  SizedBox(
-                                    width: screenWidth * 0.05,
-                                  ),
-                                  SizedBox(
-                                    height: screenHeight * 0.07,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        for (var index = 0;
-                                            index < titles.length;
-                                            index++)
-                                          TextButton(
-                                            onPressed: () {
-                                              context
-                                                  .read<StatisticsCubit>()
-                                                  .updateSelectedIndex(index);
-                                            },
-                                            style: ButtonStyle(
-                                              overlayColor:
-                                                  MaterialStateProperty
-                                                      .resolveWith<Color?>(
-                                                (states) {
-                                                  return index == selectedIndex
-                                                      ? kLightblue
-                                                          .withOpacity(0.1)
-                                                      : null;
-                                                },
-                                              ),
-                                            ),
-                                            child: Text(
-                                              titles[index],
-                                              style: TextStyle(
-                                                color: index == selectedIndex
+                                ),
+                                SizedBox(
+                                  width: screenWidth * 0.05,
+                                ),
+                                SizedBox(
+                                  height: screenHeight * 0.07,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                    children: [
+                                      for (var index = 0;
+                                          index < titles.length;
+                                          index++)
+                                        TextButton(
+                                          onPressed: () {
+                                            context
+                                                .read<StatisticsCubit>()
+                                                .updateSelectedIndex(index);
+                                          },
+                                          style: ButtonStyle(
+                                            overlayColor:
+                                                MaterialStateProperty
+                                                    .resolveWith<Color?>(
+                                              (states) {
+                                                return index == selectedIndex
                                                     ? kLightblue
-                                                    : Colors.white,
-                                                fontSize: screenWidth * 0.03,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                                        .withOpacity(0.1)
+                                                    : null;
+                                              },
                                             ),
                                           ),
-                                      ],
-                                    ),
-                                  )
-                                ],
+                                          child: Text(
+                                            titles[index],
+                                            style: TextStyle(
+                                              color: index == selectedIndex
+                                                  ? kLightblue
+                                                  : Colors.white,
+                                              fontSize: screenWidth * 0.03,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            const Spacer(),
+                            SfCartesianChart(
+                              primaryXAxis: const CategoryAxis(
+                                majorGridLines: MajorGridLines(
+                                    width: 0,
+                                    color: Color.fromRGBO(69, 69, 73, 0.546)),
                               ),
-                              const Spacer(),
-                              SfCartesianChart(
-                                primaryXAxis: const CategoryAxis(
-                                  majorGridLines: MajorGridLines(
-                                      width: 0,
-                                      color: Color.fromRGBO(69, 69, 73, 0.546)),
+                              legend: const Legend(
+                                  isVisible: true,
+                                  position: LegendPosition.bottom),
+                              series: [
+                                SplineSeries<ChartData, String>(
+                                  dataSource: data1[selectedIndex],
+                                  name: "Projects",
+                                  splineType: SplineType.cardinal,
+                                  cardinalSplineTension: 0.9,
+                                  color: kMainColor,
+                                  xValueMapper: (ChartData data, _) => data.x,
+                                  yValueMapper: (ChartData data, _) =>
+                                      data.y!,
+                                  markerSettings:
+                                      const MarkerSettings(isVisible: true),
                                 ),
-                                legend: const Legend(
-                                    isVisible: true,
-                                    position: LegendPosition.bottom),
-                                series: [
-                                  SplineSeries<ChartData, String>(
-                                    dataSource: data1[selectedIndex],
-                                    name: "Projects",
-                                    splineType: SplineType.cardinal,
-                                    cardinalSplineTension: 0.9,
-                                    color: kMainColor,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) =>
-                                        data.y!,
-                                    markerSettings:
-                                        const MarkerSettings(isVisible: true),
-                                  ),
-                                  SplineSeries<ChartData, String>(
-                                    dataSource: data2[selectedIndex],
-                                    name: "Tasks",
-                                    splineType: SplineType.cardinal,
-                                    cardinalSplineTension: 0.9,
-                                    color: kLightblue,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) =>
-                                        data.y!,
-                                    markerSettings:
-                                        const MarkerSettings(isVisible: true),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                                SplineSeries<ChartData, String>(
+                                  dataSource: data2[selectedIndex],
+                                  name: "Tasks",
+                                  splineType: SplineType.cardinal,
+                                  cardinalSplineTension: 0.9,
+                                  color: kLightblue,
+                                  xValueMapper: (ChartData data, _) => data.x,
+                                  yValueMapper: (ChartData data, _) =>
+                                      data.y!,
+                                  markerSettings:
+                                      const MarkerSettings(isVisible: true),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
                       ),
                     ),

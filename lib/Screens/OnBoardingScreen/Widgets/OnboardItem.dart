@@ -17,7 +17,7 @@ class OnboardItem extends StatelessWidget {
             ? const DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage(
-                    "assets/images/HD-wallpaper-black-space-black-star-stars.jpg"),
+                    "Assets/images/HD-wallpaper-black-space-black-star-stars.jpg"),
               )
             : null,
       ),

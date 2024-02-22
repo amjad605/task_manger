@@ -16,15 +16,15 @@ class OnBoardScreen extends StatefulWidget {
 class _OnBoardScreenState extends State<OnBoardScreen> {
   List<OnboardModel> item = [
     OnboardModel(
-        image: "assets/images/Untitled-3.png",
+        image: "Assets/images/Untitled-3.png",
         text: "Task , Calender , Pariority.",
         bgColor: kMainColor),
     OnboardModel(
-        image: "assets/images/Untitled.png",
+        image: "Assets/images/Untitled.png",
         text: "Work Anywheare Easliy.",
         bgColor: kBackgroundColor),
     OnboardModel(
-        image: "assets/images/Untitled-2.png",
+        image: "Assets/images/Untitled-2.png",
         text: "Manage Everything On Phone.",
         bgColor: kMainColor),
   ];
