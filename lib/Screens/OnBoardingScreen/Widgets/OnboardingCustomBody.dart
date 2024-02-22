@@ -1,12 +1,8 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:task_manger/OnBoardingScreen/OnBoardScreen.dart';
-import 'package:task_manger/constants.dart';
-import 'package:task_manger/OnBoardingScreen/Widgets/chatItem.dart';
-
-import '../../screens/controller_screen/controller_screen.dart';
+import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/screens/OnBoardingScreen/Widgets/chatItem.dart';
+import 'package:task_manger/screens/controller_screen/controller_screen.dart';
 
 class OnBoardCustomBody extends StatelessWidget {
   const OnBoardCustomBody({super.key});
@@ -39,8 +35,8 @@ class OnBoardCustomBody extends StatelessWidget {
                       children: [
                         Expanded(
                           child: FadeInLeft(
-                            delay: Duration(seconds: 1),
-                            duration: Duration(seconds: 1),
+                            delay: const Duration(seconds: 1),
+                            duration: const Duration(seconds: 1),
                             child: Text(
                               '''Lets Create a Space for your WorkFlows.''',
                               style: TextStyle(
@@ -52,7 +48,7 @@ class OnBoardCustomBody extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                           width: size.width * 0.2,
                           height: size.height * 0.2,
                         ),
@@ -67,13 +63,13 @@ class OnBoardCustomBody extends StatelessWidget {
                           width: size.width * 0.4,
                           height: size.height * 0.05,
                           child: FadeInLeft(
-                            delay: Duration(seconds: 2),
-                            duration: Duration(seconds: 1),
+                            delay: const Duration(seconds: 2),
+                            duration: const Duration(seconds: 1),
                             child: ElevatedButton(
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (ctx) => ControllerScreen()),
+                                      builder: (ctx) => const ControllerScreen()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
@@ -115,8 +111,8 @@ class Topitem extends StatelessWidget {
           top: size.height * 0.1,
           left: size.width * 0.1,
           child: FadeIn(
-            delay: Duration(milliseconds: 500),
-            duration: Duration(seconds: 1),
+            delay: const Duration(milliseconds: 500),
+            duration: const Duration(seconds: 1),
             animate: true,
             child: CircleAvatar(
               radius: size.height * 0.011,
@@ -128,12 +124,12 @@ class Topitem extends StatelessWidget {
           top: size.height * 0.2,
           left: size.width * 0.4,
           child: FadeIn(
-            delay: Duration(milliseconds: 300),
-            duration: Duration(seconds: 2),
+            delay: const Duration(milliseconds: 300),
+            duration: const Duration(seconds: 2),
             child: CircleAvatar(
               radius: size.height * 0.01,
               backgroundColor:
-                  Color.fromARGB(255, 240, 105, 202).withOpacity(0.4),
+                  const Color.fromARGB(255, 240, 105, 202).withOpacity(0.4),
             ),
           ),
         ),
@@ -141,11 +137,11 @@ class Topitem extends StatelessWidget {
           top: size.height * 0.02,
           left: size.width * 0.3,
           child: FadeIn(
-            delay: Duration(milliseconds: 900),
-            duration: Duration(milliseconds: 800),
+            delay: const Duration(milliseconds: 900),
+            duration: const Duration(milliseconds: 800),
             child: CircleAvatar(
               radius: size.height * 0.013,
-              backgroundColor: Color.fromARGB(255, 50, 52, 42).withOpacity(0.7),
+              backgroundColor: const Color.fromARGB(255, 50, 52, 42).withOpacity(0.7),
             ),
           ),
         ),
@@ -170,7 +166,7 @@ class Topitem extends StatelessWidget {
           left: size.width * 0.4,
           child: CircleAvatar(
             radius: size.height * 0.085,
-            backgroundColor: Color.fromARGB(255, 105, 175, 240),
+            backgroundColor: const Color.fromARGB(255, 105, 175, 240),
             child: Image.asset(
               "assets/images/Daco_5969784.png",
               fit: BoxFit.cover,
@@ -183,7 +179,7 @@ class Topitem extends StatelessWidget {
           left: size.width * 0.65,
           child: CircleAvatar(
             radius: size.height * 0.055, //50,
-            backgroundColor: Color.fromARGB(255, 240, 112, 105),
+            backgroundColor: const Color.fromARGB(255, 240, 112, 105),
             child: Image.asset(
               "assets/images/Daco_5969784.png",
               fit: BoxFit.cover,
@@ -198,7 +194,7 @@ class Topitem extends StatelessWidget {
           child: FadeInRight(
             from: 200,
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               width: size.width * 0.5,
               height: size.height * 0.06,
               decoration: BoxDecoration(
