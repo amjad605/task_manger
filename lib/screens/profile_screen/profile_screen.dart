@@ -1,6 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
+import 'package:task_manger/screens/profile_screen/widgets/custom_profile_buttons.dart';
+import 'package:task_manger/screens/profile_screen/widgets/display_user_data.dart';
+import 'package:task_manger/screens/profile_screen/widgets/logout_custom_button.dart';
+import 'package:task_manger/screens/profile_screen/widgets/profile_appbar.dart';
 
 import '../../Constants/constants.dart';
 
@@ -9,70 +21,43 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String name = "User Name", mail = "e-mail@gmail.com";
-
-    return ListView(
-      children: [
-        SizedBox(
-          height: 10,
-        ),
-        AppBar(
-          leading: SizedBox(),
-          title: Text(
-            "Profile",
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Colors.white70,
+    return Container(
+      color: kBackgroundColor,
+      child: Column(
+        children: [
+          SizedBox(height: 5.h,),
+          ProfileAppBar(),
+          Expanded(
+            child: ListView(
+              children: [
+                DisplayUserData(),
+                SizedBox(height: 15.h,),
+                CustomProfileButtons(
+                  buttonName: "My Projects",
+                  iconPath: "Assets/icons/mangment.png",
+                ),
+                SizedBox(height: 15.h,),
+                CustomProfileButtons(
+                  buttonName: "Join Team",
+                  iconPath: "Assets/icons/group.png",
+                ),
+                SizedBox(height: 15.h,),
+                CustomProfileButtons(buttonName: "Share Profile",
+                  iconPath: "Assets/icons/share.png",
+                ),
+                SizedBox(height: 15.h,),
+                CustomProfileButtons(
+                  buttonName: "All My Task",
+                  iconPath: "Assets/icons/check-mark.png",
+                ),
+                SizedBox(height: 30.h,),
+                LogoutCustomButton(),
+                SizedBox(height: 20,)
+              ],
             ),
           ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {},
-              child: Icon(
-                Icons.edit,
-                color: kMainColor,
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kItemsBackgroundColor,
-              ),
-            ),
-            SizedBox(width: 14)
-          ],
-          centerTitle: true,
-          backgroundColor: Colors.transparent,
-        ),
-        SizedBox(height: 20),
-        CircleAvatar(
-          radius: 70.0, // Set your desired radius
-          child: ClipOval(
-            child: Image.asset(
-              "Assets/images/Profile_pic.png",
-            ),
-          ),
-        ),
-        SizedBox(height: 20),
-        Text(
-          name,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 17,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        SizedBox(height: 2,),
-        Text(
-          mail,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: Colors.grey,
-          ),
-        ),
-
-      ],
+        ],
+      ),
     );
   }
 }

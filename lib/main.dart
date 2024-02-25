@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
 import 'package:task_manger/screens/OnBoardingScreen/OnBoardScreen.dart';
 import 'package:task_manger/theme.dart';
 import 'cubits/change_screen_bottom_nav.dart';
@@ -13,16 +15,23 @@ class MyTaskManger extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => ChangeScreenBottomNav(),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => ChangeScreenBottomNav(),
+          ),
+          BlocProvider(
+            create: (context) => ProfileEditingCubit(),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: theme,
+          home: const OnBoardScreen(),
         ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: theme,
-        home: const OnBoardScreen(),
       ),
     );
   }
