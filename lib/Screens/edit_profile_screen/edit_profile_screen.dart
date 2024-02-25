@@ -11,6 +11,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
 import 'package:task_manger/screens/edit_profile_screen/widgets/custom_profile_text_formfield.dart';
 import 'package:task_manger/screens/edit_profile_screen/widgets/edit_profile_appbar.dart';
+import 'package:task_manger/screens/edit_profile_screen/widgets/profile_pic.dart';
 
 import '../../Constants/constants.dart';
 
@@ -54,45 +55,7 @@ class EditProfileScreen extends StatelessWidget {
             body: ListView(
               children: [
                 SizedBox(height: 30.h,),
-                Center(
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        radius: 60.0.r, // Set your desired radius
-                        child:img ==null? ClipOval(
-                          child: Image.asset(
-                            "Assets/images/Profile_pic.png",
-                          ),
-                        )
-                      :ClipOval(
-                          child: SizedBox(
-                            height: double.infinity,
-                            width: double.infinity,
-                            child: Image.file(
-                              img!,
-                              fit: BoxFit.fill,
-                            ),
-                          )
-                        ),
-                        ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: IconButton(
-                            onPressed: ()async{
-                                BlocProvider.of<ProfileEditingCubit>(context).SelectPic();
-                            },
-                            icon:Icon(Icons.edit),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: kLightblue,
-                            )
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+               ProfilePic(img: img),
                 Form(
                     key: keyForm,
                     autovalidateMode: mode,
@@ -125,7 +88,6 @@ class EditProfileScreen extends StatelessWidget {
                             child: ElevatedButton(
                               onPressed: () {
                                 if (keyForm.currentState!.validate()){
-                                  print("sss$img");
                                   BlocProvider.of<ProfileEditingCubit>(context).
                                   EditUserData(
                                     name:nameController.value.text,
