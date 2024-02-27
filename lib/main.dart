@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Screens/splash_screen/view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
-import 'package:task_manger/screens/OnBoardingScreen/OnBoardScreen.dart';
+
 import 'package:task_manger/theme.dart';
 import 'cubits/change_screen_bottom_nav.dart';
 

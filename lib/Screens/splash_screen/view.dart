@@ -6,11 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:task_manger/Screens/OnBoardingScreen/onBoardingScreen.dart';
 
-
-
 import '../../Constants/constants.dart';
 import '../../screens/OnBoardingScreen/OnBoardScreen.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,31 +17,27 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(
-        const Duration(seconds: 3),
-            () {
-         //   Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
+    Timer(const Duration(seconds: 3), () {
+      //   Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
 
-
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>const OnBoardScreen()),);
-        }
-    );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const OnBoardScreen()),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body:Center(child: ZoomIn(
-
-
-          child: SvgPicture.asset('Assets/images/Clip path group.svg'))) ,
-
-
+      body: Center(
+          child: ZoomIn(
+              child: SvgPicture.asset('assets/images/Clip path group.svg'))),
     );
   }
 }
