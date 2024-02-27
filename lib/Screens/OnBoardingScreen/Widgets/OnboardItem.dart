@@ -25,7 +25,7 @@ class OnboardItem extends StatelessWidget {
         children: [
           ShakeY(
             infinite: true,
-            from: 4,
+            from: 3,
             delay: const Duration(milliseconds: 0),
             duration: const Duration(seconds: 5),
             child: Image.asset(

@@ -35,8 +35,8 @@ class ChatItem extends StatelessWidget {
                     ),
                     shape: BoxShape.circle,
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  child: const CircleAvatar(
+                    backgroundColor: Colors.transparent,
                     child: Icon(
                       Icons.check,
                       color: Colors.black,
@@ -51,20 +51,20 @@ class ChatItem extends StatelessWidget {
                   children: [
                     Container(
                       width: size.width * 0.23,
-                      height: size.height * 0.012,
+                      height: size.height * 0.01,
                       decoration: BoxDecoration(
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(40)),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: size.height * 0.01,
                     ),
                     Container(
                       width: size.width * 0.13,
                       decoration: BoxDecoration(
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(40)),
-                      height: size.height * 0.012,
+                      height: size.height * 0.01,
                     ),
                   ],
                 )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:task_manger/Constants/constants.dart';
@@ -128,40 +129,44 @@ class StatisticsScreenContent extends StatelessWidget {
                                 )
                               ],
                             ),
-                            const Spacer(),
-                            SfCartesianChart(
-                              primaryXAxis: const CategoryAxis(
-                                majorGridLines: MajorGridLines(
-                                    width: 0,
-                                    color: Color.fromRGBO(69, 69, 73, 0.546)),
+                            //   const Spacer(),
+                            Expanded(
+                              child: SfCartesianChart(
+                                primaryXAxis: const CategoryAxis(
+                                  majorGridLines: MajorGridLines(
+                                      width: 0,
+                                      color: Color.fromRGBO(69, 69, 73, 0.546)),
+                                ),
+                                legend: const Legend(
+                                    isVisible: true,
+                                    position: LegendPosition.bottom),
+                                series: [
+                                  SplineSeries<ChartData, String>(
+                                    dataSource: data1[selectedIndex],
+                                    name: "Projects",
+                                    splineType: SplineType.cardinal,
+                                    cardinalSplineTension: 0.9,
+                                    color: kMainColor,
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) =>
+                                        data.y!,
+                                    markerSettings:
+                                        const MarkerSettings(isVisible: true),
+                                  ),
+                                  SplineSeries<ChartData, String>(
+                                    dataSource: data2[selectedIndex],
+                                    name: "Tasks",
+                                    splineType: SplineType.cardinal,
+                                    cardinalSplineTension: 0.9,
+                                    color: kLightblue,
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) =>
+                                        data.y!,
+                                    markerSettings:
+                                        const MarkerSettings(isVisible: true),
+                                  ),
+                                ],
                               ),
-                              legend: const Legend(
-                                  isVisible: true,
-                                  position: LegendPosition.bottom),
-                              series: [
-                                SplineSeries<ChartData, String>(
-                                  dataSource: data1[selectedIndex],
-                                  name: "Projects",
-                                  splineType: SplineType.cardinal,
-                                  cardinalSplineTension: 0.9,
-                                  color: kMainColor,
-                                  xValueMapper: (ChartData data, _) => data.x,
-                                  yValueMapper: (ChartData data, _) => data.y!,
-                                  markerSettings:
-                                      const MarkerSettings(isVisible: true),
-                                ),
-                                SplineSeries<ChartData, String>(
-                                  dataSource: data2[selectedIndex],
-                                  name: "Tasks",
-                                  splineType: SplineType.cardinal,
-                                  cardinalSplineTension: 0.9,
-                                  color: kLightblue,
-                                  xValueMapper: (ChartData data, _) => data.x,
-                                  yValueMapper: (ChartData data, _) => data.y!,
-                                  markerSettings:
-                                      const MarkerSettings(isVisible: true),
-                                ),
-                              ],
                             )
                           ],
                         ),

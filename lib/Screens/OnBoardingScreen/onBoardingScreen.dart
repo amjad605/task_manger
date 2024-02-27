@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'Widgets/onBoardingBody.dart';
+import 'package:task_manger/Screens/OnBoardingScreen/OnBoardBody.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -8,7 +7,7 @@ class OnBoardingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: OnBoardingBody(),
+      body: OnBoardBody(),
     );
   }
 }

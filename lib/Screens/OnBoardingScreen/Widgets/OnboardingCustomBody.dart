@@ -214,8 +214,8 @@ class Topitem extends StatelessWidget {
                       ),
                       shape: BoxShape.circle,
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(6.0),
+                    child: const CircleAvatar(
+                      backgroundColor: Colors.transparent,
                       child: Icon(
                         Icons.check,
                         color: Colors.black,
@@ -235,8 +235,8 @@ class Topitem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(40)),
                         height: size.height * 0.01,
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: size.height * 0.01,
                       ),
                       Container(
                         width: size.width * 0.13,
