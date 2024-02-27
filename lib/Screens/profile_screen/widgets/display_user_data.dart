@@ -32,19 +32,18 @@ class DisplayUserData extends StatelessWidget {
               child: img == null
                   ? ClipOval(
                       child: Image.asset(
-                        "Assets/images/Profile_pic.png",
+                        "assets/images/Profile_pic.png",
                       ),
                     )
                   : ClipOval(
                       child: SizedBox(
-                        height: double.infinity,
-                        width: double.infinity,
-                        child: Image.file(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Image.file(
                         img!,
                         fit: BoxFit.fill,
-                        ),
-                      )
-              ),
+                      ),
+                    )),
             ),
             SizedBox(height: 12.h),
             Text(

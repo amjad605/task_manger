@@ -25,34 +25,49 @@ class ProfileScreen extends StatelessWidget {
       color: kBackgroundColor,
       child: Column(
         children: [
-          SizedBox(height: 5.h,),
+          SizedBox(
+            height: 5.h,
+          ),
           ProfileAppBar(),
           Expanded(
             child: ListView(
               children: [
                 DisplayUserData(),
-                SizedBox(height: 15.h,),
+                SizedBox(
+                  height: 15.h,
+                ),
                 CustomProfileButtons(
                   buttonName: "My Projects",
-                  iconPath: "Assets/icons/mangment.png",
+                  iconPath: "assets/icons/mangment.png",
                 ),
-                SizedBox(height: 15.h,),
+                SizedBox(
+                  height: 15.h,
+                ),
                 CustomProfileButtons(
                   buttonName: "Join Team",
-                  iconPath: "Assets/icons/group.png",
+                  iconPath: "assets/icons/group.png",
                 ),
-                SizedBox(height: 15.h,),
-                CustomProfileButtons(buttonName: "Share Profile",
-                  iconPath: "Assets/icons/share.png",
+                SizedBox(
+                  height: 15.h,
                 ),
-                SizedBox(height: 15.h,),
+                CustomProfileButtons(
+                  buttonName: "Share Profile",
+                  iconPath: "assets/icons/share.png",
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
                 CustomProfileButtons(
                   buttonName: "All My Task",
-                  iconPath: "Assets/icons/check-mark.png",
+                  iconPath: "assets/icons/check-mark.png",
                 ),
-                SizedBox(height: 30.h,),
+                SizedBox(
+                  height: 30.h,
+                ),
                 LogoutCustomButton(),
-                SizedBox(height: 20,)
+                SizedBox(
+                  height: 20,
+                )
               ],
             ),
           ),

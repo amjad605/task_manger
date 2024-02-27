@@ -6,14 +6,14 @@ import 'package:task_manger/screens/OnBoardingScreen/Widgets/OnboardItem.dart';
 import 'package:task_manger/screens/OnBoardingScreen/Widgets/OnboardingCustomBody.dart';
 import 'package:task_manger/screens/OnBoardingScreen/model/onboarding_model.dart';
 
-class OnBoardScreen extends StatefulWidget {
-  const OnBoardScreen({super.key});
+class OnBoardBody extends StatefulWidget {
+  const OnBoardBody({super.key});
 
   @override
-  State<OnBoardScreen> createState() => _OnBoardScreenState();
+  State<OnBoardBody> createState() => _OnBoardBodyState();
 }
 
-class _OnBoardScreenState extends State<OnBoardScreen> {
+class _OnBoardBodyState extends State<OnBoardBody> {
   List<OnboardModel> item = [
     OnboardModel(
         image: "assets/images/Untitled-3.png",
@@ -34,7 +34,6 @@ class _OnBoardScreenState extends State<OnBoardScreen> {
     return Scaffold(
         extendBodyBehindAppBar: true,
         body: LiquidSwipe.builder(
-            ignoreUserGestureWhileAnimating: true,
             positionSlideIcon: 0.7,
             waveType: WaveType.circularReveal,
             slideIconWidget: const Icon(Icons.arrow_forward_ios),

@@ -69,7 +69,8 @@ class OnBoardCustomBody extends StatelessWidget {
                               onPressed: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                      builder: (ctx) => const ControllerScreen()),
+                                      builder: (ctx) =>
+                                          const ControllerScreen()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
@@ -141,7 +142,8 @@ class Topitem extends StatelessWidget {
             duration: const Duration(milliseconds: 800),
             child: CircleAvatar(
               radius: size.height * 0.013,
-              backgroundColor: const Color.fromARGB(255, 50, 52, 42).withOpacity(0.7),
+              backgroundColor:
+                  const Color.fromARGB(255, 50, 52, 42).withOpacity(0.7),
             ),
           ),
         ),
@@ -154,7 +156,7 @@ class Topitem extends StatelessWidget {
               radius: size.height * 0.035, //30,
               backgroundColor: const Color.fromARGB(255, 211, 240, 105),
               child: Image.asset(
-                "Assets/images/Daco_5969784.png",
+                "assets/images/Daco_5969784.png",
                 fit: BoxFit.cover,
                 scale: 1,
               ),
@@ -168,7 +170,7 @@ class Topitem extends StatelessWidget {
             radius: size.height * 0.085,
             backgroundColor: const Color.fromARGB(255, 105, 175, 240),
             child: Image.asset(
-              "Assets/images/Daco_5969784.png",
+              "assets/images/Daco_5969784.png",
               fit: BoxFit.cover,
               scale: 2.1,
             ),
@@ -181,7 +183,7 @@ class Topitem extends StatelessWidget {
             radius: size.height * 0.055, //50,
             backgroundColor: const Color.fromARGB(255, 240, 112, 105),
             child: Image.asset(
-              "Assets/images/Daco_5969784.png",
+              "assets/images/Daco_5969784.png",
               fit: BoxFit.cover,
               scale: 1,
             ),

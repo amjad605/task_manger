@@ -19,30 +19,27 @@ class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);
   GlobalKey<FormState> keyForm = GlobalKey();
   AutovalidateMode mode = AutovalidateMode.disabled;
-  TextEditingController nameController=TextEditingController();
-  TextEditingController mailController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
-  bool isLoading=false;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController mailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-
-    String mail=BlocProvider.of<ProfileEditingCubit>(context).mail,
-        name=BlocProvider.of<ProfileEditingCubit>(context).name,
-        password=BlocProvider.of<ProfileEditingCubit>(context).password;
-    var img=BlocProvider.of<ProfileEditingCubit>(context).img;
+    String mail = BlocProvider.of<ProfileEditingCubit>(context).mail,
+        name = BlocProvider.of<ProfileEditingCubit>(context).name,
+        password = BlocProvider.of<ProfileEditingCubit>(context).password;
+    var img = BlocProvider.of<ProfileEditingCubit>(context).img;
     return BlocConsumer<ProfileEditingCubit, ProfileEditingState>(
       listener: (context, state) {
-        if(state is ProfileEditingSuccess){
-          isLoading=false;
+        if (state is ProfileEditingSuccess) {
+          isLoading = false;
           Navigator.pop(context);
-        }
-        else if(state is ProfileEditingImgSelected){
-          img=BlocProvider.of<ProfileEditingCubit>(context).selectedImg;
-          isLoading=false;
-        }
-        else if(state is ProfileEditingLoading){
-          isLoading=true;
+        } else if (state is ProfileEditingImgSelected) {
+          img = BlocProvider.of<ProfileEditingCubit>(context).selectedImg;
+          isLoading = false;
+        } else if (state is ProfileEditingLoading) {
+          isLoading = true;
         }
       },
       builder: (context, state) {
@@ -50,12 +47,15 @@ class EditProfileScreen extends StatelessWidget {
           inAsyncCall: isLoading,
           child: Scaffold(
             backgroundColor: kBackgroundColor,
-            appBar: PreferredSize(preferredSize: Size(double.infinity, 44),
+            appBar: PreferredSize(
+                preferredSize: Size(double.infinity, 44),
                 child: EditProfileAppBar()),
             body: ListView(
               children: [
-                SizedBox(height: 30.h,),
-               ProfilePic(img: img),
+                SizedBox(
+                  height: 30.h,
+                ),
+                ProfilePic(img: img),
                 Form(
                     key: keyForm,
                     autovalidateMode: mode,
@@ -64,66 +64,67 @@ class EditProfileScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 30.h,),
+                          SizedBox(
+                            height: 30.h,
+                          ),
                           CustomProfileTextFormField(
                             fieldName: "Your Email",
-                            controller: mailController
-                              ..text = mail,
+                            controller: mailController..text = mail,
                           ),
-                          SizedBox(height: 30.h,),
+                          SizedBox(
+                            height: 30.h,
+                          ),
                           CustomProfileTextFormField(
                             fieldName: "Your Name",
-                            controller: nameController
-                              ..text = name,
+                            controller: nameController..text = name,
                           ),
-                          SizedBox(height: 30.h,),
+                          SizedBox(
+                            height: 30.h,
+                          ),
                           CustomProfileTextFormField(
                             fieldName: "Password",
-                            controller: passwordController
-                              ..text = password,
+                            controller: passwordController..text = password,
                           ),
-                          SizedBox(height: 50.h,),
+                          SizedBox(
+                            height: 50.h,
+                          ),
                           Padding(
-                            padding:  EdgeInsets.symmetric(horizontal: 50.w),
+                            padding: EdgeInsets.symmetric(horizontal: 50.w),
                             child: ElevatedButton(
                               onPressed: () {
-                                if (keyForm.currentState!.validate()){
-                                  BlocProvider.of<ProfileEditingCubit>(context).
-                                  EditUserData(
-                                    name:nameController.value.text,
+                                if (keyForm.currentState!.validate()) {
+                                  BlocProvider.of<ProfileEditingCubit>(context)
+                                      .EditUserData(
+                                    name: nameController.value.text,
                                     password: passwordController.value.text,
                                     mail: mailController.value.text,
                                     img: img,
                                   );
-                                }
-                                else{
-                                  mode =AutovalidateMode.always;
+                                } else {
+                                  mode = AutovalidateMode.always;
                                 }
                               },
-                              child: Text(
-                                "Submit",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: mainFont,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.sp
-                                ),
-                              ),
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: kLightblue,
                                 foregroundColor: kPriamaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15),
-
                                 ),
                                 minimumSize: Size(double.infinity, 45.h),
+                              ),
+                              child: Text(
+                                "Submit",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: mainFont,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.sp),
                               ),
                             ),
                           ),
                         ],
                       ),
-                    )
-                ),
+                    )),
               ],
             ),
           ),
