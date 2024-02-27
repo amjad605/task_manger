@@ -19,7 +19,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           Row(
             children: [
               CustomNavButton(
-                imagenotSelectedPath: "Assets/icons/home.png",
+                imagenotSelectedPath: "assets/icons/home.png",
                 isSelected:
                     BlocProvider.of<ChangeScreenBottomNav>(context).index == 0,
                 title: "Home",
@@ -27,10 +27,10 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   BlocProvider.of<ChangeScreenBottomNav>(context)
                       .setCurrentIndexTab(0);
                 },
-                imageSelected: "Assets/icons/home_filled.png",
+                imageSelected: "assets/icons/home_filled.png",
               ),
               CustomNavButton(
-                imagenotSelectedPath: "Assets/icons/tasks.png",
+                imagenotSelectedPath: "assets/icons/tasks.png",
                 isSelected:
                     BlocProvider.of<ChangeScreenBottomNav>(context).index == 1,
                 title: "Tasks",
@@ -44,7 +44,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
           Row(
             children: [
               CustomNavButton(
-                imagenotSelectedPath: "Assets/icons/projects.png",
+                imagenotSelectedPath: "assets/icons/projects.png",
                 isSelected:
                     BlocProvider.of<ChangeScreenBottomNav>(context).index == 2,
                 title: "Projects",
@@ -54,7 +54,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 },
               ),
               CustomNavButton(
-                imagenotSelectedPath: "Assets/icons/profile.png",
+                imagenotSelectedPath: "assets/icons/profile.png",
                 isSelected:
                     BlocProvider.of<ChangeScreenBottomNav>(context).index == 3,
                 title: "Profile",

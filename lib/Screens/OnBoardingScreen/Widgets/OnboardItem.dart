@@ -17,7 +17,7 @@ class OnboardItem extends StatelessWidget {
             ? const DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage(
-                    "Assets/images/HD-wallpaper-black-space-black-star-stars.jpg"),
+                    "assets/images/HD-wallpaper-black-space-black-star-stars.jpg"),
               )
             : null,
       ),
@@ -45,7 +45,8 @@ class OnboardItem extends StatelessWidget {
                 Expanded(
                   child: Text(
                     model.text,
-                    style: const TextStyle(fontSize: 45, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 45, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
