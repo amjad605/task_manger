@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manger/Screens/splash_screen/view.dart';
 import 'package:task_manger/screens/OnBoardingScreen/OnBoardScreen.dart';
 import 'package:task_manger/theme.dart';
 import 'cubits/change_screen_bottom_nav.dart';
@@ -22,7 +23,7 @@ class MyTaskManger extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
-        home: const OnBoardScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
