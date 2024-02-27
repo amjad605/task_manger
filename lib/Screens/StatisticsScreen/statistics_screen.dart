@@ -90,8 +90,7 @@ class StatisticsScreenContent extends StatelessWidget {
                                 SizedBox(
                                   height: screenHeight * 0.07,
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       for (var index = 0;
                                           index < titles.length;
@@ -103,9 +102,8 @@ class StatisticsScreenContent extends StatelessWidget {
                                                 .updateSelectedIndex(index);
                                           },
                                           style: ButtonStyle(
-                                            overlayColor:
-                                                MaterialStateProperty
-                                                    .resolveWith<Color?>(
+                                            overlayColor: MaterialStateProperty
+                                                .resolveWith<Color?>(
                                               (states) {
                                                 return index == selectedIndex
                                                     ? kLightblue
@@ -148,8 +146,7 @@ class StatisticsScreenContent extends StatelessWidget {
                                   cardinalSplineTension: 0.9,
                                   color: kMainColor,
                                   xValueMapper: (ChartData data, _) => data.x,
-                                  yValueMapper: (ChartData data, _) =>
-                                      data.y!,
+                                  yValueMapper: (ChartData data, _) => data.y!,
                                   markerSettings:
                                       const MarkerSettings(isVisible: true),
                                 ),
@@ -160,8 +157,7 @@ class StatisticsScreenContent extends StatelessWidget {
                                   cardinalSplineTension: 0.9,
                                   color: kLightblue,
                                   xValueMapper: (ChartData data, _) => data.x,
-                                  yValueMapper: (ChartData data, _) =>
-                                      data.y!,
+                                  yValueMapper: (ChartData data, _) => data.y!,
                                   markerSettings:
                                       const MarkerSettings(isVisible: true),
                                 ),
