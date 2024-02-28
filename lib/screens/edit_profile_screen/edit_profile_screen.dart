@@ -23,7 +23,6 @@ class EditProfileScreen extends StatelessWidget {
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
-
   @override
   Widget build(BuildContext context) {
     String mail = BlocProvider.of<ProfileEditingCubit>(context).mail,
@@ -84,6 +83,7 @@ class EditProfileScreen extends StatelessWidget {
                           CustomProfileTextFormField(
                             fieldName: "Password",
                             controller: passwordController..text = password,
+                            needObscure: true,
                           ),
                           SizedBox(
                             height: 50.h,
