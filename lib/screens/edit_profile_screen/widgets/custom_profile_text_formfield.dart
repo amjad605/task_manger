@@ -58,15 +58,15 @@ class CustomProfileTextFormField extends StatelessWidget {
               validator: (value) {
                 if (fieldName == "Your Email") {
                   if (!value!.contains("@") || !value!.contains(".com")) {
-                    return "Invalid mail";
+                    return "Invalid Email";
                   }
                 } else if (fieldName == "Your Name") {
                   if (value!.isEmpty) {
-                    return "Name cant be empty";
+                    return "Name cannot be empty";
                   }
                 } else if (fieldName == "Password") {
                   if (value!.isEmpty) {
-                    return "password cant be empty";
+                    return "password cannot be empty";
                   }
                 }
               },
