@@ -13,7 +13,7 @@ Widget customTextFormField({
   return Container(
     width: width,
     child: TextFormField(
-      autovalidateMode: AutovalidateMode.always,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       style: const TextStyle(fontSize: 18, color: Colors.white),
       controller: controller,
       keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
