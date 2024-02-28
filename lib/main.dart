@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Screens/splash_screen/view.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manger/cubits/auth/cubit.dart';
 import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
+import 'package:task_manger/screens/auth/login/login_email_screen.dart';
 
 import 'package:task_manger/theme.dart';
 import 'cubits/change_screen_bottom_nav.dart';
@@ -31,11 +33,14 @@ class MyTaskManger extends StatelessWidget {
           BlocProvider(
             create: (context) => TextVisibilityCubit(),
           ),
+          BlocProvider(
+            create: (context) => LoginCubit(),
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: theme,
-          home: const SplashScreen(),
+          home: const LoginEmailScreen(),
         ),
       ),
     );
