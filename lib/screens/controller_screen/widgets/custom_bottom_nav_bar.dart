@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../cubits/change_screen_bottom_nav.dart';
+import '../../../cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
 import 'custom_nav_button.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -12,7 +12,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       clipBehavior: Clip.hardEdge,
-      // notchMargin: 6,
+      notchMargin: 8,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

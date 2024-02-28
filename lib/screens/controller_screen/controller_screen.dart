@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../cubits/change_screen_bottom_nav.dart';
-import '../../../cubits/screens_states.dart';
-import '../home_screen/home_screen.dart';
+import '../../cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
+import '../../cubits/nav_bottom_bar/screens_states.dart';
+import '../dashboard_screen/dashboard_screen.dart';
 import '../profile_screen/profile_screen.dart';
 import '../projects_screen/projects_screen.dart';
 import '../tasks_screen/task_screen.dart';
@@ -34,7 +34,7 @@ class ControllerScreen extends StatelessWidget {
           BlocProvider.of<ChangeScreenBottomNav>(context).switchScreen(index);
         },
         children: const [
-          HomeScreen(),
+          DashboardScreen(),
           TasksScreen(),
           ProjectsScreen(),
           ProfileScreen(),
