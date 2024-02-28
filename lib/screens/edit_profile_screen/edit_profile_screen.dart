@@ -18,7 +18,7 @@ import '../../Constants/constants.dart';
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);
   GlobalKey<FormState> keyForm = GlobalKey();
-  AutovalidateMode mode = AutovalidateMode.disabled;
+  AutovalidateMode mode = AutovalidateMode.always;
   TextEditingController nameController = TextEditingController();
   TextEditingController mailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -63,31 +63,23 @@ class EditProfileScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: 30.h,
-                          ),
+                          SizedBox(height: 30.h,),
                           CustomProfileTextFormField(
                             fieldName: "Your Email",
                             controller: mailController..text = mail,
                           ),
-                          SizedBox(
-                            height: 30.h,
-                          ),
+                          SizedBox(height: 30.h,),
                           CustomProfileTextFormField(
                             fieldName: "Your Name",
                             controller: nameController..text = name,
                           ),
-                          SizedBox(
-                            height: 30.h,
-                          ),
+                          SizedBox(height: 30.h,),
                           CustomProfileTextFormField(
                             fieldName: "Password",
                             controller: passwordController..text = password,
                             needObscure: true,
                           ),
-                          SizedBox(
-                            height: 50.h,
-                          ),
+                          SizedBox(height: 50.h,),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 50.w),
                             child: ElevatedButton(
@@ -100,8 +92,6 @@ class EditProfileScreen extends StatelessWidget {
                                     mail: mailController.value.text,
                                     img: img,
                                   );
-                                } else {
-                                  mode = AutovalidateMode.always;
                                 }
                               },
                               style: ElevatedButton.styleFrom(
