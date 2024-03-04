@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:task_manger/screens/OnBoardingScreen/model/onboarding_model.dart';
 
 class OnboardItem extends StatelessWidget {
@@ -45,8 +46,9 @@ class OnboardItem extends StatelessWidget {
                 Expanded(
                   child: Text(
                     model.text,
-                    style: const TextStyle(
-                        fontSize: 45, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: MediaQuery.of(context).size.height * 0.045,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(

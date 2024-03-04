@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import '../../../constants.dart';
 
 class CustomAboveAppBar extends StatelessWidget {
@@ -9,7 +10,7 @@ class CustomAboveAppBar extends StatelessWidget {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text("Dashboard"),
+        Text("Dashboard", style: TextStyle(fontSize: 16)),
         CircleAvatar(
           backgroundColor: kMainColor,
           child: Icon(Icons.person),

@@ -8,15 +8,19 @@ import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.d
 
 class CustomProfileTextFormField extends StatelessWidget {
   CustomProfileTextFormField(
-      {Key? key, required this.fieldName, required this.controller, this.needObscure})
+      {Key? key,
+      required this.fieldName,
+      required this.controller,
+      this.needObscure})
       : super(key: key);
   bool? needObscure;
   String fieldName;
   TextEditingController controller;
-  bool obscure=true;
+  bool obscure = true;
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<TextVisibilityCubit>(context).SetVisibility(obscure: obscure);
+    BlocProvider.of<TextVisibilityCubit>(context)
+        .SetVisibility(obscure: obscure);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -27,27 +31,31 @@ class CustomProfileTextFormField extends StatelessWidget {
         ),
         BlocConsumer<TextVisibilityCubit, TextVisibilityState>(
           listener: (context, state) {
-            obscure =BlocProvider.of<TextVisibilityCubit>(context).obscure;
+            obscure = BlocProvider.of<TextVisibilityCubit>(context).obscure;
           },
           builder: (context, state) {
             return TextFormField(
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      color: kMainColor,
-                    )),
-                focusedBorder:
-                UnderlineInputBorder(borderSide: BorderSide(color: kLightblue)),
-                suffixIcon: needObscure!=null ? IconButton(
-                  icon: Icon(
-                      obscure==true? Icons.visibility_off_outlined:
-                      Icons.visibility_outlined,
-                    color: Colors.white,
-                  ),
-                  onPressed: (){
-                    BlocProvider.of<TextVisibilityCubit>(context).ChangeVisibility();
-                  },
-                ):SizedBox(),
+                  color: kMainColor,
+                )),
+                focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: kLightblue)),
+                suffixIcon: needObscure != null
+                    ? IconButton(
+                        icon: Icon(
+                          obscure == true
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          BlocProvider.of<TextVisibilityCubit>(context)
+                              .ChangeVisibility();
+                        },
+                      )
+                    : SizedBox(),
               ),
               cursorColor: kPriamaryColor,
               style: TextStyle(
@@ -70,8 +78,7 @@ class CustomProfileTextFormField extends StatelessWidget {
                   }
                 }
               },
-              obscureText: needObscure!=null ? obscure:false,
-
+              obscureText: needObscure != null ? obscure : false,
             );
           },
         ),

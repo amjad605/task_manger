@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,147 +37,146 @@ class StatisticsScreenContent extends StatelessWidget {
         List<List<ChartData>> data2 = [weeklyData2, monthlyData2, dailyData2];
         List<String> titles = ["Weekly", "Monthly", "Daily"];
 
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: kItemsBackgroundColor,
-          ),
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Row(
-                        children: [
-                          for (var i in info)
-                            Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: buildItem(i, screenWidth, screenHeight),
-                            ),
-                        ],
+        return Column(
+          children: [
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(
+            //     children: [
+            //       Row(
+            //         children: [
+            //           for (var i in info)
+            //             Padding(
+            //               padding: const EdgeInsets.all(10),
+            //               child: buildItem(i, screenWidth, screenHeight),
+            //             ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            Padding(
+              padding: EdgeInsets.all(screenWidth * 0.00),
+              child: SizedBox(
+                child: Container(
+                  width: screenWidth,
+                  height: screenHeight * 0.5,
+                  decoration: BoxDecoration(
+                      // color: kItemsBackgroundColor,
+                      //  borderRadius: BorderRadius.circular(30),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(screenWidth * 0.03),
-                  child: SizedBox(
-                    width: screenWidth,
-                    height: screenHeight * 0.6,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: kItemsBackgroundColor,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(screenWidth * 0.055),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Padding(
+                    padding: EdgeInsets.all(screenWidth * 0.04),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Tasks Done",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: screenWidth * 0.04,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: screenWidth * 0.05,
-                                ),
-                                SizedBox(
-                                  height: screenHeight * 0.07,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      for (var index = 0;
-                                          index < titles.length;
-                                          index++)
-                                        TextButton(
-                                          onPressed: () {
-                                            context
-                                                .read<StatisticsCubit>()
-                                                .updateSelectedIndex(index);
-                                          },
-                                          style: ButtonStyle(
-                                            overlayColor: MaterialStateProperty
-                                                .resolveWith<Color?>(
-                                              (states) {
-                                                return index == selectedIndex
-                                                    ? kLightblue
-                                                        .withOpacity(0.1)
-                                                    : null;
-                                              },
-                                            ),
-                                          ),
-                                          child: Text(
-                                            titles[index],
-                                            style: TextStyle(
-                                              color: index == selectedIndex
-                                                  ? kLightblue
-                                                  : Colors.white,
-                                              fontSize: screenWidth * 0.03,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                            Text(
+                              "Tasks Done",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: screenWidth * 0.04,
+                              ),
                             ),
-                            //   const Spacer(),
-                            Expanded(
-                              child: SfCartesianChart(
-                                primaryXAxis: const CategoryAxis(
-                                  majorGridLines: MajorGridLines(
-                                      width: 0,
-                                      color: Color.fromRGBO(69, 69, 73, 0.546)),
-                                ),
-                                legend: const Legend(
-                                    isVisible: true,
-                                    position: LegendPosition.bottom),
-                                series: [
-                                  SplineSeries<ChartData, String>(
-                                    dataSource: data1[selectedIndex],
-                                    name: "Projects",
-                                    splineType: SplineType.cardinal,
-                                    cardinalSplineTension: 0.9,
-                                    color: kMainColor,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) =>
-                                        data.y!,
-                                    markerSettings:
-                                        const MarkerSettings(isVisible: true),
-                                  ),
-                                  SplineSeries<ChartData, String>(
-                                    dataSource: data2[selectedIndex],
-                                    name: "Tasks",
-                                    splineType: SplineType.cardinal,
-                                    cardinalSplineTension: 0.9,
-                                    color: kLightblue,
-                                    xValueMapper: (ChartData data, _) => data.x,
-                                    yValueMapper: (ChartData data, _) =>
-                                        data.y!,
-                                    markerSettings:
-                                        const MarkerSettings(isVisible: true),
-                                  ),
+                            SizedBox(
+                              width: screenWidth * 0.05,
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.07,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  for (var index = 0;
+                                      index < titles.length;
+                                      index++)
+                                    TextButton(
+                                      onPressed: () {
+                                        context
+                                            .read<StatisticsCubit>()
+                                            .updateSelectedIndex(index);
+                                      },
+                                      style: ButtonStyle(
+                                        overlayColor: MaterialStateProperty
+                                            .resolveWith<Color?>(
+                                          (states) {
+                                            return index == selectedIndex
+                                                ? kLightblue.withOpacity(0.1)
+                                                : null;
+                                          },
+                                        ),
+                                      ),
+                                      child: Text(
+                                        titles[index],
+                                        style: TextStyle(
+                                          color: index == selectedIndex
+                                              ? kLightblue
+                                              : Colors.white,
+                                          fontSize: screenWidth * 0.03,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
                                 ],
                               ),
                             )
                           ],
                         ),
-                      ),
+                        //   const Spacer(),
+                        Expanded(
+                          child: SfCartesianChart(
+                            plotAreaBorderWidth: 0,
+                            primaryXAxis: const CategoryAxis(
+                              // majorGridLines: MajorGridLines(width: 0.3),
+                              //majorTickLines: MajorTickLines(size: 0),
+                              majorGridLines: MajorGridLines(
+                                  width: 0,
+                                  color: Color.fromRGBO(69, 69, 73, 0.546)),
+                            ),
+                            legend: const Legend(
+                                iconBorderWidth: 2,
+                                isVisible: true,
+                                position: LegendPosition.bottom),
+                            series: [
+                              SplineSeries<ChartData, String>(
+                                dataSource: data1[selectedIndex],
+                                name: "Projects",
+                                splineType: SplineType.cardinal,
+                                cardinalSplineTension: 0.9,
+                                color: kMainColor,
+                                xValueMapper: (ChartData data, _) => data.x,
+                                yValueMapper: (ChartData data, _) => data.y!,
+                                markerSettings: const MarkerSettings(
+                                  color: kMainColor,
+                                  borderColor: kMainColor,
+                                  isVisible: true,
+                                ),
+                              ),
+                              SplineSeries<ChartData, String>(
+                                dataSource: data2[selectedIndex],
+                                name: "Tasks",
+                                splineType: SplineType.cardinal,
+                                cardinalSplineTension: 0.9,
+                                color: kLightblue,
+                                xValueMapper: (ChartData data, _) => data.x,
+                                yValueMapper: (ChartData data, _) => data.y!,
+                                markerSettings: const MarkerSettings(
+                                    isVisible: true,
+                                    color: kLightblue,
+                                    borderColor: kLightblue),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         );
       },
     );
@@ -186,7 +186,7 @@ class StatisticsScreenContent extends StatelessWidget {
 Widget buildItem(Info i, final screenWidth, final screenHeight) {
   return SizedBox(
     width: screenWidth * 0.56,
-    height: screenHeight * 0.28,
+    height: screenHeight * 0.25,
     child: Container(
       decoration: BoxDecoration(
         color: kItemsBackgroundColor,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:task_manger/screens/StatisticsScreen/statistics_screen.dart';
 
 import '../../../constants.dart';
 import '../models/bar.dart';
@@ -40,7 +41,7 @@ class ProductivityPart extends StatelessWidget {
                       ),
                       const SizedBox(height: 15),
                       TagWidget(
-                        color: kRed.withOpacity(0.5),
+                        color: kMainColor.withOpacity(0.5),
                         children: const [
                           Text("3/5 tasks"),
                         ],
@@ -50,11 +51,15 @@ class ProductivityPart extends StatelessWidget {
                   SizedBox(
                     width: 100,
                     child: CircularPercentIndicator(
-                      radius: 40,
-                      lineWidth: 4.0,
+                      animation: true,
+                      rotateLinearGradient: true,
+                      arcType: ArcType.FULL,
+                      arcBackgroundColor: kMainColor.withOpacity(0.3),
+                      radius: 55,
+                      lineWidth: 8.0,
                       startAngle: 110,
                       percent: 3 / 5,
-                      progressColor: kRed,
+                      progressColor: kLightblue,
                       center: const Text("LOGO"),
                     ),
                   ),
@@ -87,7 +92,7 @@ class ProductivityPart extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           decoration: BoxDecoration(
             color: tintBlack.withOpacity(0.3),
             borderRadius: BorderRadius.circular(15),
@@ -95,35 +100,40 @@ class ProductivityPart extends StatelessWidget {
           child: Column(
             children: [
               // Text("Completed in the last 7 Days"),
-              SfCartesianChart(
-                plotAreaBorderWidth: 0.2,
-                title: const ChartTitle(
-                  text: 'Completed in the last 7 Days',
-                  textStyle: TextStyle(fontSize: 12),
+              Padding(
+                padding:
+                    EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
+                child: SfCartesianChart(
+                  plotAreaBorderWidth: 0.2,
+                  title: const ChartTitle(
+                    text: 'Completed in the last 7 Days',
+                    textStyle: TextStyle(fontSize: 12),
+                  ),
+                  palette: const [kPriamaryColor, kMainColor],
+                  legend: const Legend(
+                    isVisible: true,
+                    position: LegendPosition.bottom,
+                  ),
+                  primaryXAxis: const CategoryAxis(
+                    // minimum: DateTime.monday * 1.0,
+                    // maximum: DateTime.sunday * 1.0,
+                    // maximumLabels: 100,
+                    majorGridLines: MajorGridLines(width: 0.3),
+                    majorTickLines: MajorTickLines(size: 0),
+                    axisLine: AxisLine(width: 0.3),
+                  ),
+                  primaryYAxis: const NumericAxis(
+                    // minimum: 0,
+                    // maximum: 20,
+                    axisLine: AxisLine(width: 0.3),
+                    majorGridLines: MajorGridLines(width: 0.3),
+                    majorTickLines: MajorTickLines(size: 0),
+                  ),
+                  series: _getDefaultColumnSeries(),
+                  // tooltipBehavior: _tooltipBehavior,
                 ),
-                palette: const [kPriamaryColor, kMainColor],
-                legend: const Legend(
-                  isVisible: true,
-                  position: LegendPosition.bottom,
-                ),
-                primaryXAxis: const CategoryAxis(
-                  // minimum: DateTime.monday * 1.0,
-                  // maximum: DateTime.sunday * 1.0,
-                  // maximumLabels: 100,
-                  majorGridLines: MajorGridLines(width: 0.3),
-                  majorTickLines: MajorTickLines(size: 0),
-                  axisLine: AxisLine(width: 0.3),
-                ),
-                primaryYAxis: const NumericAxis(
-                  // minimum: 0,
-                  // maximum: 20,
-                  axisLine: AxisLine(width: 0.3),
-                  majorGridLines: MajorGridLines(width: 0.3),
-                  majorTickLines: MajorTickLines(size: 0),
-                ),
-                series: _getDefaultColumnSeries(),
-                // tooltipBehavior: _tooltipBehavior,
-              )
+              ),
+              StatisticsScreen()
             ],
           ),
         )

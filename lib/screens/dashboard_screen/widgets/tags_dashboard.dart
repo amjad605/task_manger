@@ -16,6 +16,12 @@ class TagsDashboard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         TagWidget(
+          size: BlocProvider.of<SwitchDashboardCubit>(context).state
+                  is OverviewState
+              ? Size(MediaQuery.of(context).size.width * 0.36,
+                  MediaQuery.of(context).size.height * 0.055)
+              : Size(MediaQuery.of(context).size.width * 0.30,
+                  MediaQuery.of(context).size.height * 0.055),
           color: BlocProvider.of<SwitchDashboardCubit>(context).state
                   is OverviewState
               ? kMainColor
@@ -26,6 +32,7 @@ class TagsDashboard extends StatelessWidget {
           children: const [
             Text(
               "Overview",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
               ),
@@ -33,6 +40,12 @@ class TagsDashboard extends StatelessWidget {
           ],
         ),
         TagWidget(
+          size: BlocProvider.of<SwitchDashboardCubit>(context).state
+                  is ProductivityState
+              ? Size(MediaQuery.of(context).size.width * 0.38,
+                  MediaQuery.of(context).size.height * 0.055)
+              : Size(MediaQuery.of(context).size.width * 0.33,
+                  MediaQuery.of(context).size.height * 0.055),
           color: BlocProvider.of<SwitchDashboardCubit>(context).state
                   is ProductivityState
               ? kMainColor

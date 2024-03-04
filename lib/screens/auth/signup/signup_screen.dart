@@ -20,7 +20,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController name = TextEditingController();
-    final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    name.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return BlocBuilder<LoginCubit, LoginStates>(
       builder: (context, state) {
-        return  Container(
+        return Container(
           decoration: BoxDecoration(gradient: backgroundStyle()),
           child: Scaffold(
               backgroundColor: Colors.transparent,
@@ -57,7 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                   SizedBox(
                                     width: 0.8 * screenWidth,
-                                    child: Text("Sign Up ",
+                                    child: const Text("Sign Up ",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 45,
@@ -100,7 +107,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       ),
                                     ),
                                   ),
-                                  
                                   Form(
                                     key: _formKey,
                                     child: Column(
@@ -121,8 +127,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               }
                                               return null;
                                             }),
-                                            SizedBox(height: 15,),
-                                          
+                                        SizedBox(
+                                          height: 15,
+                                        ),
                                         EmailTextFormField(
                                             width: 0.7 * screenWidth,
                                             email: email,
@@ -160,24 +167,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                                 .changePasswordVisibility();
                                           },
                                         ),
-                                      
                                       ],
                                     ),
                                   ),
-                                SizedBox(
+                                  SizedBox(
                                     height: 0.05 * screenHeight,
                                   ),
-                                DefaultButton(
-                                width: 0.7 * screenWidth,
-                                height: 0.06 * screenHeight,
-                                text: "Sign Up",
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                    Navigator.of(context).push(SlidePageRoute(
-                                        page: const LoginEmailScreen()));
-                                  }
-                                },
-                              ),
+                                  DefaultButton(
+                                    width: 0.7 * screenWidth,
+                                    height: 0.06 * screenHeight,
+                                    text: "Sign Up",
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        Navigator.of(context).push(
+                                            SlidePageRoute(
+                                                page:
+                                                    const LoginEmailScreen()));
+                                      }
+                                    },
+                                  ),
                                 ],
                               )))))),
         );

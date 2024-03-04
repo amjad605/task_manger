@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/screens/OnBoardingScreen/Widgets/chatItem.dart';
+import 'package:task_manger/screens/auth/login/login_email_screen.dart';
 import 'package:task_manger/screens/controller_screen/controller_screen.dart';
 
 class OnBoardCustomBody extends StatelessWidget {
@@ -70,7 +71,7 @@ class OnBoardCustomBody extends StatelessWidget {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                       builder: (ctx) =>
-                                          const ControllerScreen()),
+                                          const LoginEmailScreen()),
                                 );
                               },
                               style: ElevatedButton.styleFrom(
@@ -156,7 +157,7 @@ class Topitem extends StatelessWidget {
               radius: size.height * 0.035, //30,
               backgroundColor: const Color.fromARGB(255, 211, 240, 105),
               child: Image.asset(
-                "assets/images/Daco_5969784.png",
+                "assets/images/memoji.png",
                 fit: BoxFit.cover,
                 scale: 1,
               ),
@@ -183,7 +184,7 @@ class Topitem extends StatelessWidget {
             radius: size.height * 0.055, //50,
             backgroundColor: const Color.fromARGB(255, 240, 112, 105),
             child: Image.asset(
-              "assets/images/Daco_5969784.png",
+              "assets/images/emojipng.com-1852162.png",
               fit: BoxFit.cover,
               scale: 1,
             ),
