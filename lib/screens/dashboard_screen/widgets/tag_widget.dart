@@ -16,7 +16,7 @@ class TagWidget extends StatelessWidget {
       child: AnimatedContainer(
         width: size != null ? size!.width : 100,
         height: size != null ? size!.height : 40,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
           color: color,

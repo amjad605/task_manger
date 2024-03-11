@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -39,12 +40,14 @@ class ProductivityPart extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
-                      const SizedBox(height: 15),
-                      TagWidget(
-                        color: kMainColor.withOpacity(0.5),
-                        children: const [
-                          Text("3/5 tasks"),
-                        ],
+                      const SizedBox(height: 10),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: kMainColor.withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text("3/5 tasks"),
                       ),
                     ],
                   ),
@@ -65,7 +68,7 @@ class ProductivityPart extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 10),
               const Text("You marked 3/5 tasks are done 🎉"),
               const SizedBox(height: 15),
               ElevatedButton(

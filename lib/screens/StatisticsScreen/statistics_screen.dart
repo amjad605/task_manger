@@ -9,7 +9,7 @@ import 'package:task_manger/Screens/StatisticsScreen/overall_info_class.dart';
 import 'package:task_manger/cubits/statistics_screen_states.dart';
 
 class StatisticsScreen extends StatelessWidget {
-  const StatisticsScreen({Key? key}) : super(key: key);
+  const StatisticsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class StatisticsScreen extends StatelessWidget {
 }
 
 class StatisticsScreenContent extends StatelessWidget {
-  const StatisticsScreenContent({Key? key}) : super(key: key);
+  const StatisticsScreenContent({super.key});
 
   @override
   Widget build(BuildContext context) {
