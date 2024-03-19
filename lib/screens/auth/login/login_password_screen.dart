@@ -127,13 +127,13 @@ class LoginPasswordScreen extends StatelessWidget {
                                     width: 0.7 * screenWidth,
                                     height: 50.0,
                                     onPressed: () {
-                                      if (_formKey.currentState!.validate()) {
+                                      // if (_formKey.currentState!.validate()) {
                                         Navigator.of(context).pushAndRemoveUntil(
                                             MaterialPageRoute(
                                                 builder: (ctx) =>
                                                     const ControllerScreen()),
                                             (route) => false);
-                                      }
+                                      // }
                                     },
                                     text: "Sign In"),
                               ],
