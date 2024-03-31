@@ -6,22 +6,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../Constants/constants.dart';
-import '../../../cubits/profile_editing_cubit/profile_editing_cubit.dart';
+import '../../../cubits/profile_cubit/profile_cubit.dart';
+import '../../../models/user_model.dart';
+
 
 class DisplayUserData extends StatelessWidget {
   const DisplayUserData({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String name = BlocProvider.of<ProfileEditingCubit>(context).name,
-        mail = BlocProvider.of<ProfileEditingCubit>(context).mail;
-    File? img = BlocProvider.of<ProfileEditingCubit>(context).img;
-    return BlocConsumer<ProfileEditingCubit, ProfileEditingState>(
+    User myUser= BlocProvider.of<ProfileCubit>(context).myUser;
+    File? img = BlocProvider.of<ProfileCubit>(context).img;
+    return BlocConsumer<ProfileCubit, ProfileEditingState>(
       listener: (context, state) {
         if (state is ProfileEditingSuccess) {
-          mail = BlocProvider.of<ProfileEditingCubit>(context).mail;
-          name = BlocProvider.of<ProfileEditingCubit>(context).name;
-          img = BlocProvider.of<ProfileEditingCubit>(context).img;
+          myUser= BlocProvider.of<ProfileCubit>(context).myUser;
+          img = BlocProvider.of<ProfileCubit>(context).img;
         }
       },
       builder: (context, state) {
@@ -32,7 +32,7 @@ class DisplayUserData extends StatelessWidget {
               child: img == null
                   ? ClipOval(
                       child: Image.asset(
-                        "assets/images/Profile_pic.png",
+                        myUser.imgAsset,
                       ),
                     )
                   : ClipOval(
@@ -47,7 +47,7 @@ class DisplayUserData extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             Text(
-              name,
+              myUser.name,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -60,7 +60,7 @@ class DisplayUserData extends StatelessWidget {
               height: 1.h,
             ),
             Text(
-              mail,
+              myUser.email,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14.sp,
