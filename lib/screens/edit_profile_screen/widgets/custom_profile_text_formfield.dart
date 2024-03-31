@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manger/Constants/constants.dart';
-import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
 
 class CustomProfileTextFormField extends StatelessWidget {
