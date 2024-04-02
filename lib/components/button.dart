@@ -15,7 +15,7 @@ Widget DefaultButton(
         
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
               fontWeight: FontWeight.bold, fontSize: 19, color: Colors.white),
         ),
       ),

@@ -7,7 +7,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:task_manger/Screens/OnBoardingScreen/onBoardingScreen.dart';
 
 import '../../Constants/constants.dart';
-import '../../screens/OnBoardingScreen/OnBoardScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

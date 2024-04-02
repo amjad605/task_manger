@@ -1,13 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
 import 'package:task_manger/screens/edit_profile_screen/widgets/custom_profile_text_formfield.dart';
 import 'package:task_manger/screens/edit_profile_screen/widgets/edit_profile_appbar.dart';
@@ -16,7 +10,7 @@ import 'package:task_manger/screens/edit_profile_screen/widgets/profile_pic.dart
 import '../../Constants/constants.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({Key? key}) : super(key: key);
+  EditProfileScreen({super.key});
   GlobalKey<FormState> keyForm = GlobalKey();
   AutovalidateMode mode = AutovalidateMode.always;
   TextEditingController nameController = TextEditingController();
@@ -46,7 +40,7 @@ class EditProfileScreen extends StatelessWidget {
           inAsyncCall: isLoading,
           child: Scaffold(
             backgroundColor: kBackgroundColor,
-            appBar: PreferredSize(
+            appBar: const PreferredSize(
                 preferredSize: Size(double.infinity, 44),
                 child: EditProfileAppBar()),
             body: ListView(

@@ -43,11 +43,11 @@ class TaskWidget extends StatelessWidget {
               children: [
                 Text(
                   titleTask,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Deadline:$deadlineDate",
-                  style: TextStyle(fontSize: 10),
+                  style: const TextStyle(fontSize: 10),
                 ),
               ],
             ),
@@ -66,7 +66,7 @@ class TaskWidget extends StatelessWidget {
                       backgroundColor: Colors.white,
                       child: CircleAvatar(
                         radius: 20,
-                        backgroundImage: NetworkImage(
+                        backgroundImage: AssetImage(
                           urlImages[i],
                         ),
                       ),

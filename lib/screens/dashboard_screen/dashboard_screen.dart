@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task_manger/screens/StatisticsScreen/statistics_screen.dart';
 import '../../cubits/change_dashboard_body/dashboard_states.dart';
 import '../../cubits/change_dashboard_body/switch_states_dashboard.dart';
 import 'widgets/custom_above_app_bar.dart';
@@ -16,15 +15,16 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height * 0.04;
     return BlocProvider(
       create: (context) => SwitchDashboardCubit(),
       child: Builder(builder: (context) {
         return SafeArea(
           child: CustomScrollView(
             slivers: [
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: CustomAboveAppBar(),
                 ),
               ),
@@ -32,13 +32,13 @@ class DashboardScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: AnimatedTextKit(
-                      pause: Duration(milliseconds: 600),
+                      pause: const Duration(milliseconds: 600),
                       displayFullTextOnTap: true,
                       totalRepeatCount: 1,
                       isRepeatingAnimation: true,
                       animatedTexts: [
                         TypewriterAnimatedText(
-                          speed: Duration(milliseconds: 150),
+                          speed: const Duration(milliseconds: 150),
                           "Hello,\nDerek Doyle👋",
                           textStyle: TextStyle(
                               fontSize:
@@ -47,14 +47,14 @@ class DashboardScreen extends StatelessWidget {
                       ]),
                 ),
               ),
-              SliverToBoxAdapter(child: SizedBox(height: 20)),
+              const SliverToBoxAdapter(child: SizedBox(height: 20)),
               SliverToBoxAdapter(
                 child: BlocBuilder<SwitchDashboardCubit, DashboardState>(
                   builder: (context, state) {
                     if (state is ProductivityState) {
                       return ListView(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: const [
                           // CustomAboveAppBar(),
                           // Text(
@@ -71,8 +71,8 @@ class DashboardScreen extends StatelessWidget {
                     }
                     return ListView(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: const [
+                      physics: const NeverScrollableScrollPhysics(),
+                      children: [
                         // CustomAboveAppBar(),
                         // Text(
                         //   "Hello,\nDerek Doyle👋",
@@ -80,10 +80,10 @@ class DashboardScreen extends StatelessWidget {
                         // ),
                         // SizedBox(height: 20),
 
-                        TagsDashboard(),
-                        SizedBox(height: 15),
+                        const TagsDashboard(),
+                        SizedBox(height: screenHeight * 2.5),
                         //!OVERVIEW PART!
-                        OverviewPart(),
+                        const OverviewPart(),
                       ],
                     );
                   },

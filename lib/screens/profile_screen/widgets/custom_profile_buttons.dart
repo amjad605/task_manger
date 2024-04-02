@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,8 +5,7 @@ import '../../../Constants/constants.dart';
 
 class CustomProfileButtons extends StatelessWidget {
   const CustomProfileButtons(
-      {Key? key, required this.buttonName, required this.iconPath})
-      : super(key: key);
+      {super.key, required this.buttonName, required this.iconPath});
   final String iconPath, buttonName;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class CustomProfileButtons extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
                 height: 25.h,
                 width: 25.w,
                 child: Image.asset(

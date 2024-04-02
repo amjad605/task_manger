@@ -18,44 +18,44 @@ class ProfileScreen extends StatelessWidget {
           SizedBox(
             height: 5.h,
           ),
-          ProfileAppBar(),
+          const ProfileAppBar(),
           Expanded(
             child: ListView(
               children: [
-                DisplayUserData(),
+                const DisplayUserData(),
                 SizedBox(
                   height: 15.h,
                 ),
-                CustomProfileButtons(
+                const CustomProfileButtons(
                   buttonName: "My Projects",
                   iconPath: "assets/icons/mangment.png",
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                CustomProfileButtons(
+                const CustomProfileButtons(
                   buttonName: "Join Team",
                   iconPath: "assets/icons/group.png",
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                CustomProfileButtons(
+                const CustomProfileButtons(
                   buttonName: "Share Profile",
                   iconPath: "assets/icons/share.png",
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                CustomProfileButtons(
+                const CustomProfileButtons(
                   buttonName: "All My Task",
                   iconPath: "assets/icons/check-mark.png",
                 ),
                 SizedBox(
                   height: 30.h,
                 ),
-                LogoutCustomButton(),
-                SizedBox(
+                const LogoutCustomButton(),
+                const SizedBox(
                   height: 20,
                 )
               ],

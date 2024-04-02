@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manger/Constants/constants.dart';
-import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
 
 class CustomProfileTextFormField extends StatelessWidget {
   CustomProfileTextFormField(
-      {Key? key,
+      {super.key,
       required this.fieldName,
       required this.controller,
-      this.needObscure})
-      : super(key: key);
+      this.needObscure});
   bool? needObscure;
   String fieldName;
   TextEditingController controller;
@@ -36,11 +33,11 @@ class CustomProfileTextFormField extends StatelessWidget {
           builder: (context, state) {
             return TextFormField(
               decoration: InputDecoration(
-                enabledBorder: UnderlineInputBorder(
+                enabledBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(
                   color: kMainColor,
                 )),
-                focusedBorder: UnderlineInputBorder(
+                focusedBorder: const UnderlineInputBorder(
                     borderSide: BorderSide(color: kLightblue)),
                 suffixIcon: needObscure != null
                     ? IconButton(
@@ -55,17 +52,17 @@ class CustomProfileTextFormField extends StatelessWidget {
                               .ChangeVisibility();
                         },
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ),
               cursorColor: kPriamaryColor,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontFamily: mainFont,
               ),
               controller: controller,
               validator: (value) {
                 if (fieldName == "Your Email") {
-                  if (!value!.contains("@") || !value!.contains(".com")) {
+                  if (!value!.contains("@") || !value.contains(".com")) {
                     return "Invalid Email";
                   }
                 } else if (fieldName == "Your Name") {
@@ -77,6 +74,7 @@ class CustomProfileTextFormField extends StatelessWidget {
                     return "password cannot be empty";
                   }
                 }
+                return null;
               },
               obscureText: needObscure != null ? obscure : false,
             );

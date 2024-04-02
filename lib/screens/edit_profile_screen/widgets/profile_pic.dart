@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +6,7 @@ import '../../../Constants/constants.dart';
 import '../../../cubits/profile_editing_cubit/profile_editing_cubit.dart';
 
 class ProfilePic extends StatelessWidget {
-  ProfilePic({required this.img});
+  ProfilePic({super.key, required this.img});
   File? img;
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class ProfilePic extends StatelessWidget {
                 onPressed: () async {
                   BlocProvider.of<ProfileEditingCubit>(context).SelectPic();
                 },
-                icon: Icon(Icons.edit),
+                icon: const Icon(Icons.edit),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kLightblue,
                 )),

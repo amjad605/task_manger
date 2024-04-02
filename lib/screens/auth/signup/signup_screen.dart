@@ -56,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   backIcon(
                                     onPressed: () {
                                       Navigator.of(context).pop(SlidePageRoute(
-                                          page: LoginEmailScreen()));
+                                          page: const LoginEmailScreen()));
                                     },
                                   ),
                                   SizedBox(
@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   TextButton(
                                     onPressed: () {
                                       Navigator.of(context).pop(SlidePageRoute(
-                                          page: LoginEmailScreen()));
+                                          page: const LoginEmailScreen()));
                                     },
                                     child: const Text.rich(
                                       TextSpan(
@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                               }
                                               return null;
                                             }),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 15,
                                         ),
                                         EmailTextFormField(

@@ -10,7 +10,7 @@ Widget customTextFormField({
   var width,
   void Function()? suffixPressed,
 }) {
-  return Container(
+  return SizedBox(
     width: width,
     child: TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
