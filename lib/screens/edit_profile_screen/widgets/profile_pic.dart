@@ -2,11 +2,14 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manger/models/user_model.dart';
 import '../../../Constants/constants.dart';
-import '../../../cubits/profile_editing_cubit/profile_editing_cubit.dart';
+import '../../../cubits/profile_cubit/profile_cubit.dart';
+
 
 class ProfilePic extends StatelessWidget {
-  ProfilePic({super.key, required this.img});
+  ProfilePic({required this.img,required this.myUser});
+  User myUser;
   File? img;
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class ProfilePic extends StatelessWidget {
             child: img == null
                 ? ClipOval(
                     child: Image.asset(
-                      "assets/images/Profile_pic.png",
+                     myUser.imgAsset,
                     ),
                   )
                 : ClipOval(
@@ -38,7 +41,7 @@ class ProfilePic extends StatelessWidget {
             right: 0,
             child: IconButton(
                 onPressed: () async {
-                  BlocProvider.of<ProfileEditingCubit>(context).SelectPic();
+                  BlocProvider.of<ProfileCubit>(context).SelectPic();
                 },
                 icon: const Icon(Icons.edit),
                 style: ElevatedButton.styleFrom(
