@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manger/cubits/auth/cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
 import 'package:task_manger/screens/splash_screen/view.dart';
+import 'package:task_manger/screens/tasks_screen/task_screen.dart';
 import 'package:task_manger/theme.dart';
 import 'cubits/add_friend_cubit/add_friend_cubit.dart';
 import 'cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
@@ -40,7 +41,7 @@ class MyTaskManger extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: theme,
-          home: const SplashScreen(),
+          home:  TasksScreen(),
         ),
       ),
     );

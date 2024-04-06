@@ -18,7 +18,8 @@ class TaskWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //CircularPrecentage
           Expanded(

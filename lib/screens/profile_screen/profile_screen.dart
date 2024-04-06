@@ -27,7 +27,7 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                const CustomProfileButtons(
+                 CustomProfileButtons(
                   buttonName: "My Projects",
                   iconPath: "assets/icons/mangment.png",
                   onPressed: (){},
@@ -35,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                const CustomProfileButtons(
+                 CustomProfileButtons(
                   buttonName: "Join Team",
                   iconPath: "assets/icons/group.png",
                   onPressed: (){},
@@ -43,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                const CustomProfileButtons(
+                 CustomProfileButtons(
                   buttonName: "Share Profile",
                   iconPath: "assets/icons/share.png",
                   onPressed: (){},
@@ -51,7 +51,7 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                const CustomProfileButtons(
+                 CustomProfileButtons(
                   buttonName: "All My Task",
                   iconPath: "assets/icons/check-mark.png",
                   onPressed: (){},

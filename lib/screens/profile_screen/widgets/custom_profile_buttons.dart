@@ -4,13 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Constants/constants.dart';
 
 class CustomProfileButtons extends StatelessWidget {
-<<<<<<< HEAD
-  const CustomProfileButtons(
-      {super.key, required this.buttonName, required this.iconPath});
-=======
-  CustomProfileButtons(
+
+   CustomProfileButtons(
       {super.key, required this.buttonName, required this.iconPath,required this.onPressed});
->>>>>>> 149809db1af84890665abaa9ba55bd61ae399475
   final String iconPath, buttonName;
   void Function() onPressed;
   @override
