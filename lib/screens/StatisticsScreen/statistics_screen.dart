@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:task_manger/Constants/constants.dart';
@@ -15,7 +13,7 @@ class StatisticsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => StatisticsCubit(),
-      child: StatisticsScreenContent(),
+      child: const StatisticsScreenContent(),
     );
   }
 }
@@ -61,7 +59,7 @@ class StatisticsScreenContent extends StatelessWidget {
                 child: Container(
                   width: screenWidth,
                   height: screenHeight * 0.5,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       // color: kItemsBackgroundColor,
                       //  borderRadius: BorderRadius.circular(30),
                       ),

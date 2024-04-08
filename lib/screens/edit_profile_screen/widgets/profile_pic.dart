@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +43,7 @@ class ProfilePic extends StatelessWidget {
                 onPressed: () async {
                   BlocProvider.of<ProfileCubit>(context).SelectPic();
                 },
-                icon: Icon(Icons.edit),
+                icon: const Icon(Icons.edit),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: kLightblue,
                 )),

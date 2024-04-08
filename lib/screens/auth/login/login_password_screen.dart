@@ -15,7 +15,7 @@ class LoginPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final formKey = GlobalKey<FormState>();
 
     TextEditingController password = TextEditingController();
 
@@ -41,8 +41,8 @@ class LoginPasswordScreen extends StatelessWidget {
                         children: [
                           backIcon(
                             onPressed: () {
-                              Navigator.of(context).pop(
-                                  SlidePageRoute(page: LoginEmailScreen()));
+                              Navigator.of(context).pop(SlidePageRoute(
+                                  page: const LoginEmailScreen()));
                             },
                           ),
                           SizedBox(
@@ -64,8 +64,8 @@ class LoginPasswordScreen extends StatelessWidget {
                           FadeInLeft(
                             child: TextButton(
                               onPressed: () {
-                                Navigator.of(context).pop(
-                                    SlidePageRoute(page: LoginEmailScreen()));
+                                Navigator.of(context).pop(SlidePageRoute(
+                                    page: const LoginEmailScreen()));
                               },
                               child: const Text.rich(
                                 TextSpan(
@@ -99,7 +99,7 @@ class LoginPasswordScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 0.03 * screenHeight),
                           Form(
-                            key: _formKey,
+                            key: formKey,
                             child: Column(
                               children: [
                                 passwordTextFormField(
@@ -127,12 +127,13 @@ class LoginPasswordScreen extends StatelessWidget {
                                     width: 0.7 * screenWidth,
                                     height: 50.0,
                                     onPressed: () {
-                                      // if (_formKey.currentState!.validate()) {
+                                      if (formKey.currentState!.validate()) {
                                         Navigator.of(context).pushAndRemoveUntil(
                                             MaterialPageRoute(
                                                 builder: (ctx) =>
                                                     const ControllerScreen()),
                                             (route) => false);
+                                      }
                                       // }
                                     },
                                     text: "Sign In"),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -8,7 +7,6 @@ import 'package:task_manger/screens/StatisticsScreen/statistics_screen.dart';
 import '../../../constants.dart';
 import '../models/bar.dart';
 import '../models/bar_data_model.dart';
-import 'tag_widget.dart';
 
 class ProductivityPart extends StatelessWidget {
   const ProductivityPart({
@@ -42,12 +40,12 @@ class ProductivityPart extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: kMainColor.withOpacity(0.5),
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        child: Text("3/5 tasks"),
+                        child: const Text("3/5 tasks"),
                       ),
                     ],
                   ),
@@ -136,7 +134,7 @@ class ProductivityPart extends StatelessWidget {
                   // tooltipBehavior: _tooltipBehavior,
                 ),
               ),
-              StatisticsScreen()
+              const StatisticsScreen()
             ],
           ),
         )

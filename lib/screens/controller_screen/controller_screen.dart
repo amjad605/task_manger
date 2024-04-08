@@ -44,7 +44,7 @@ class ControllerScreen extends StatelessWidget {
       bottomNavigationBar: BlocBuilder<ChangeScreenBottomNav, ScreenState>(
         builder: (context, state) {
           //don't add const
-          return CustomBottomNavigationBar();
+          return const CustomBottomNavigationBar();
         },
       ),
       body: PageView(

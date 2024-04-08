@@ -1,11 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -18,7 +13,7 @@ import '../../cubits/profile_cubit/profile_cubit.dart';
 import '../../models/user_model.dart';
 
 class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({Key? key}) : super(key: key);
+  EditProfileScreen({super.key});
   GlobalKey<FormState> keyForm = GlobalKey();
   AutovalidateMode mode = AutovalidateMode.always;
   TextEditingController nameController = TextEditingController();
@@ -46,7 +41,7 @@ class EditProfileScreen extends StatelessWidget {
           inAsyncCall: isLoading,
           child: Scaffold(
             backgroundColor: kBackgroundColor,
-            appBar: PreferredSize(
+            appBar: const PreferredSize(
                 preferredSize: Size(double.infinity, 44),
                 child: EditProfileAppBar()),
             body: ListView(
@@ -54,7 +49,7 @@ class EditProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-                ProfilePic(img: img,myUser: myUser,),
+                ProfilePic(img: img, myUser: myUser,),
                 Form(
                     key: keyForm,
                     autovalidateMode: mode,

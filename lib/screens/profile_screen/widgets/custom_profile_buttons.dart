@@ -1,11 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../Constants/constants.dart';
 
 class CustomProfileButtons extends StatelessWidget {
-  CustomProfileButtons(
+
+   CustomProfileButtons(
       {super.key, required this.buttonName, required this.iconPath,required this.onPressed});
   final String iconPath, buttonName;
   void Function() onPressed;
@@ -25,7 +25,7 @@ class CustomProfileButtons extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
                 height: 25.h,
                 width: 25.w,
                 child: Image.asset(

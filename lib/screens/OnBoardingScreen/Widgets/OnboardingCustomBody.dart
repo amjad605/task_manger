@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/screens/OnBoardingScreen/Widgets/chatItem.dart';
 import 'package:task_manger/screens/auth/login/login_email_screen.dart';
-import 'package:task_manger/screens/controller_screen/controller_screen.dart';
 
 class OnBoardCustomBody extends StatelessWidget {
   const OnBoardCustomBody({super.key});

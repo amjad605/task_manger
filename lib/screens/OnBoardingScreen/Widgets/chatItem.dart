@@ -18,7 +18,7 @@ class ChatItem extends StatelessWidget {
         child: FadeInRight(
           from: 200,
           child: Container(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             width: size.width * 0.5,
             height: size.height * 0.06,
             decoration: BoxDecoration(
