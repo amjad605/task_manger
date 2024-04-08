@@ -31,6 +31,7 @@ dependencies:
   animate_do: ^3.3.3
   animated_text_kit: ^4.2.2
   cupertino_icons: ^1.0.6
+  dio: ^5.4.2+1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
@@ -65,7 +66,6 @@ flutter:
     - assets/images/
     - assets/icons/completed_tasks.png
     - assets/icons/total_tasks.png
-
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
