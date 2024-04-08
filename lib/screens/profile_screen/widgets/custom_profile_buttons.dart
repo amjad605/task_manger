@@ -5,16 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Constants/constants.dart';
 
 class CustomProfileButtons extends StatelessWidget {
-  const CustomProfileButtons(
-      {Key? key, required this.buttonName, required this.iconPath})
-      : super(key: key);
+  CustomProfileButtons(
+      {super.key, required this.buttonName, required this.iconPath,required this.onPressed});
   final String iconPath, buttonName;
+  void Function() onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

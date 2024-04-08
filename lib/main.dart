@@ -3,13 +3,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manger/cubits/auth/cubit.dart';
-import 'package:task_manger/cubits/profile_editing_cubit/profile_editing_cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
 import 'package:task_manger/screens/splash_screen/view.dart';
 import 'package:task_manger/screens/task_details_screen/task_detail.dart';
 import 'package:task_manger/screens/task_details_screen/task_detail_cubit/task_details_cubit.dart';
 import 'package:task_manger/theme.dart';
+import 'cubits/add_friend_cubit/add_friend_cubit.dart';
 import 'cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
+import 'cubits/profile_cubit/profile_cubit.dart';
 
 void main() {
   runApp(const MyTaskManger());
@@ -29,7 +30,7 @@ class MyTaskManger extends StatelessWidget {
             create: (context) => ChangeScreenBottomNav(),
           ),
           BlocProvider(
-            create: (context) => ProfileEditingCubit(),
+            create: (context) => ProfileCubit(),
           ),
           BlocProvider(
             create: (context) => TextVisibilityCubit(),
@@ -39,6 +40,9 @@ class MyTaskManger extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => TaskDetailsCubit(),
+          ),
+          BlocProvider(
+            create: (context) => AddFriendCubit(),
           ),
         ],
         child: MaterialApp(
