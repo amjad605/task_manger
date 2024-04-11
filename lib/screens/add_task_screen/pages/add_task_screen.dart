@@ -95,7 +95,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           callback: (selectedUsers) {
                             setState(() {
                               _users = selectedUsers;
-
                             });
                           },
                           initialUsers: _users,
@@ -207,13 +206,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                   hintText: 'UI/UX Design',
                                                   hintStyle: const TextStyle(
                                                       color: Colors.black54,
-                                                  fontWeight: FontWeight.w300),
+                                                      fontWeight:
+                                                          FontWeight.w300),
                                                   border: OutlineInputBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               16.0)),
                                                 ),
-                                                textInputAction: TextInputAction.next,
+                                                textInputAction:
+                                                    TextInputAction.next,
                                                 controller: _categoryController,
                                                 style: const TextStyle(
                                                     color: Colors.black87),
@@ -259,11 +260,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                             vertical: 20.0),
                                                     hintText:
                                                         'Make Grocery Apps UI Design',
-                                                    hintStyle:
-                                                        const TextStyle(
-                                                            color:
-                                                                Colors.black54,
-                                                            fontWeight: FontWeight.w300),
+                                                    hintStyle: const TextStyle(
+                                                        color: Colors.black54,
+                                                        fontWeight:
+                                                            FontWeight.w300),
                                                     border: OutlineInputBorder(
                                                         borderRadius:
                                                             BorderRadius
@@ -401,16 +401,21 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                     const SizedBox(
                                       height: 16.0,
                                     ),
-                                    Expanded(child: GridView.builder(
-                                      itemCount: _users.length + 1,
-                                      gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 6,
-                                        mainAxisSpacing: 12.0,
-                                        crossAxisSpacing: 12.0,
-                                        childAspectRatio: .5
+                                    Expanded(
+                                      child: GridView.builder(
+                                        itemCount: _users.length + 1,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 6,
+                                                mainAxisSpacing: 12.0,
+                                                crossAxisSpacing: 12.0,
+                                                childAspectRatio: .5),
+                                        padding: EdgeInsets.zero,
+                                        itemBuilder: (context, index) =>
+                                            index == _users.length
+                                                ? _addButton(values[4])
+                                                : _userWidget(_users[index]),
                                       ),
-                                      padding: EdgeInsets.zero,
-                                      itemBuilder: (context, index) => index == _users.length ?  _addButton(values[4]):_userWidget(_users[index]),),
                                     )
                                   ],
                                 ),
@@ -423,7 +428,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 direction: Alignment.bottomCenter,
                                 value: Curves.easeOutBack.transform(values[5]),
                                 child: GestureDetector(
-                                  onTap: () async{
+                                  onTap: () async {
                                     if (_categoryController.text.isEmpty) {
                                       showSnackBar('Enter valid category');
                                       return;
@@ -449,36 +454,43 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
                                     // TODO: Replace timers with async functions to load data from database
 
-                                    await Future.delayed(const Duration(milliseconds: 1000) );
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 1000));
                                     setState(() {
                                       next = true;
                                       stage = 2;
                                     });
-                                    await Future.delayed(const Duration(milliseconds: 1000) );
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 1000));
                                     print(task);
                                     Navigator.pop(context);
                                   },
                                   child: Center(
                                     child: AnimatedContainer(
-                                      duration: const Duration(milliseconds: 400),
+                                      duration:
+                                          const Duration(milliseconds: 400),
                                       height: screenSize.height * .075,
-                                      width: stage == 1 ?screenSize.height * .075 : screenSize.width,
+                                      width: stage == 1
+                                          ? screenSize.height * .075
+                                          : screenSize.width,
                                       decoration: BoxDecoration(
-                                          color: stage == 2 ? Colors.green : kMainColor,
+                                          color: stage == 2
+                                              ? Colors.green
+                                              : kMainColor,
                                           borderRadius: BorderRadius.circular(
                                               screenSize.width)),
                                       margin: EdgeInsets.symmetric(
-                                          vertical:
-                                              MediaQuery.of(context).padding.top *
-                                                  1.5,
+                                          vertical: MediaQuery.of(context)
+                                                  .padding
+                                                  .top *
+                                              1.5,
                                           horizontal: 24.0),
-
                                       alignment: Alignment.center,
-                                      clipBehavior:Clip.antiAlias,
+                                      clipBehavior: Clip.antiAlias,
                                       child: AnimatedSwitcher(
-                                        duration: const Duration(milliseconds: 400),
-                                        child: stages[stage]
-                                      ),
+                                          duration:
+                                              const Duration(milliseconds: 400),
+                                          child: stages[stage]),
                                     ),
                                   ),
                                 ),
@@ -496,120 +508,113 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-
-
   _userWidget(User user) => Column(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Expanded(
-        flex: 2,
-        child: Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: const BoxDecoration(
-            color: Colors.white,
-            shape: BoxShape.circle,
-          ),
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
-            margin: const EdgeInsets.all(1.0),
-            child: Image.asset(
-              user.image,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-      ),
-      Expanded(
-        child: Text(
-          user.name,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 10.0 ,
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ),
-    ],
-  );
-
-  _addButton(value) =>  Column(
-    children: [
-      Expanded(
-        flex: 2,
-        child: Center(
-          child: GestureDetector(
-            onTap: () {
-              pageController.animateToPage(0,
-                  duration: const Duration(
-                      milliseconds: 500),
-                  curve: Curves.easeOut);
-            },
-            child: FractionalTranslation(
-              translation: Offset(
-                  4 -
-                      (Curves.easeOutBack
-                          .transform(value) *
-                          4),
-                  0.0),
-              child: Transform.rotate(
-                angle: pi *
-                    Curves.easeIn
-                        .transform(value),
-                child: Opacity(
-                    opacity: Curves.easeOutQuad
-                        .transform(value),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: Colors.lightGreen,
-                              width: 2.0),
-                        ),
-                        padding:
-                        const EdgeInsets.all(8.0),
-                        child: const Icon(
-                          Icons.add_rounded,
-                          color: Colors.lightGreen,
-                        ),
-                      ),
-                    )),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+              child: Container(
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                margin: const EdgeInsets.all(1.0),
+                child: Image.asset(
+                  user.image,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
-        ),
-      ),
-      const Spacer()
-    ],
-  );
+          Expanded(
+            child: Text(
+              user.name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 10.0,
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ],
+      );
+
+  _addButton(value) => Column(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Center(
+              child: GestureDetector(
+                onTap: () {
+                  pageController.animateToPage(0,
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeOut);
+                },
+                child: FractionalTranslation(
+                  translation: Offset(
+                      4 - (Curves.easeOutBack.transform(value) * 4), 0.0),
+                  child: Transform.rotate(
+                    angle: pi * Curves.easeIn.transform(value),
+                    child: Opacity(
+                        opacity: Curves.easeOutQuad.transform(value),
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  color: Colors.lightGreen, width: 2.0),
+                            ),
+                            padding: const EdgeInsets.all(8.0),
+                            child: const Icon(
+                              Icons.add_rounded,
+                              color: Colors.lightGreen,
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Spacer()
+        ],
+      );
   int stage = 0;
   bool next = true;
   List<Widget> stages = [
     const Text(
       'Create Task',
       style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w700,
-          fontSize: 18.0),
+          color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18.0),
     ),
-    const CircularProgressIndicator(color: Colors.white ,strokeCap: StrokeCap.round,),
+    const CircularProgressIndicator(
+      color: Colors.white,
+      strokeCap: StrokeCap.round,
+    ),
     const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           'Done',
           style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: 18.0),
+              color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18.0),
         ),
-        SizedBox(width: 4.0,),
-        Icon(Icons.check_rounded,color: Colors.white, size: 24.0,)
+        SizedBox(
+          width: 4.0,
+        ),
+        Icon(
+          Icons.check_rounded,
+          color: Colors.white,
+          size: 24.0,
+        )
       ],
     ),
   ];

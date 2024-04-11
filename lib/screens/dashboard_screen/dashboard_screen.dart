@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manger/Constants/constants.dart';
 import '../../cubits/change_dashboard_body/dashboard_states.dart';
 import '../../cubits/change_dashboard_body/switch_states_dashboard.dart';
 import 'widgets/custom_above_app_bar.dart';
@@ -39,7 +40,7 @@ class DashboardScreen extends StatelessWidget {
                       animatedTexts: [
                         TypewriterAnimatedText(
                           speed: const Duration(milliseconds: 150),
-                          "Hello,\nDerek Doyle👋",
+                          "Hello,\n${user!.name}👋",
                           textStyle: TextStyle(
                               fontSize:
                                   MediaQuery.of(context).size.height * 0.04),

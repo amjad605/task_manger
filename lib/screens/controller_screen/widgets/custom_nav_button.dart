@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manger/cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
+import 'package:task_manger/cubits/nav_bottom_bar/screens_states.dart';
 
 class CustomNavButton extends StatelessWidget {
   const CustomNavButton({

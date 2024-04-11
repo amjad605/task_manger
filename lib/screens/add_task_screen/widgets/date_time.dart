@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -63,8 +62,6 @@ class _DateState extends State<Date> {
     );
   }
 }
-
-
 
 class Time extends StatefulWidget {
   final Function(TimeOfDay newTime)? onSelectTime;

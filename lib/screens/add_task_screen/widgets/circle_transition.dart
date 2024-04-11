@@ -12,8 +12,7 @@ class CircleTransition extends StatelessWidget {
       required this.animation,
       required this.child,
       required this.startingPoint,
-        this.startingRadius = 0.0
-      });
+      this.startingRadius = 0.0});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +40,12 @@ class CircleClipper extends CustomClipper<RRect> {
 
   @override
   RRect getClip(Size size) {
-    final radius =
-        sqrt(pow(size.width, 2) + pow(size.height, 2)) * sizeAnimation.value * .5;
-    return RRect.fromRectAndRadius(Rect.fromCircle(center: offsetAnimation.value, radius: radius) , Radius.circular(radius));
+    final radius = sqrt(pow(size.width, 2) + pow(size.height, 2)) *
+        sizeAnimation.value *
+        .5;
+    return RRect.fromRectAndRadius(
+        Rect.fromCircle(center: offsetAnimation.value, radius: radius),
+        Radius.circular(radius));
   }
 
   @override

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class ApiService {
-  static final _baseUrl = 'https://cxmanager.onrender.com/';
+  static const _baseUrl = 'https://cxmanager.onrender.com';
   final Dio _dio = Dio(
     BaseOptions(
       baseUrl: _baseUrl,
@@ -17,8 +17,9 @@ class ApiService {
     return response.data;
   }
 
-  Future<Response> post({required String endPoint, required body}) async {
+  Future<Map<String, dynamic>> post(
+      {required String endPoint, required body}) async {
     var response = await _dio.post(endPoint, data: body);
-    return response;
+    return response.data;
   }
 }
