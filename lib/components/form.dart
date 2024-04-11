@@ -16,7 +16,9 @@ Widget customTextFormField({
       autovalidateMode: AutovalidateMode.onUserInteraction,
       style: const TextStyle(fontSize: 18, color: Colors.white),
       controller: controller,
-      keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
+      keyboardType: isPassword
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
       validator: validator,
       obscureText: isPassword,
       decoration: InputDecoration(
@@ -36,7 +38,8 @@ Widget customTextFormField({
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.white),
         ),
-        errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color:kRed )),
+        errorBorder:
+            const UnderlineInputBorder(borderSide: BorderSide(color: kRed)),
         errorStyle: const TextStyle(color: kRed),
         suffixIcon: suffixIcon != null
             ? IconButton(

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Constants/constants.dart';
 
 class EditProfileAppBar extends StatelessWidget {
-const EditProfileAppBar({super.key});
+  const EditProfileAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +13,14 @@ const EditProfileAppBar({super.key});
       child: AppBar(
         toolbarHeight: 38,
         leading: IconButton(
-          onPressed: (){
+          onPressed: () {
             Navigator.pop(context);
           },
           icon: const Icon(
             Icons.arrow_back_sharp,
             color: Colors.white,
           ),
-          style:  ElevatedButton.styleFrom(
+          style: ElevatedButton.styleFrom(
             foregroundColor: kPriamaryColor,
           ),
         ),
@@ -30,8 +30,7 @@ const EditProfileAppBar({super.key});
               fontSize: 20.sp,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontFamily: mainFont
-          ),
+              fontFamily: mainFont),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,

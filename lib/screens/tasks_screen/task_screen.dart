@@ -34,8 +34,8 @@ class TasksScreen extends StatelessWidget {
                   SizedBox(
                     height: screenHeight * 0.009,
                   ),
-                  buildTaskCompleteWidget(screenWidth,screenHeight),
-                SizedBox(
+                  buildTaskCompleteWidget(screenWidth, screenHeight),
+                  SizedBox(
                     height: screenHeight * 0.02,
                   ),
                 ],
@@ -49,14 +49,13 @@ class TasksScreen extends StatelessWidget {
                 itemCount: dates.length,
                 itemBuilder: (context, index) =>
                     calendarWidget(screenHeight, screenWidth, dates[index]),
-                separatorBuilder: (BuildContext context, int index) =>
-                     SizedBox(
-                  width: screenWidth*0.04,
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  width: screenWidth * 0.04,
                 ),
               ),
             ),
-             SizedBox(
-              height: screenHeight*0.04,
+            SizedBox(
+              height: screenHeight * 0.04,
             ),
             Expanded(
               child: Container(

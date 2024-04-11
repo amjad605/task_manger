@@ -36,7 +36,7 @@ class _SelectedUsersWidgetState extends State<SelectedUsersWidget> {
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: widget.users.length,
-          padding:  EdgeInsets.only(right:  screenSize.width * .03),
+          padding: EdgeInsets.only(right: screenSize.width * .03),
           separatorBuilder: (context, index) => const SizedBox(
             width: 8.0,
           ),
@@ -51,46 +51,46 @@ class _SelectedUsersWidgetState extends State<SelectedUsersWidget> {
   }
 
   _userWidget(User user) => Container(
-    clipBehavior: Clip.antiAlias,
-    decoration: const BoxDecoration(
-      color: Colors.white,
-      shape: BoxShape.circle,
-    ),
-    child: Container(
-      clipBehavior: Clip.antiAlias,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
-      margin: const EdgeInsets.all(1.0),
-      child: Stack(
-        alignment: Alignment.center,
-        fit: StackFit.expand,
-        children: [
-          Image.asset(
-            user.image,
-            fit: BoxFit.cover,
+        clipBehavior: Clip.antiAlias,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: Container(
+          clipBehavior: Clip.antiAlias,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
           ),
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
-            child: Container(
-              color: Colors.black12,
-              alignment: Alignment.center,
-              child: FittedBox(
-                child: Transform.scale(
-                  scale: .5,
-                  child: Text(
-                    user.name[0].toUpperCase(),
-                    style: const TextStyle(
-                        fontSize: 100,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w900),
+          margin: const EdgeInsets.all(1.0),
+          child: Stack(
+            alignment: Alignment.center,
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                user.image,
+                fit: BoxFit.cover,
+              ),
+              BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
+                child: Container(
+                  color: Colors.black12,
+                  alignment: Alignment.center,
+                  child: FittedBox(
+                    child: Transform.scale(
+                      scale: .5,
+                      child: Text(
+                        user.name[0].toUpperCase(),
+                        style: const TextStyle(
+                            fontSize: 100,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w900),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          )
-        ],
-      ),
-    ),
-  );
+              )
+            ],
+          ),
+        ),
+      );
 }

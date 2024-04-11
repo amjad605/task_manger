@@ -25,28 +25,23 @@ class ControllerScreen extends StatelessWidget {
           Navigator.of(context).push(
             PageRouteBuilder(
               pageBuilder: (context, animation, secondaryAnimation) =>
-              const AddTaskScreen(),
+                  const AddTaskScreen(),
               transitionDuration: const Duration(milliseconds: 400),
               reverseTransitionDuration: const Duration(milliseconds: 400),
-              transitionsBuilder: (context, animation, secondaryAnimation,
-                  child) =>
-                  CircleTransition(
-                    animation: animation,
-                    startingPoint: getOffset(fabKey),
-                    startingRadius: 56.0,
-                    child: child,
-                  ),
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) =>
+                      CircleTransition(
+                animation: animation,
+                startingPoint: getOffset(fabKey),
+                startingRadius: 56.0,
+                child: child,
+              ),
             ),
           );
         },
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: BlocBuilder<ChangeScreenBottomNav, ScreenState>(
-        builder: (context, state) {
-          //don't add const
-          return const CustomBottomNavigationBar();
-        },
-      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
       body: PageView(
         controller:
             BlocProvider.of<ChangeScreenBottomNav>(context).pageController,
@@ -63,10 +58,10 @@ class ControllerScreen extends StatelessWidget {
     );
   }
 
-
-  Offset getOffset(GlobalKey key){
+  Offset getOffset(GlobalKey key) {
     final renderBox = (key.currentContext?.findRenderObject() as RenderBox);
-    final offset = renderBox.localToGlobal(Offset(renderBox.size.width / 2 , renderBox.size.height / 2));
+    final offset = renderBox.localToGlobal(
+        Offset(renderBox.size.width / 2, renderBox.size.height / 2));
     return offset;
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:task_manger/cache_helper/local.dart';
 import 'package:task_manger/cubits/auth/cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
 import 'package:task_manger/screens/splash_screen/view.dart';
@@ -12,7 +14,9 @@ import 'cubits/add_friend_cubit/add_friend_cubit.dart';
 import 'cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
 import 'cubits/profile_cubit/profile_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   runApp(const MyTaskManger());
 }
 

@@ -39,6 +39,6 @@ final List<TaskData> tasks = [
 DateTime today = DateTime.now();
 
 List<DateTime> dates = List.generate(
-  11, 
+  11,
   (index) => today.subtract(Duration(days: 5)).add(Duration(days: index)),
 );

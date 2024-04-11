@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 
 class CrossFade extends StatelessWidget {
@@ -8,9 +6,9 @@ class CrossFade extends StatelessWidget {
   final Alignment direction;
   const CrossFade(
       {super.key,
-        required this.value,
-        required this.child,
-        required this.direction});
+      required this.value,
+      required this.child,
+      required this.direction});
 
   @override
   Widget build(BuildContext context) {

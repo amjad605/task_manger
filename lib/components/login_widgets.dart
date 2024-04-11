@@ -2,56 +2,53 @@ import 'package:flutter/material.dart';
 import 'package:hexagon/hexagon.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/components/form.dart';
+
 Widget EmailTextFormField({
   required TextEditingController email,
   final String? Function(String?)? validate,
   var width,
- IconData? suffixIcon,
+  IconData? suffixIcon,
   void Function()? suffixPressed,
+}) =>
+    customTextFormField(
+        controller: email,
+        suffixIcon: suffixIcon,
+        suffixPressed: suffixPressed,
+        width: width,
+        labelText: 'YOUR EMAIL',
+        validator: validate);
 
-}) => customTextFormField(
-      controller: email,
-      suffixIcon:suffixIcon ,
-      suffixPressed: suffixPressed,
-      width: width,
-      labelText: 'YOUR EMAIL',
-      validator: validate
-    );
-
-    Widget NameTextFormField({
+Widget NameTextFormField({
   required TextEditingController name,
   final String? Function(String?)? validate,
   var width,
- IconData? suffixIcon,
+  IconData? suffixIcon,
   void Function()? suffixPressed,
-
-}) => customTextFormField(
-      controller: name,
-      suffixIcon:suffixIcon ,
-      suffixPressed: suffixPressed,
-      width: width,
-      labelText: 'YOUR NAME',
-      validator: validate
-    );
+}) =>
+    customTextFormField(
+        controller: name,
+        suffixIcon: suffixIcon,
+        suffixPressed: suffixPressed,
+        width: width,
+        labelText: 'YOUR NAME',
+        validator: validate);
 
 Widget passwordTextFormField({
   required TextEditingController password,
   final String? Function(String?)? validate,
   var width,
-  bool isPassword =false,
+  bool isPassword = false,
   IconData? suffixIcon,
   void Function()? suffixPressed,
 }) =>
     customTextFormField(
-      controller: password,
-      validator: validate,
-      labelText: 'YOUR PASSWORD',
-      isPassword: isPassword,
-      suffixIcon: suffixIcon,
-      suffixPressed: suffixPressed,
-      width: width
-    );
-
+        controller: password,
+        validator: validate,
+        labelText: 'YOUR PASSWORD',
+        isPassword: isPassword,
+        suffixIcon: suffixIcon,
+        suffixPressed: suffixPressed,
+        width: width);
 
 Gradient backgroundStyle() => const LinearGradient(
     begin: Alignment.topLeft,
