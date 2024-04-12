@@ -48,9 +48,9 @@ class ControllerScreen extends StatelessWidget {
         onPageChanged: (index) {
           BlocProvider.of<ChangeScreenBottomNav>(context).switchScreen(index);
         },
-        children: const [
-          DashboardScreen(),
+        children: [
           TasksScreen(),
+          DashboardScreen(),
           ProjectsScreen(),
           ProfileScreen(),
         ],

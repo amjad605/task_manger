@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       String token = CacheHelper.getData(key: kAccessToken) ?? '';
       if (token.isEmpty) {
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (ctx) => const OnBoardingScreen()),
         );
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen> {
         user = UserAccount.fromJson(jsonDecode(u));
         User usermodel = User(user!.name!, user!.email!);
         BlocProvider.of<ProfileCubit>(context).myUser = usermodel;
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (ctx) => const ControllerScreen()),
         );

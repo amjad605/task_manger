@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manger/Constants/constants.dart';
@@ -19,10 +20,18 @@ Widget buildUserInfoWidget(double screenWidth, double screenHeight) => Row(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Welcome Jamie!",
-                style: TextStyle(fontSize: 15),
-              ),
+              AnimatedTextKit(
+                  pause: const Duration(milliseconds: 600),
+                  displayFullTextOnTap: true,
+                  totalRepeatCount: 1,
+                  isRepeatingAnimation: true,
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      speed: const Duration(milliseconds: 150),
+                      "Hello ${user!.name}👋",
+                      textStyle: TextStyle(fontSize: screenHeight * 0.018),
+                    )
+                  ]),
               const Text(
                 "Explore Tasks",
                 style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),

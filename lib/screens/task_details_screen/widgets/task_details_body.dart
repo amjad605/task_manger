@@ -9,108 +9,112 @@ class TaskDetailBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Positioned(
-            top: height * 0.3,
+    return Container(
+      color: Colors.black,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Positioned(
+              top: height * 0.3,
+              right: 0,
+              bottom: 0,
+              left: 0,
+              child: ListView.builder(itemBuilder: (ctx, indx) => SubTask())),
+          Positioned(
+            top: 0,
+            bottom: height * 0.6,
             right: 0,
-            bottom: 0,
             left: 0,
-            child: ListView.builder(itemBuilder: (ctx, indx) => SubTask())),
-        Positioned(
-          top: 0,
-          bottom: height * 0.6,
-          right: 0,
-          left: 0,
-          child: Container(
-            decoration: BoxDecoration(
-                color: kMainColor, borderRadius: BorderRadius.circular(30)),
-            child: SafeArea(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40.0, vertical: 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Creating Flutter Project and Work on it ",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: kMainColor, borderRadius: BorderRadius.circular(30)),
+              child: SafeArea(
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        "Creating Flutter Project and Work on it ",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.calendar_month,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Date : 21 nov",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.alarm,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Date : 21 nov",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 55,
-                      width: double.infinity,
-                      child: Row(
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Expanded(
-                            child: ListView.separated(
-                                //   physics: NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (ctx, indx) => CircleAvatar(
-                                      radius: 35,
-                                      backgroundColor: kLightblue,
-                                      child: CircleAvatar(
-                                        backgroundColor: kMainColor,
-                                        radius: 25,
-                                        child: Image.asset(
-                                          "assets/images/Daco_5969784.png",
-                                          scale: 9,
-                                        ),
-                                      ),
-                                    ),
-                                separatorBuilder: (ctx, indx) => const SizedBox(
-                                      width: 5,
-                                    ),
-                                itemCount: 3),
-                          )
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.calendar_month,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Date : 21 nov",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.alarm,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Date : 21 nov",
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        height: 55,
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ListView.separated(
+                                  //   physics: NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (ctx, indx) => CircleAvatar(
+                                        radius: 35,
+                                        backgroundColor: kLightblue,
+                                        child: CircleAvatar(
+                                          backgroundColor: kMainColor,
+                                          radius: 25,
+                                          child: Image.asset(
+                                            "assets/images/Daco_5969784.png",
+                                            scale: 9,
+                                          ),
+                                        ),
+                                      ),
+                                  separatorBuilder: (ctx, indx) =>
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                  itemCount: 3),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
