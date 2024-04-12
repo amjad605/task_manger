@@ -34,8 +34,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () {
       //   Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
 
-      String token = CacheHelper.getData(key: kAccessToken) ?? '';
-      if (token.isEmpty) {
+      token = CacheHelper.getData(key: kAccessToken) ?? '';
+      if (token!.isEmpty) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (ctx) => const OnBoardingScreen()),

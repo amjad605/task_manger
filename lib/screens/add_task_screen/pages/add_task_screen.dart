@@ -9,11 +9,11 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/screens/add_task_screen/models/task.dart';
 import 'package:task_manger/screens/add_task_screen/models/user.dart';
 import 'package:task_manger/screens/add_task_screen/pages/user_selection_page.dart';
 
-import '../../../constants.dart';
 import '../widgets/cross_fade.dart';
 import '../widgets/date_time.dart';
 import '../widgets/sequence_animation_builder.dart';
@@ -74,7 +74,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               builder: (context, child) => Opacity(
                 opacity: Curves.easeOut.transform(route!.animation!.value),
                 child: Container(
-                  color: kBackgroungColor,
+                  color: kBackgroundColor,
                 ),
               ),
             ),
@@ -146,7 +146,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                       const EdgeInsets.all(4.0),
                                                   child: const Icon(
                                                     Icons.arrow_back_rounded,
-                                                    color: kBackgroungColor,
+                                                    color: kBackgroundColor,
                                                   ),
                                                 ),
                                               ),
@@ -160,7 +160,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                   .transform(values[1]),
                                               child: const Text('Add Task',
                                                   style: TextStyle(
-                                                      color: kBackgroungColor,
+                                                      color: kBackgroundColor,
                                                       fontSize: 24.0,
                                                       fontWeight:
                                                           FontWeight.w700)),

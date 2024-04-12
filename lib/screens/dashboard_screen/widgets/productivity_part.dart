@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/screens/StatisticsScreen/statistics_screen.dart';
-
-import '../../../constants.dart';
 import '../models/bar.dart';
 import '../models/bar_data_model.dart';
 
