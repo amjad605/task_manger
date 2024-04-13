@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -13,6 +14,9 @@ import 'package:task_manger/components/task_widget.dart';
 import 'package:task_manger/components/task_screen_components/user_info_widget.dart';
 import 'package:task_manger/screens/tasks_screen/task_info.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import '../../cache_helper/local.dart';
+import 'cubit/left_done_tasks_cubit/switch_done_left_tasks.dart';
+import 'cubit/left_done_tasks_cubit/tasks_states.dart';
 
 class TasksScreen extends StatelessWidget {
   TasksScreen({super.key});
@@ -138,26 +142,47 @@ class TasksScreen extends StatelessWidget {
                             radiusStyle: true,
                             animate: true,
                             borderColor: const [kMainColor],
+                            onToggle: (index) {
+                              print("Switched to: $index");
+                              SwitchDoneLeftTasks.get(context)
+                                  .switched(index ?? 1);
+                            },
                           ),
                         ),
                       ],
                     ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: tasks.length,
-                        itemBuilder: (context, index) {
-                          final task = tasks[index];
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 18.0),
-                            child: TaskWidget(
-                              percent: task.percent,
-                              titleTask: task.titleTask,
-                              deadlineDate: task.deadlineDate,
-                              urlImages: task.urlImages,
-                            ),
-                          );
-                        },
-                      ),
+                    BlocBuilder<SwitchDoneLeftTasks, States>(
+                      builder: (context, state) {
+                        debugPrint("$state");
+                        List<TaskData> currentTasks = [];
+                        if (state is LeftTasksState) {
+                          currentTasks = state.leftTasks;
+                        } else if (state is DoneTasksState) {
+                          //DONE
+                          currentTasks = state.finishedTasks;
+                        } else {
+                          //EROR
+                          return Text("ERROR");
+                        }
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount: currentTasks.length,
+                            itemBuilder: (context, index) {
+                              final currentTasks = tasks[index];
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 18.0),
+                                child: TaskWidget(
+                                  percent: currentTasks.percent,
+                                  titleTask: currentTasks.titleTask,
+                                  deadlineDate: currentTasks.deadlineDate,
+                                  urlImages: currentTasks.urlImages,
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

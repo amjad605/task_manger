@@ -1,15 +1,41 @@
 class TaskData {
   final double percent;
-  final String titleTask;
   final String deadlineDate;
   final List<String> urlImages;
+
+  final String titleTask;
+  final String? description, priority, category;
+  final int? points;
+  final DateTime? startAt, finishedAt;
 
   TaskData({
     required this.percent,
     required this.titleTask,
     required this.deadlineDate,
     required this.urlImages,
+    this.description,
+    this.priority,
+    this.category,
+    this.points,
+    this.startAt,
+    this.finishedAt,
   });
+
+  factory TaskData.fromMap(Map<String, dynamic> map) {
+    return TaskData(
+      percent: 0.0,
+      deadlineDate: "",
+      urlImages: [],
+      //
+      titleTask: map['titleTask'],
+      description: map['description'],
+      priority: map['priority'],
+      category: map['category'],
+      points: map['points'],
+      startAt: map['startAt'],
+      finishedAt: map['finishedAt'],
+    );
+  }
 }
 
 final List<TaskData> tasks = [

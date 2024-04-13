@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 
+import '../Constants/constants.dart';
+import '../cache_helper/local.dart';
+
 class ApiService {
   static const _baseUrl = 'https://cxmanager.onrender.com';
   final Dio _dio = Dio(
@@ -8,6 +11,7 @@ class ApiService {
       receiveDataWhenStatusError: true,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${CacheHelper.getData(key: kAccessToken)}',
       },
     ),
   );
