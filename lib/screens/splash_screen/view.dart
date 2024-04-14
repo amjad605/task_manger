@@ -6,6 +6,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/Screens/OnBoardingScreen/onBoardingScreen.dart';
 import 'package:task_manger/cache_helper/local.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
@@ -41,9 +42,11 @@ class _SplashScreenState extends State<SplashScreen> {
           MaterialPageRoute(builder: (ctx) => const OnBoardingScreen()),
         );
       } else {
+        ApiService.initialize(token!);
+
         var u = CacheHelper.getData(key: kUserData);
         user = UserAccount.fromJson(jsonDecode(u));
-        User usermodel = User(user!.name!, user!.email!);
+        User usermodel = User(name: user!.name!, email: user!.email!);
         BlocProvider.of<ProfileCubit>(context).myUser = usermodel;
         Navigator.pushReplacement(
           context,

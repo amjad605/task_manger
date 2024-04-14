@@ -6,9 +6,8 @@ import 'package:task_manger/models/user_model.dart';
 import '../../../Constants/constants.dart';
 import '../../../cubits/profile_cubit/profile_cubit.dart';
 
-
 class ProfilePic extends StatelessWidget {
-  ProfilePic({required this.img,required this.myUser});
+  ProfilePic({required this.img, required this.myUser});
   User myUser;
   File? img;
   @override
@@ -23,7 +22,7 @@ class ProfilePic extends StatelessWidget {
             child: img == null
                 ? ClipOval(
                     child: Image.asset(
-                     myUser.imgAsset,
+                      myUser.image,
                     ),
                   )
                 : ClipOval(

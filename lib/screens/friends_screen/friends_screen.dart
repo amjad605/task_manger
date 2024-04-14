@@ -17,7 +17,7 @@ class FriendsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User myUser = BlocProvider.of<ProfileCubit>(context).myUser;
-    List<User> friends = myUser.friends;
+    List<User> friends = myUser?.friends ?? [];
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -37,7 +37,7 @@ class FriendsScreen extends StatelessWidget {
       ),
       body: BlocConsumer<AddFriendCubit, AddFriendState>(
         listener: (context, state) {
-          myUser =BlocProvider.of<ProfileCubit>(context).myUser;
+          myUser = BlocProvider.of<ProfileCubit>(context).myUser;
         },
         builder: (context, state) {
           return Column(
@@ -54,7 +54,7 @@ class FriendsScreen extends StatelessWidget {
                     separatorBuilder: (context, index) => SizedBox(
                           height: 18.h,
                         ),
-                    itemCount: myUser.friends.length),
+                    itemCount: myUser.friends?.length ?? 0),
               ),
               Center(
                 child: ElevatedButton(

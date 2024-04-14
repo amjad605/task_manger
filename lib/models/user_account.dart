@@ -8,7 +8,7 @@ class UserAccount extends Equatable {
   String? password;
   String? image;
   final bool? active;
-  final List<Task> tasks = [];
+  List<Task>? tasks = [];
   final List<dynamic>? categories;
   final List<UserAccount> friends = [];
   final int? v;
@@ -18,6 +18,7 @@ class UserAccount extends Equatable {
     this.name,
     this.email,
     this.active,
+    this.tasks,
     this.categories,
     this.v,
   });
@@ -27,6 +28,7 @@ class UserAccount extends Equatable {
       email: friend.email,
       active: friend.active,
       categories: friend.categories,
+      tasks: friend.tasks,
       v: friend.v);
   factory UserAccount.fromJson(Map<String, dynamic> json) => UserAccount(
         id: json['_id'] as String?,

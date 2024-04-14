@@ -8,18 +8,17 @@ import '../../../Constants/constants.dart';
 import '../../../cubits/profile_cubit/profile_cubit.dart';
 import '../../../models/user_model.dart';
 
-
 class DisplayUserData extends StatelessWidget {
   const DisplayUserData({super.key});
 
   @override
   Widget build(BuildContext context) {
-    User myUser= BlocProvider.of<ProfileCubit>(context).myUser;
+    User myUser = BlocProvider.of<ProfileCubit>(context).myUser;
     File? img = BlocProvider.of<ProfileCubit>(context).img;
     return BlocConsumer<ProfileCubit, ProfileEditingState>(
       listener: (context, state) {
         if (state is ProfileEditingSuccess) {
-          myUser= BlocProvider.of<ProfileCubit>(context).myUser;
+          myUser = BlocProvider.of<ProfileCubit>(context).myUser;
           img = BlocProvider.of<ProfileCubit>(context).img;
         }
       },
@@ -31,7 +30,7 @@ class DisplayUserData extends StatelessWidget {
               child: img == null
                   ? ClipOval(
                       child: Image.asset(
-                        myUser.imgAsset,
+                        myUser.image,
                       ),
                     )
                   : ClipOval(
@@ -46,7 +45,7 @@ class DisplayUserData extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             Text(
-              myUser.name,
+              myUser.name ?? "Friend",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -59,7 +58,7 @@ class DisplayUserData extends StatelessWidget {
               height: 1.h,
             ),
             Text(
-              myUser.email,
+              myUser.email ?? "Friend",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14.sp,

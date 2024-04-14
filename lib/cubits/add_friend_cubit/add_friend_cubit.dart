@@ -9,11 +9,13 @@ part 'add_friend_state.dart';
 
 class AddFriendCubit extends Cubit<AddFriendState> {
   AddFriendCubit() : super(AddInitial());
-  Searching(){
+  Searching() {
     emit(SearchingState());
   }
-  addFriend({required User friend,required context}){
-    BlocProvider.of<ProfileCubit>(context).addFriend(friend: User(friend.name, friend.email));
+
+  addFriend({required User friend, required context}) {
+    BlocProvider.of<ProfileCubit>(context)
+        .addFriend(friend: User(name: friend.name, email: friend.email));
     emit(AddSucssesState());
   }
 }

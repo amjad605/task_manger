@@ -11,7 +11,14 @@ import '../friends_screen/widgets/friend_item.dart';
 
 class AddFriendScreen extends StatelessWidget {
   AddFriendScreen({Key? key}) : super(key: key);
-  User user = User('', 'email@gmail.com');
+  User? user = User(
+      id: "1",
+      name: "Guest",
+      email: "guest@gmail.com",
+      active: false,
+      tasks: [],
+      categories: [],
+      v: 1);
   TextEditingController controller = TextEditingController();
 
   @override
@@ -30,8 +37,7 @@ class AddFriendScreen extends StatelessWidget {
               fontSize: 20.sp,
               fontWeight: FontWeight.bold,
               color: Colors.white,
-              fontFamily: mainFont
-          ),
+              fontFamily: mainFont),
         ),
         centerTitle: true,
       ),
@@ -51,7 +57,7 @@ class AddFriendScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 5.w),
                   child: TextFormField(
                     onChanged: (value) {
-                      user.name = controller.text;
+                      user!.name = controller.text;
                       BlocProvider.of<AddFriendCubit>(context).Searching();
                     },
                     controller: controller,
@@ -59,15 +65,12 @@ class AddFriendScreen extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16.sp,
                         color: Colors.white,
-                        fontFamily: mainFont
-                    ),
+                        fontFamily: mainFont),
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                            color: Colors.transparent,
-
-                          )
-                      ),
+                        color: Colors.transparent,
+                      )),
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: kPriamaryColor)),
                       label: Text(
@@ -75,26 +78,36 @@ class AddFriendScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 18.sp,
                             color: Colors.white,
-                            fontFamily: mainFont
-                        ),
+                            fontFamily: mainFont),
                       ),
                       prefixIcon: Icon(Icons.search),
-
                     ),
-
                   ),
                 ),
               ),
-              SizedBox(height: 10.h,),
-              controller.text.isEmpty ? SizedBox() :
-              Expanded(
-                child: ListView.separated(
-                    itemBuilder: (context, index) =>
-                        AddFriendItem(user: user,),
-                    separatorBuilder: (context, index) =>
-                        SizedBox(height: 18.h,),
-                    itemCount: 1),
-              )
+              SizedBox(
+                height: 10.h,
+              ),
+              controller.text.isEmpty
+                  ? SizedBox()
+                  : Expanded(
+                      child: ListView.separated(
+                          itemBuilder: (context, index) => AddFriendItem(
+                                user: user ??
+                                    User(
+                                        id: "1",
+                                        name: "Guest",
+                                        email: "guest@gmail.com",
+                                        active: false,
+                                        tasks: [],
+                                        categories: [],
+                                        v: 1),
+                              ),
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: 18.h,
+                              ),
+                          itemCount: 1),
+                    )
             ],
           );
         },

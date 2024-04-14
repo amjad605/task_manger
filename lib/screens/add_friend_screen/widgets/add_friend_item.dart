@@ -8,7 +8,7 @@ import '../../../Constants/constants.dart';
 import '../../../models/user_model.dart';
 
 class AddFriendItem extends StatelessWidget {
- AddFriendItem({Key? key,required this.user}) : super(key: key);
+  AddFriendItem({Key? key, required this.user}) : super(key: key);
   User user;
   @override
   Widget build(BuildContext context) {
@@ -25,20 +25,19 @@ class AddFriendItem extends StatelessWidget {
               blurRadius: 2,
               spreadRadius: 1,
             )
-          ]
-      ),
+          ]),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ClipOval(
             child: CircleAvatar(
               radius: 35.r,
-              child: Image.asset(user.imgAsset),
+              child: Image.asset(user.image),
             ),
           ),
-          SizedBox(width:10.w),
+          SizedBox(width: 10.w),
           Text(
-            user.name,
+            user.name ?? "Geust",
             style: TextStyle(
               color: Colors.white,
               fontSize: 20.sp,
@@ -47,16 +46,17 @@ class AddFriendItem extends StatelessWidget {
           ),
           Expanded(child: SizedBox()),
           IconButton(
-              onPressed: (){
-                BlocProvider.of<AddFriendCubit>(context).addFriend(friend: user, context: context);
-              },
-              icon: Icon(
-                Icons.add_circle,size:35.r,
-                color: kLightblue,
-              ),
+            onPressed: () {
+              BlocProvider.of<AddFriendCubit>(context)
+                  .addFriend(friend: user, context: context);
+            },
+            icon: Icon(
+              Icons.add_circle,
+              size: 35.r,
+              color: kLightblue,
+            ),
             color: kLightblue,
           ),
-
         ],
       ),
     );
