@@ -16,7 +16,7 @@ class GetTasksRepo {
       List<dynamic> tasksMap = result["data"];
       List<TaskData> tasks = [];
       for (var task in tasksMap) {
-        tasks.add(TaskData.fromMap(task));
+        tasks.add(TaskData.fromJson(task));
       }
       return right(tasks);
     } on ServerFailure catch (failure) {
@@ -32,7 +32,7 @@ class GetTasksRepo {
       List<dynamic> tasksMap = result["data"];
       List<TaskData> tasks = [];
       for (var task in tasksMap) {
-        tasks.add(TaskData.fromMap(task));
+        tasks.add(TaskData.fromJson(task));
       }
       return right(tasks);
     } on ServerFailure catch (failure) {

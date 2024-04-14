@@ -3,7 +3,7 @@ import '../../task_info.dart';
 abstract class States {}
 
 class LeftTasksState extends States {
-  List<TaskData> leftTasks = [];
+  List<TaskData> leftTasks;
   LeftTasksState(this.leftTasks);
 }
 

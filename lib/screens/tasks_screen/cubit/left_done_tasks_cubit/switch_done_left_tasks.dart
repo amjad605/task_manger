@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../repo/get_tasks_repo.dart';
+import '../../task_info.dart';
 import 'tasks_states.dart';
 
 class SwitchDoneLeftTasks extends Cubit<States> {
@@ -11,6 +12,7 @@ class SwitchDoneLeftTasks extends Cubit<States> {
   void switched(int index) async {
     if (index == 1) {
       var tasks = await GetTasksRepo().getDoneTasks();
+
       tasks.fold((failure) => emit(FailedToGetTasksState(failure.errmsg)),
           (donetasks) => emit(DoneTasksState(donetasks)));
     } else {

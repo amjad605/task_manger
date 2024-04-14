@@ -32,19 +32,23 @@ class TaskWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //CircularPrecentage
-            Expanded(
-              flex: 2,
-              child: CircularPercentIndicator(
-                animation: true,
-                rotateLinearGradient: false,
-                backgroundColor: kMainColor.withOpacity(0.3),
-                radius: 35,
-                lineWidth: 3,
-                percent: percent,
-                progressColor: kLightblue,
-                center: Text("${((percent) * 100).toInt()}%"),
-              ),
-            ),
+            percent == -1
+                ? IconButton(
+                    onPressed: () {}, icon: const Icon(Icons.play_arrow))
+                : Expanded(
+                    flex: 2,
+                    child: CircularPercentIndicator(
+                      animation: true,
+                      rotateLinearGradient: false,
+                      backgroundColor: kMainColor.withOpacity(0.3),
+                      radius: 35,
+                      lineWidth: 3,
+                      percent: percent,
+                      progressColor: kLightblue,
+                      center: Text("${((percent) * 100).toInt()}%"),
+                    ),
+                  ),
+
             const SizedBox(width: 15),
             //Texts of tasks
             Expanded(

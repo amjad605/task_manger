@@ -157,31 +157,76 @@ class TasksScreen extends StatelessWidget {
                         List<TaskData> currentTasks = [];
                         if (state is LeftTasksState) {
                           currentTasks = state.leftTasks;
+                          return Expanded(
+                            child: ListView.builder(
+                              itemCount: currentTasks.length,
+                              itemBuilder: (context, index) {
+                                print(currentTasks[index].name);
+                                print(currentTasks[index].deadline);
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 18.0),
+                                  child: TaskWidget(
+                                    percent: -1,
+                                    titleTask: currentTasks[index].name,
+                                    deadlineDate: DateFormat.yMEd()
+                                        .format(DateTime.parse(
+                                            currentTasks[index].deadline))
+                                        .toString(),
+                                    urlImages: [],
+                                  ),
+                                );
+                              },
+                            ),
+                          );
                         } else if (state is DoneTasksState) {
                           //DONE
                           currentTasks = state.finishedTasks;
+                          return Expanded(
+                            child: ListView.builder(
+                              itemCount: currentTasks.length,
+                              itemBuilder: (context, index) {
+                                print(currentTasks[index].name);
+                                print(currentTasks[index].deadline);
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 18.0),
+                                  child: TaskWidget(
+                                    percent: 1,
+                                    titleTask: currentTasks[index].name,
+                                    deadlineDate: DateFormat.yMEd()
+                                        .format(DateTime.parse(
+                                            currentTasks[index].deadline))
+                                        .toString(),
+                                    urlImages: [],
+                                  ),
+                                );
+                              },
+                            ),
+                          );
                         } else {
                           //EROR
                           return Text("ERROR");
                         }
-                        return Expanded(
-                          child: ListView.builder(
-                            itemCount: currentTasks.length,
-                            itemBuilder: (context, index) {
-                              final currentTasks = tasks[index];
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 18.0),
-                                child: TaskWidget(
-                                  percent: currentTasks.percent,
-                                  titleTask: currentTasks.titleTask,
-                                  deadlineDate: currentTasks.deadlineDate,
-                                  urlImages: currentTasks.urlImages,
-                                ),
-                              );
-                            },
-                          ),
-                        );
+                        // return Expanded(
+                        //   child: ListView.builder(
+                        //     itemCount: currentTasks.length,
+                        //     itemBuilder: (context, index) {
+                        //       return Padding(
+                        //         padding:
+                        //             const EdgeInsets.symmetric(vertical: 18.0),
+                        //         child: TaskWidget(
+                        //           percent: state is DoneTasksState ? 1 : 0.4,
+                        //           titleTask: currentTasks[index].name,
+                        //           deadlineDate: DateFormat.yMd(
+                        //                   currentTasks[index].deadline)
+                        //               .toString(),
+                        //           urlImages: [],
+                        //         ),
+                        //       );
+                        //     },
+                        //   ),
+                        // );
                       },
                     ),
                   ],
