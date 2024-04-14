@@ -41,7 +41,7 @@ class MyTaskManger extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: theme,
-          home:  TasksScreen(),
+          home:  SplashScreen(),
         ),
       ),
     );
