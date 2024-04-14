@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger/Constants/constants.dart';
 
-import '../../../constants.dart';
 
 class CustomContainerWithTextImage extends StatelessWidget {
   const CustomContainerWithTextImage({

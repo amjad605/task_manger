@@ -71,7 +71,7 @@ class EditProfileScreen extends StatelessWidget {
                           SizedBox(height: 30.h,),
                           CustomProfileTextFormField(
                             fieldName: "Password",
-                            controller: passwordController..text = myUser.password!,
+                            controller: passwordController..text = myUser.password==null?"":myUser.password!,
                             needObscure: true,
                           ),
                           SizedBox(height: 50.h,),
