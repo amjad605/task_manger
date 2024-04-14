@@ -21,7 +21,6 @@ final nameValid = RegExp(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
 const kLoginEndPount = "/users/login";
 const kRegestierEndPoint = '/users/signup';
 const kTasksEndPount = "/tasks/";
-
 const String kAccessToken = "token";
 const String kUserData = "user";
 UserAccount? user;

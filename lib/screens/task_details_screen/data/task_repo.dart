@@ -27,4 +27,20 @@ class TaskRepo {
       }
     }
   }
+  Future<Either<Failure, Map<String, dynamic>>> getAllTasks() async{
+    try {
+
+     dynamic data= await ApiService().get(
+        endPoint: "$kTasksEndPount",
+      );
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+
+          return left(ServerFailure.fromDioError(e));
+      } else {
+        return left(ServerFailure(e.toString()));
+      }
+    }
+  }
 }
