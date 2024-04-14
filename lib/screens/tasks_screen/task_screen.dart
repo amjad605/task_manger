@@ -51,9 +51,9 @@ class TasksScreen extends StatelessWidget {
                 shrinkWrap: true,
                 itemCount: dates.length,
                 itemBuilder: (context, index) {
-                  _controller.animateTo((43 * index).toDouble(),
+                  /*_controller.animateTo((43 * index).toDouble(),
                       duration: const Duration(milliseconds: 500),
-                      curve: Curves.linear);
+                      curve: Curves.linear);*/
                   return calendarWidget(
                       screenHeight, screenWidth, dates[index]);
                 },

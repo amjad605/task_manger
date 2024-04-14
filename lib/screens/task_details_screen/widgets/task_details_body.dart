@@ -19,10 +19,10 @@ class TaskDetailBody extends StatelessWidget {
               right: 0,
               bottom: 0,
               left: 0,
-              child: ListView.builder(itemBuilder: (ctx, indx) => SubTask())),
+              child: ListView.builder(itemBuilder: (ctx, indx) => const SubTask())),
           Positioned(
             top: 0,
-            bottom: height * 0.6,
+            bottom: height * 0.48,
             right: 0,
             left: 0,
             child: Container(
@@ -31,7 +31,7 @@ class TaskDetailBody extends StatelessWidget {
               child: SafeArea(
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 0),
+                      const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -137,10 +137,10 @@ class _SubTaskState extends State<SubTask> {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(134, 82, 80, 80)),
+          border: Border.all(color: const Color.fromARGB(134, 82, 80, 80)),
           borderRadius: BorderRadius.circular(30)),
       child: Padding(
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

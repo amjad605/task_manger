@@ -15,7 +15,6 @@ class TaskDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fabKey = GlobalKey();
-    
 
     return Scaffold(
         key: fabKey,
@@ -68,7 +67,24 @@ class TaskDetailsScreen extends StatelessWidget {
                     iconColor: kRed,
                   ),
                   CircularMenuItem(
-                    onTap: () {},
+                    onTap: () {
+                      Map<String, dynamic> updatedTaskData = {
+                        "category": "Updated Category",
+                        "title": "Updated Title",
+                        "date": DateTime.now().toIso8601String(),
+                        "users": [
+                          {
+                            "id": 1,
+                            "name": "Name1",
+                            "image": "assets/images/Person_1.png",
+                          },
+                        ]
+                      };
+
+                      tasksCubit.updateTask(
+                          taskId: '66198f9f75b249d421f12071',
+                          taskData: updatedTaskData);
+                    },
                     icon: Icons.edit,
                   ),
                   CircularMenuItem(

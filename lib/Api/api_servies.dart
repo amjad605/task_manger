@@ -15,7 +15,7 @@ class ApiService {
   );
 
   Future<Map<String, dynamic>> get({required String endPoint}) async {
-    var response = await _dio.get('$endPoint');
+    var response = await _dio.get(endPoint);
     return response.data;
   }
 
@@ -29,4 +29,10 @@ class ApiService {
     var response = await _dio.delete(endPoint);
     print(response);
   }
+
+Future<Map<String, dynamic>> update({required String endPoint, required Map<String, dynamic> body}) async {
+    var response = await _dio.patch(endPoint, data: body);
+    return response.data;
+}
+
 }
