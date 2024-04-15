@@ -36,64 +36,13 @@ class FriendsScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: BlocConsumer<AddFriendCubit, AddFriendState>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          if (state is GetMyFriendsLoadingState) {
-            return Center(
-              child: LoadingAnimationWidget.flickr(
-                  leftDotColor: kMainColor,
-                  rightDotColor: kLightblue,
-                  size: 24),
-            );
-          } else {
-            return Column(
-              children: [
-                SizedBox(
-                  height: 8.h,
-                ),
-                if (state is GetMyFriendsSuccessState)
-                  Expanded(
-                    child: ListView.separated(
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (context, index) => FriendItem(
-                              friend: state.Friends[index],
-                            ),
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: 18.h,
-                            ),
-                        itemCount: state.Friends.length),
-                  ),
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddFriendScreen(),
-                          ));
-                    },
-                    child: Text(
-                      "Invite a friend",
-                      style: TextStyle(
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          fontFamily: mainFont),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        fixedSize: Size(300.w, 50.h),
-                        backgroundColor: kLightblue),
-                  ),
-                ),
-                SizedBox(
-                  height: 18.h,
-                )
-              ],
-            );
-          }
-        },
-      ),
+      body: Column(
+         children: [
+           Row(
+
+           )
+         ],
+      )
     );
   }
 }
