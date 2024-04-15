@@ -29,66 +29,27 @@ class DashboardScreen extends StatelessWidget {
                   child: CustomAboveAppBar(),
                 ),
               ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: AnimatedTextKit(
-                      pause: const Duration(milliseconds: 600),
-                      displayFullTextOnTap: true,
-                      totalRepeatCount: 1,
-                      isRepeatingAnimation: true,
-                      animatedTexts: [
-                        TypewriterAnimatedText(
-                          speed: const Duration(milliseconds: 150),
-                          "Hello,\n${user!.name}👋",
-                          textStyle: TextStyle(
-                              fontSize:
-                                  MediaQuery.of(context).size.height * 0.04),
-                        )
-                      ]),
-                ),
-              ),
               const SliverToBoxAdapter(child: SizedBox(height: 20)),
               SliverToBoxAdapter(
                 child: BlocBuilder<SwitchDashboardCubit, DashboardState>(
-                  builder: (context, state) {
-                    if (state is ProductivityState) {
-                      return ListView(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: const [
-                          // CustomAboveAppBar(),
-                          // Text(
-                          //   "Hello,\nDerek Doyle👋",
-                          //   style: TextStyle(fontSize: 24),
-                          // ),
-                          // SizedBox(height: 20),
-                          TagsDashboard(),
-                          SizedBox(height: 15),
-                          //!PRODUCTIVITY PART!
-                          ProductivityPart(),
-                        ],
-                      );
-                    }
-                    return ListView(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: [
-                        // CustomAboveAppBar(),
-                        // Text(
-                        //   "Hello,\nDerek Doyle👋",
-                        //   style: TextStyle(fontSize: 24),
-                        // ),
-                        // SizedBox(height: 20),
+                    builder: (context, state) {
+                  return ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [
+                      // CustomAboveAppBar(),
+                      // Text(
+                      //   "Hello,\nDerek Doyle👋",
+                      //   style: TextStyle(fontSize: 24),
+                      // ),
+                      // SizedBox(height: 20),
 
-                        const TagsDashboard(),
-                        SizedBox(height: screenHeight * 2.5),
-                        //!OVERVIEW PART!
-                        const OverviewPart(),
-                      ],
-                    );
-                  },
-                ),
+                      SizedBox(height: 15),
+                      //!PRODUCTIVITY PART!
+                      ProductivityPart(),
+                    ],
+                  );
+                }),
               ),
             ],
           ),
