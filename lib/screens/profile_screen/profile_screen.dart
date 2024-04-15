@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/cubits/add_friend_cubit/add_friend_cubit.dart';
 import 'package:task_manger/screens/friends_screen/friends_screen.dart';
 import 'package:task_manger/screens/profile_screen/widgets/custom_profile_buttons.dart';
 import 'package:task_manger/screens/profile_screen/widgets/display_user_data.dart';
@@ -27,34 +29,34 @@ class ProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 15.h,
                 ),
-                 CustomProfileButtons(
+                CustomProfileButtons(
                   buttonName: "My Projects",
                   iconPath: "assets/icons/mangment.png",
-                  onPressed: (){},
+                  onPressed: () {},
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                 CustomProfileButtons(
+                CustomProfileButtons(
                   buttonName: "Join Team",
                   iconPath: "assets/icons/group.png",
-                  onPressed: (){},
+                  onPressed: () {},
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                 CustomProfileButtons(
+                CustomProfileButtons(
                   buttonName: "Share Profile",
                   iconPath: "assets/icons/share.png",
-                  onPressed: (){},
+                  onPressed: () {},
                 ),
                 SizedBox(
                   height: 15.h,
                 ),
-                 CustomProfileButtons(
+                CustomProfileButtons(
                   buttonName: "All My Task",
                   iconPath: "assets/icons/check-mark.png",
-                  onPressed: (){},
+                  onPressed: () {},
                 ),
                 SizedBox(
                   height: 15.h,
@@ -62,8 +64,14 @@ class ProfileScreen extends StatelessWidget {
                 CustomProfileButtons(
                   buttonName: "Friends",
                   iconPath: "assets/icons/friends.png",
-                  onPressed: (){Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => FriendsScreen(),));},
+                  onPressed: () {
+                    BlocProvider.of<AddFriendCubit>(context).getMyFriends();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FriendsScreen(),
+                        ));
+                  },
                 ),
                 SizedBox(
                   height: 30.h,

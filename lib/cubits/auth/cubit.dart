@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/cache_helper/local.dart';
 import 'package:task_manger/cubits/auth/states.dart';
@@ -28,7 +30,10 @@ class LoginCubit extends Cubit<LoginStates> {
     emit(LoginChangePasswordVisibilityState());
   }
 
-  void login({required String email, required String pass}) async {
+  void login({
+    required String email,
+    required String pass,
+  }) async {
     emit(LoginLoadingState());
     var result = await authRepo().login(email: email, password: pass);
     result.fold((l) {
@@ -36,8 +41,8 @@ class LoginCubit extends Cubit<LoginStates> {
     }, (data) {
       user = UserAccount.fromJson(data["data"]);
       CacheHelper.saveData(key: kAccessToken, value: data['token']);
-      var userToJson = user!.toJson();
-      CacheHelper.saveData(key: kUserData, value: jsonEncode(user!.toJson()));
+      token = data['token'];
+      ApiService.initialize(data['token']);
       emit(LoginSuccessState(user!));
     });
   }
@@ -58,8 +63,8 @@ class LoginCubit extends Cubit<LoginStates> {
     }, (data) {
       user = UserAccount.fromJson(data["data"]);
       CacheHelper.saveData(key: kAccessToken, value: data['token']);
-      var userToJson = user!.toJson();
-      CacheHelper.saveData(key: kUserData, value: jsonEncode(user!.toJson()));
+      token = data['token'];
+      ApiService.initialize(data['token']);
       emit(SignUpSuccessState(user!));
     });
   }

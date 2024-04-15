@@ -17,8 +17,10 @@ class TasksCubit extends Cubit<TasksState> {
       emit(DeleteTaskFailureState(l));
     }, (data) {
       emit(DeleteTaskSuccessState());
+      getAllTasks();
     });
   }
+
   void getAllTasks() async {
     emit(DeleteTaskLoadingState());
     var result = await TaskRepo().getAllTasks();
@@ -26,10 +28,8 @@ class TasksCubit extends Cubit<TasksState> {
     result.fold((l) {
       emit(DeleteTaskFailureState(l));
     }, (data) {
-
-      tasks= TaskModel.fromJson(data);
+      tasks = TaskModel.fromJson(data);
       emit(DeleteTaskSuccessState());
-
     });
   }
 }

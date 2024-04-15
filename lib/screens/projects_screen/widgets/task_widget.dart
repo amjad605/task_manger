@@ -9,7 +9,7 @@ import '../../add_task_screen/widgets/circle_transition.dart';
 import '../../task_details_screen/task_detail.dart';
 
 class TaskWidget extends StatelessWidget {
-  TaskWidget({super.key,required this.task});
+  TaskWidget({super.key, required this.task});
   Data task;
 
   @override
@@ -22,17 +22,18 @@ class TaskWidget extends StatelessWidget {
         final renderBox = context.findAncestorRenderObjectOfType<RenderBox>();
         if (renderBox != null) {
           final offset = renderBox.localToGlobal(
-              Offset(renderBox.size.width, renderBox.size.height));
+              Offset(renderBox.size.width, renderBox.size.height / 10));
           Navigator.of(context).push(_createRoute(offset));
-        }
-        else {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => TaskDetailsScreen(),));
+        } else {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TaskDetailsScreen(),
+              ));
         }
       },
       child: Container(
-          margin: EdgeInsets.symmetric(
-              vertical: 3.0.h, horizontal: 6.w),
+          margin: EdgeInsets.symmetric(vertical: 3.0.h, horizontal: 6.w),
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           height: 80.h,
           width: double.infinity,
@@ -40,8 +41,7 @@ class TaskWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(
                 Radius.circular(10.0.r),
               ),
-              color: kItemsBackgroundColor
-          ),
+              color: kItemsBackgroundColor),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -82,32 +82,33 @@ class TaskWidget extends StatelessWidget {
     );
   }
 
-    Route _createRoute(Offset offset) {
-      return PageRouteBuilder(
-        transitionDuration: const Duration(milliseconds: 1000),
-        pageBuilder: (context, animation, secondaryAnimation) =>
-        const TaskDetailsScreen(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = Offset(offset.dx, offset.dy);
-          const end = Offset.zero;
-          const curve = Curves.ease;
+  Route _createRoute(Offset offset) {
+    return PageRouteBuilder(
+      transitionDuration: const Duration(milliseconds: 1000),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const TaskDetailsScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        var begin = Offset(offset.dx, offset.dy);
+        const end = Offset.zero;
+        const curve = Curves.ease;
 
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-          return CircleTransition(
-            animation: animation,
-            startingPoint: offset,
-            startingRadius: 100,
-            child: child,
-          );
-        },
-      );
-    }
-    Offset getOffset(GlobalKey key) {
-      final renderBox = (key.currentContext?.findRenderObject() as RenderBox);
-      final offset = renderBox.localToGlobal(
-          Offset(renderBox.size.width / 2, renderBox.size.height / 2));
-      return offset;
-    }
+        return CircleTransition(
+          animation: animation,
+          startingPoint: offset,
+          startingRadius: 100,
+          child: child,
+        );
+      },
+    );
   }
 
+  Offset getOffset(GlobalKey key) {
+    final renderBox = (key.currentContext?.findRenderObject() as RenderBox);
+    final offset = renderBox.localToGlobal(
+        Offset(renderBox.size.width / 2, renderBox.size.height / 2));
+    return offset;
+  }
+}

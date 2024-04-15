@@ -3,16 +3,19 @@ import 'package:task_manger/Constants/constants.dart';
 
 class ApiService {
   static const _baseUrl = 'https://cxmanager.onrender.com';
-  final Dio _dio = Dio(
+  static final Dio _dio = Dio(
     BaseOptions(
       baseUrl: _baseUrl,
       receiveDataWhenStatusError: true,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'
+        // 'Authorization': 'Bearer $token'
       },
     ),
   );
+  static void initialize(String token) {
+    _dio.options.headers = {'Authorization': 'Bearer $token'};
+  }
 
   Future<Map<String, dynamic>> get({required String endPoint}) async {
     var response = await _dio.get('$endPoint');
