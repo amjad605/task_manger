@@ -10,10 +10,6 @@ class CustomAboveAppBar extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("Dashboard", style: TextStyle(fontSize: 16)),
-        CircleAvatar(
-          backgroundColor: kMainColor,
-          child: Icon(Icons.person),
-        ),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -50,17 +51,44 @@ class ProjectsScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(50.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Lottie.asset("assets/images/Animation - 1713100638764.json"),
-                  const Text(
-                    "Empty task list! Time for a break or a new challenge? Add a task to get started!",
-                    style: TextStyle(
-                      fontSize: 15,
+                  DefaultTextStyle(
+                    style: const TextStyle(
+                      fontSize: 16,
                       color: Colors.grey,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 2.0,
+                          color: Colors.grey,
+                          offset: Offset(0, 0),
+                        ),
+                      ],
                     ),
-                    textAlign: TextAlign.center,
+                    child: Center(
+                      child: AnimatedTextKit(
+                        displayFullTextOnTap: true,
+                        isRepeatingAnimation: true,
+                        pause: const Duration(milliseconds: 600),
+                        totalRepeatCount: 1,
+                        animatedTexts: [
+                          TyperAnimatedText(
+                              textAlign: TextAlign.center,
+                              'Empty task list! Time for a break or a new challenge? Add a task to get started!'),
+                        ],
+                      ),
+                    ),
                   )
+                  // const Text(
+                  //   "Empty task list! Time for a break or a new challenge? Add a task to get started!",
+                  //   style: TextStyle(
+                  //     fontSize: 15,
+                  //     color: Colors.grey,
+                  //   ),
+                  //   textAlign: TextAlign.center,
+                  // )
                 ],
               ),
             ),
