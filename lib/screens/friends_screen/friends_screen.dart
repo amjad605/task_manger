@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:task_manger/cubits/add_friend_cubit/add_friend_cubit.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
 import 'package:task_manger/screens/add_friend_screen/add_friend_screen.dart';
@@ -16,8 +17,8 @@ class FriendsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User myUser = BlocProvider.of<ProfileCubit>(context).myUser;
-    List<User> friends = myUser.friends;
+    // User myUser = BlocProvider.of<ProfileCubit>(context).myUser!;
+    List<User> friends = [];
     return Scaffold(
       backgroundColor: kBackgroundColor,
       appBar: AppBar(
@@ -36,53 +37,61 @@ class FriendsScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: BlocConsumer<AddFriendCubit, AddFriendState>(
-        listener: (context, state) {
-          myUser =BlocProvider.of<ProfileCubit>(context).myUser;
-        },
+        listener: (context, state) {},
         builder: (context, state) {
-          return Column(
-            children: [
-              SizedBox(
-                height: 8.h,
-              ),
-              Expanded(
-                child: ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) => FriendItem(
-                          friend: friends[index],
-                        ),
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 18.h,
-                        ),
-                    itemCount: myUser.friends.length),
-              ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddFriendScreen(),
-                        ));
-                  },
-                  child: Text(
-                    "Invite a friend",
-                    style: TextStyle(
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        fontFamily: mainFont),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: Size(300.w, 50.h),
-                      backgroundColor: kLightblue),
+          if (state is GetMyFriendsLoadingState) {
+            return Center(
+              child: LoadingAnimationWidget.flickr(
+                  leftDotColor: kMainColor,
+                  rightDotColor: kLightblue,
+                  size: 24),
+            );
+          } else {
+            return Column(
+              children: [
+                SizedBox(
+                  height: 8.h,
                 ),
-              ),
-              SizedBox(
-                height: 18.h,
-              )
-            ],
-          );
+                if (state is GetMyFriendsSuccessState)
+                  Expanded(
+                    child: ListView.separated(
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) => FriendItem(
+                              friend: state.Friends[index],
+                            ),
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 18.h,
+                            ),
+                        itemCount: state.Friends.length),
+                  ),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddFriendScreen(),
+                          ));
+                    },
+                    child: Text(
+                      "Invite a friend",
+                      style: TextStyle(
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          fontFamily: mainFont),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        fixedSize: Size(300.w, 50.h),
+                        backgroundColor: kLightblue),
+                  ),
+                ),
+                SizedBox(
+                  height: 18.h,
+                )
+              ],
+            );
+          }
         },
       ),
     );

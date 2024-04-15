@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../constants.dart';
+import 'package:task_manger/Constants/constants.dart';
 import '../../../cubits/change_dashboard_body/dashboard_states.dart';
 import '../../../cubits/change_dashboard_body/switch_states_dashboard.dart';
 import 'tag_widget.dart';

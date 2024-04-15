@@ -7,8 +7,8 @@ import 'package:task_manger/Constants/constants.dart';
 import '../../../models/user_model.dart';
 
 class FriendItem extends StatelessWidget {
-  FriendItem({Key? key,required this.friend}) : super(key: key);
-  User friend;
+  FriendItem({Key? key, required this.friend}) : super(key: key);
+  Friend friend;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,45 +16,36 @@ class FriendItem extends StatelessWidget {
       height: 80.h,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: kItemsBackgroundColor,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: kItemsBackgroundColor,
-            blurRadius: 2,
-            spreadRadius: 1,
-          )
-        ]
-      ),
+          color: kItemsBackgroundColor,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: kItemsBackgroundColor,
+              blurRadius: 2,
+              spreadRadius: 1,
+            )
+          ]),
       child: Row(
         children: [
           ClipOval(
             child: CircleAvatar(
               radius: 35.r,
-              child: Image.asset(friend.imgAsset),
+              child: Image.asset("assets/images/Profile_pic.png"),
             ),
           ),
-          SizedBox(width:10.w),
+          SizedBox(width: 10.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height:10.h),
+              SizedBox(height: 10.h),
               Text(
-                friend.name,
+                friend.name ?? "Friend",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20.sp,
                   fontFamily: mainFont,
                 ),
               ),
-              Text(
-                friend.email,
-                style: TextStyle(
-                  color: kMainColor,
-                  fontSize: 17.sp,
-                  fontFamily: mainFont,
-                ),
-              )
             ],
           )
         ],

@@ -6,6 +6,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/Screens/OnBoardingScreen/onBoardingScreen.dart';
 import 'package:task_manger/cache_helper/local.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
@@ -34,17 +35,17 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () {
       //   Get.offAll(() => OnBoardingScreen(),transition: Transition.upToDown);
 
-      String token = CacheHelper.getData(key: kAccessToken) ?? '';
-      if (token.isEmpty) {
+      token = CacheHelper.getData(key: kAccessToken) ?? '';
+      if (token!.isEmpty) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (ctx) => const OnBoardingScreen()),
         );
       } else {
-        var u = CacheHelper.getData(key: kUserData);
-        user = UserAccount.fromJson(jsonDecode(u));
-        User usermodel = User(user!.name!, user!.email!);
-        BlocProvider.of<ProfileCubit>(context).myUser = usermodel;
+        ApiService.initialize(token!);
+
+        BlocProvider.of<ProfileCubit>(context).getProfile();
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (ctx) => const ControllerScreen()),

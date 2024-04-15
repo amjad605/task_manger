@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/errors/failure.dart';
-import 'package:task_manger/models/user_model.dart';
 
 class authRepo {
   Future<Either<Failure, Map<String, dynamic>>> login(

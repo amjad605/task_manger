@@ -7,11 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:task_manger/Api/api_servies.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/screens/add_task_screen/models/task.dart';
+
 import 'package:task_manger/screens/add_task_screen/models/user.dart';
 import 'package:task_manger/screens/add_task_screen/pages/user_selection_page.dart';
 
-import '../../../constants.dart';
 import '../widgets/cross_fade.dart';
 import '../widgets/date_time.dart';
 import '../widgets/sequence_animation_builder.dart';
@@ -82,7 +87,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               builder: (context, child) => Opacity(
                 opacity: Curves.easeOut.transform(route.animation!.value),
                 child: Container(
-                  color: kBackgroungColor,
+                  color: kBackgroundColor,
                 ),
               ),
             ),
@@ -127,6 +132,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 padding: EdgeInsets.only(
                                     top:
                                         MediaQuery.of(context).padding.top *
+
                                             1.5,),
                                 clipBehavior: Clip.none,
                                 child: Column(
@@ -173,6 +179,107 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                         fontSize: 24.0,
                                                         fontWeight:
                                                             FontWeight.w700)),
+
+                                            1.5,
+                                    horizontal: 24.0),
+                                child: OverflowBox(
+                                  maxHeight: double.infinity,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Stack(
+                                        children: [
+                                          Positioned(
+                                            top: 4.0,
+                                            child: CrossFade(
+                                              direction: Alignment.centerRight,
+                                              value: Curves.easeOut
+                                                  .transform(values[1]),
+                                              child: GestureDetector(
+                                                onTap:
+                                                    Navigator.of(context).pop,
+                                                child: Container(
+                                                  color: Colors.transparent,
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: const Icon(
+                                                    Icons.arrow_back_rounded,
+                                                    color: kBackgroundColor,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment: Alignment.center,
+                                            child: CrossFade(
+                                              direction: Alignment.bottomCenter,
+                                              value: Curves.easeOut
+                                                  .transform(values[1]),
+                                              child: const Text('Add Task',
+                                                  style: TextStyle(
+                                                      color: kBackgroundColor,
+                                                      fontSize: 24.0,
+                                                      fontWeight:
+                                                          FontWeight.w700)),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          CrossFade(
+                                            value: Curves.easeOut
+                                                .transform(values[2]),
+                                            direction: Alignment.bottomCenter,
+                                            child: const Text(
+                                              'Category',
+                                              style: TextStyle(
+                                                color: Colors.black87,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 12.0,
+                                          ),
+                                          FractionallySizedBox(
+                                            widthFactor: Curves.easeOut
+                                                .transform(values[2]),
+                                            alignment:
+                                                FractionalOffset.centerLeft,
+                                            child: Opacity(
+                                              opacity: Curves.easeOut
+                                                  .transform(values[2]),
+                                              child: TextFormField(
+                                                decoration: InputDecoration(
+                                                  contentPadding:
+                                                      const EdgeInsets
+                                                          .symmetric(
+                                                          horizontal: 24.0,
+                                                          vertical: 20.0),
+                                                  hintText: 'UI/UX Design',
+                                                  hintStyle: const TextStyle(
+                                                      color: Colors.black54,
+                                                      fontWeight:
+                                                          FontWeight.w300),
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16.0)),
+                                                ),
+                                                textInputAction:
+                                                    TextInputAction.next,
+                                                controller: _categoryController,
+                                                style: const TextStyle(
+                                                    color: Colors.black87),
+
                                               ),
                                             )
                                           ],
