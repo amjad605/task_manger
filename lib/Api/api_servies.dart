@@ -9,7 +9,7 @@ class ApiService {
       receiveDataWhenStatusError: true,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token'
+        // 'Authorization': 'Bearer $token'
       },
     ),
   );

@@ -7,6 +7,8 @@ import 'package:task_manger/components/login_widgets.dart';
 import 'package:task_manger/components/task_screen_components/show_toast.dart';
 import 'package:task_manger/cubits/auth/cubit.dart';
 import 'package:task_manger/cubits/auth/states.dart';
+import 'package:task_manger/cubits/change_screen_bottom_nav.dart';
+import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
 import 'package:task_manger/screens/auth/login/login_email_screen.dart';
 import 'package:task_manger/screens/controller_screen/controller_screen.dart';
 import 'package:task_manger/slide_page_route.dart';
@@ -127,6 +129,8 @@ class LoginPasswordScreen extends StatelessWidget {
                                 BlocConsumer<LoginCubit, LoginStates>(
                                   listener: (context, state) {
                                     if (state is LoginSuccessState) {
+                                      BlocProvider.of<ProfileCubit>(context)
+                                          .getProfile();
                                       Navigator.of(context).pushAndRemoveUntil(
                                           MaterialPageRoute(
                                               builder: (ctx) =>
@@ -148,8 +152,9 @@ class LoginPasswordScreen extends StatelessWidget {
                                             // if (formKey.currentState!
                                             //     .validate()) {
                                             cubit.login(
-                                                email: email,
-                                                pass: password.text);
+                                              email: email,
+                                              pass: password.text,
+                                            );
                                             //  }
                                             // }
                                           },
@@ -166,8 +171,10 @@ class LoginPasswordScreen extends StatelessWidget {
                                           // if (formKey.currentState!
                                           //     .validate()) {
                                           cubit.login(
-                                              email: email,
-                                              pass: password.text);
+                                            email: email,
+                                            pass: password.text,
+                                          );
+
                                           //  }
                                           // }
                                         },

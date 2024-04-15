@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/cache_helper/local.dart';
+import 'package:task_manger/cubits/change_dashboard_body/switch_states_dashboard.dart';
+import 'package:task_manger/cubits/change_screen_bottom_nav.dart';
 import 'package:task_manger/screens/auth/login/login_email_screen.dart';
 
 import '../../../Constants/constants.dart';
@@ -15,6 +19,8 @@ class LogoutCustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           CacheHelper.removeData(key: kAccessToken);
+          token = null;
+          // BlocProvider.of<ChangeScreenBottomNav>(context).setCurrentIndexTab(0);
           Navigator.of(context).push(
               MaterialPageRoute(builder: (ctx) => const LoginEmailScreen()));
         },

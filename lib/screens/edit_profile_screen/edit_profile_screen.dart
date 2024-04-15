@@ -22,7 +22,7 @@ class EditProfileScreen extends StatelessWidget {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    User myUser = BlocProvider.of<ProfileCubit>(context).myUser;
+    User myUser = BlocProvider.of<ProfileCubit>(context).myUser!;
     var img = BlocProvider.of<ProfileCubit>(context).img;
     return BlocConsumer<ProfileCubit, ProfileEditingState>(
       listener: (context, state) {

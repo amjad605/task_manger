@@ -16,4 +16,45 @@ class ProfileRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  Future<Either<Failure, Map<String, dynamic>>> searchForFriend(
+      String name) async {
+    try {
+      var data =
+          await ApiService().post(endPoint: kSearchFriendEndPoint, body: {
+        "name": name,
+      });
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, Map<String, dynamic>>> addFriend(String id) async {
+    try {
+      var data =
+          await ApiService().post(endPoint: "${kAddFriend + id}", body: {});
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, Map<String, dynamic>>> getMyFriends() async {
+    try {
+      var data = await ApiService().get(endPoint: kMyFriends);
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

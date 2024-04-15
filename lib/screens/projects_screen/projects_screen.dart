@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/cubits/tasks/states.dart';
@@ -37,17 +39,43 @@ class ProjectsScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        if (state is DeleteTaskLoadingState) {
+          return Center(
+            child: LoadingAnimationWidget.twistingDots(
+                leftDotColor: kMainColor, rightDotColor: kLightblue, size: 30),
+          );
+        }
+        if (tasks.isEmpty) {
+          return Center(
+            child: Padding(
+              padding: const EdgeInsets.all(50.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Lottie.asset("assets/images/Animation - 1713100638764.json"),
+                  const Text(
+                    "Empty task list! Time for a break or a new challenge? Add a task to get started!",
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.center,
+                  )
+                ],
+              ),
+            ),
+          );
+        }
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.transparent ,
-            title:  Text(
+            backgroundColor: Colors.transparent,
+            title: Text(
               "Tasks",
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-
           ),
           body: SafeArea(
             child: ModalProgressHUD(
@@ -56,7 +84,6 @@ class ProjectsScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   SizedBox(
                     height: 10.h,
                   ),

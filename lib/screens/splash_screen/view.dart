@@ -44,10 +44,8 @@ class _SplashScreenState extends State<SplashScreen> {
       } else {
         ApiService.initialize(token!);
 
-        var u = CacheHelper.getData(key: kUserData);
-        user = UserAccount.fromJson(jsonDecode(u));
-        User usermodel = User(name: user!.name!, email: user!.email!);
-        BlocProvider.of<ProfileCubit>(context).myUser = usermodel;
+        BlocProvider.of<ProfileCubit>(context).getProfile();
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (ctx) => const ControllerScreen()),

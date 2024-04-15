@@ -8,7 +8,7 @@ import '../../../models/user_model.dart';
 
 class FriendItem extends StatelessWidget {
   FriendItem({Key? key, required this.friend}) : super(key: key);
-  User friend;
+  Friend friend;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +30,7 @@ class FriendItem extends StatelessWidget {
           ClipOval(
             child: CircleAvatar(
               radius: 35.r,
-              child: Image.asset(friend.image),
+              child: Image.asset("assets/images/Profile_pic.png"),
             ),
           ),
           SizedBox(width: 10.w),
@@ -46,14 +46,6 @@ class FriendItem extends StatelessWidget {
                   fontFamily: mainFont,
                 ),
               ),
-              Text(
-                friend.email ?? "Friend",
-                style: TextStyle(
-                  color: kMainColor,
-                  fontSize: 17.sp,
-                  fontFamily: mainFont,
-                ),
-              )
             ],
           )
         ],

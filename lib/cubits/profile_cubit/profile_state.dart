@@ -16,7 +16,7 @@ class ProfileEditingImgSelected extends ProfileEditingState {}
 class ProfileLoadingState extends ProfileEditingState {}
 
 class ProfileSuccessState extends ProfileEditingState {
-  final UserAccount user;
+  final User user;
   ProfileSuccessState(this.user);
 }
 

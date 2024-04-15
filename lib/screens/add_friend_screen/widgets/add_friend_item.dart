@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:task_manger/components/task_screen_components/show_toast.dart';
 import 'package:task_manger/cubits/add_friend_cubit/add_friend_cubit.dart';
 
 import '../../../Constants/constants.dart';
@@ -9,7 +11,7 @@ import '../../../models/user_model.dart';
 
 class AddFriendItem extends StatelessWidget {
   AddFriendItem({Key? key, required this.user}) : super(key: key);
-  User user;
+  Friend user;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,7 +34,7 @@ class AddFriendItem extends StatelessWidget {
           ClipOval(
             child: CircleAvatar(
               radius: 35.r,
-              child: Image.asset(user.image),
+              child: Image.asset("assets/images/Profile_pic.png"),
             ),
           ),
           SizedBox(width: 10.w),
@@ -44,18 +46,29 @@ class AddFriendItem extends StatelessWidget {
               fontFamily: mainFont,
             ),
           ),
-          Expanded(child: SizedBox()),
-          IconButton(
-            onPressed: () {
-              BlocProvider.of<AddFriendCubit>(context)
-                  .addFriend(friend: user, context: context);
+          const Expanded(child: SizedBox()),
+          BlocConsumer<AddFriendCubit, AddFriendState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              bool loading = state is AddFriendLoadingState;
+              return IconButton(
+                onPressed: () {
+                  BlocProvider.of<AddFriendCubit>(context)
+                      .addFriend(friend: user, context: context);
+                },
+                icon: loading
+                    ? LoadingAnimationWidget.flickr(
+                        leftDotColor: kMainColor,
+                        rightDotColor: kLightblue,
+                        size: 24)
+                    : Icon(
+                        Icons.add_circle,
+                        size: 35.r,
+                        color: kLightblue,
+                      ),
+                color: kLightblue,
+              );
             },
-            icon: Icon(
-              Icons.add_circle,
-              size: 35.r,
-              color: kLightblue,
-            ),
-            color: kLightblue,
           ),
         ],
       ),

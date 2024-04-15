@@ -15,7 +15,6 @@ class TaskDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fabKey = GlobalKey();
-    
 
     return Scaffold(
         key: fabKey,
@@ -62,7 +61,7 @@ class TaskDetailsScreen extends StatelessWidget {
                   CircularMenuItem(
                     onTap: () {
                       print(token);
-                      tasksCubit.deleteTask(id: '66198f9f75b249d421f12071');
+                      tasksCubit.deleteTask(id: tasksCubit.tasks.data![0].sId);
                     },
                     icon: Icons.delete,
                     iconColor: kRed,

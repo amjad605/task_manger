@@ -50,9 +50,9 @@ class ControllerScreen extends StatelessWidget {
         },
         children: [
           TasksScreen(),
-          DashboardScreen(),
           ProjectsScreen(),
-          ProfileScreen(),
+          const DashboardScreen(),
+          const ProfileScreen(),
         ],
       ),
     );

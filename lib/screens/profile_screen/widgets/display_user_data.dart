@@ -13,12 +13,12 @@ class DisplayUserData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User myUser = BlocProvider.of<ProfileCubit>(context).myUser;
+    User myUser = BlocProvider.of<ProfileCubit>(context).myUser ?? User();
     File? img = BlocProvider.of<ProfileCubit>(context).img;
     return BlocConsumer<ProfileCubit, ProfileEditingState>(
       listener: (context, state) {
         if (state is ProfileEditingSuccess) {
-          myUser = BlocProvider.of<ProfileCubit>(context).myUser;
+          myUser = BlocProvider.of<ProfileCubit>(context).myUser!;
           img = BlocProvider.of<ProfileCubit>(context).img;
         }
       },
