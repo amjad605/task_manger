@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
+import 'package:task_manger/cubits/search_friend/search_friend_cubit.dart';
 import 'package:task_manger/models/user_model.dart';
 import 'package:task_manger/screens/add_friend_screen/widgets/add_friend_item.dart';
 import '../../cubits/add_friend_cubit/add_friend_cubit.dart';
@@ -36,7 +37,7 @@ class AddFriendScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: BlocBuilder<AddFriendCubit, AddFriendState>(
+      body: BlocBuilder<SearchFriendCubit, SearchFriendState>(
         builder: (context, state) {
           return Column(
             children: [
@@ -53,7 +54,7 @@ class AddFriendScreen extends StatelessWidget {
                   child: TextFormField(
                     onChanged: (value) {
                       //  user!.name = controller.text;
-                      BlocProvider.of<AddFriendCubit>(context).Searching(value);
+                      BlocProvider.of<SearchFriendCubit>(context).Searching(value);
                     },
                     controller: controller,
                     cursorColor: kPriamaryColor,
@@ -83,7 +84,7 @@ class AddFriendScreen extends StatelessWidget {
               SizedBox(
                 height: 10.h,
               ),
-              BlocBuilder<AddFriendCubit, AddFriendState>(
+              BlocBuilder<SearchFriendCubit, SearchFriendState>(
                 builder: (context, state) {
                   if (state is SearchingLoadingState) {
                     return Expanded(

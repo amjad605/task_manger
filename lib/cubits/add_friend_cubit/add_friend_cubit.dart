@@ -12,26 +12,10 @@ import '../../models/user_model.dart';
 part 'add_friend_state.dart';
 
 class AddFriendCubit extends Cubit<AddFriendState> {
-  AddFriendCubit() : super(AddInitial());
-  Searching(name) async {
-    emit(SearchingLoadingState());
 
-    var data = await ProfileRepo().searchForFriend(name);
-    data.fold((l) {}, (r) {
-      //  print(r["data"][0]["name"]);
-      var data = r["data"];
-      List<Friend> friendsUser = [];
-      for (var f in data) {
-        friendsUser.add(Friend.fromjson(f));
-      }
-      if (data.isNotEmpty) {
-        emit(SearchingSucsessState(friendsUser));
-        print(r["data"][0]["name"]);
-      } else {
-        emit(SearchingLoadingState());
-      }
-    });
-  }
+  AddFriendCubit() : super(AddInitial());
+
+
 
   addFriend({required Friend friend, required context}) async {
     emit(AddFriendLoadingState());
@@ -51,18 +35,5 @@ class AddFriendCubit extends Cubit<AddFriendState> {
     //     .addFriend(friend: User(name: friend.name, email: friend.email));
   }
 
-  getMyFriends() async {
-    print("in");
-    emit(GetMyFriendsLoadingState());
-    var data = await ProfileRepo().getMyFriends();
-    data.fold((l) {
-      emit(GetMyFriendsFailureState());
-    }, (r) {
-      List<Friend> friends = [];
-      for (var f in r['data']) {
-        friends.add(Friend.fromjson(f));
-      }
-      emit(GetMyFriendsSuccessState(friends));
-    });
+
   }
-}

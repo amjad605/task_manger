@@ -66,3 +66,11 @@ class Friend {
         name: json['name'],
       );
 }
+class Request{
+  String ?id;
+  Friend? sender;
+  Request.fromjson(Map<String, dynamic> json){
+    id=json["_id"];
+    sender =Friend.fromjson(json["sender"]);
+  }
+}

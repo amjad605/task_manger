@@ -12,6 +12,8 @@ import '../../../models/user_model.dart';
 class AddFriendItem extends StatelessWidget {
   AddFriendItem({Key? key, required this.user}) : super(key: key);
   Friend user;
+  bool loading =false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,13 +50,25 @@ class AddFriendItem extends StatelessWidget {
           ),
           const Expanded(child: SizedBox()),
           BlocConsumer<AddFriendCubit, AddFriendState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              if(state is AddFriendSuccsesState){
+                loading =false;
+              }
+              else if(state is AddFriendFailureState){
+
+                loading =false;
+              }
+            },
             builder: (context, state) {
-              bool loading = state is AddFriendLoadingState;
+
               return IconButton(
                 onPressed: () {
-                  BlocProvider.of<AddFriendCubit>(context)
-                      .addFriend(friend: user, context: context);
+                  if(!loading) {
+
+                    loading = true;
+                    BlocProvider.of<AddFriendCubit>(context)
+                        .addFriend(friend: user, context: context);
+                  }
                 },
                 icon: loading
                     ? LoadingAnimationWidget.flickr(
