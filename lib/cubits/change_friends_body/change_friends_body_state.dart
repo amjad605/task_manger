@@ -4,5 +4,5 @@ part of 'change_friends_body_cubit.dart';
 sealed class ChangeFriendsBodyState {}
 
 
-final class FriendsState extends ChangeFriendsBodyState {}
-final class RequestsState extends ChangeFriendsBodyState {}
+final class FriendsViewState extends ChangeFriendsBodyState {}
+final class RequestsViewState extends ChangeFriendsBodyState {}

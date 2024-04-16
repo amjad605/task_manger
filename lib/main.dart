@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:task_manger/cache_helper/local.dart';
 import 'package:task_manger/cubits/auth/cubit.dart';
 import 'package:task_manger/cubits/change_friends_body/change_friends_body_cubit.dart';
+import 'package:task_manger/cubits/manage_friend_request/manage_friend_request_cubit.dart';
+import 'package:task_manger/cubits/search_friend/search_friend_cubit.dart';
 import 'package:task_manger/cubits/tasks/cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
 import 'package:task_manger/screens/splash_screen/view.dart';
@@ -12,6 +14,7 @@ import 'package:task_manger/screens/task_details_screen/task_detail.dart';
 import 'package:task_manger/screens/tasks_screen/task_screen.dart';
 import 'package:task_manger/theme.dart';
 import 'cubits/add_friend_cubit/add_friend_cubit.dart';
+import 'cubits/friends/friends_cubit.dart';
 import 'cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
 import 'cubits/profile_cubit/profile_cubit.dart';
 
@@ -54,7 +57,16 @@ class MyTaskManger extends StatelessWidget {
           ),
           BlocProvider(
               create: (context)=>ChangeFriendsBodyCubit()
-          )
+          ),
+          BlocProvider(
+              create: (context)=>ManageFriendRequestCubit()
+          ),
+          BlocProvider(
+              create: (context)=>FriendsCubit()
+          ),
+          BlocProvider(
+              create: (context)=>SearchFriendCubit()
+          ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

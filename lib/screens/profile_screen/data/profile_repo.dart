@@ -57,4 +57,37 @@ class ProfileRepo {
       return Left(ServerFailure(e.toString()));
     }
   }
+  Future<Either<Failure, Map<String, dynamic>>> getMyRequests() async {
+    try {
+      var data = await ApiService().get(endPoint: kGetFriendRequests);
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+  Future<Either<Failure, Map<String, dynamic>>> acceptRequest(String id) async {
+    try {
+      var data = await ApiService().patch(endPoint: kAcceptFriendRequests+id);
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+  Future<Either<Failure, Map<String, dynamic>>> rejectRequest(String id) async {
+    try {
+      var data = await ApiService().patch(endPoint: kRejectFriendRequests+id);
+      return right(data);
+    } catch (e) {
+      if (e is DioException) {
+        return Left(ServerFailure.fromDioError(e));
+      }
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

@@ -65,7 +65,6 @@ class ProfileScreen extends StatelessWidget {
                   buttonName: "Friends",
                   iconPath: "assets/icons/friends.png",
                   onPressed: () {
-                    BlocProvider.of<AddFriendCubit>(context).getMyFriends();
                     Navigator.push(
                         context,
                         MaterialPageRoute(

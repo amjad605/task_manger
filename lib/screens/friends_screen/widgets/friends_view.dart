@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:task_manger/cubits/friends/friends_cubit.dart';
 
 import '../../../Constants/constants.dart';
 import '../../../cubits/add_friend_cubit/add_friend_cubit.dart';
@@ -13,11 +14,12 @@ class FriendsView extends StatelessWidget {
   const FriendsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<AddFriendCubit, AddFriendState>(
+  Widget build(BuildContext context) {;
+    return BlocConsumer<FriendsCubit, FriendsState>(
       listener: (context, state) {},
       builder: (context, state) {
         if (state is GetMyFriendsLoadingState) {
+
           return Center(
             child: LoadingAnimationWidget.flickr(
                 leftDotColor: kMainColor,
