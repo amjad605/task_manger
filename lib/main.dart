@@ -55,18 +55,10 @@ class MyTaskManger extends StatelessWidget {
           BlocProvider(
             create: (context) => AddFriendCubit(),
           ),
-          BlocProvider(
-              create: (context)=>ChangeFriendsBodyCubit()
-          ),
-          BlocProvider(
-              create: (context)=>ManageFriendRequestCubit()
-          ),
-          BlocProvider(
-              create: (context)=>FriendsCubit()
-          ),
-          BlocProvider(
-              create: (context)=>SearchFriendCubit()
-          ),
+          BlocProvider(create: (context) => ChangeFriendsBodyCubit()),
+          BlocProvider(create: (context) => ManageFriendRequestCubit()),
+          BlocProvider(create: (context) => FriendsCubit()),
+          BlocProvider(create: (context) => SearchFriendCubit()),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

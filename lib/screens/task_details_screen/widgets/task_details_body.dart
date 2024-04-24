@@ -1,13 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/models/task_model.dart';
 
 class TaskDetailBody extends StatelessWidget {
-  const TaskDetailBody({super.key});
-
+  const TaskDetailBody({super.key, required this.task});
+  final Data task;
   @override
   Widget build(BuildContext context) {
+    DateTime createdAtdate = DateTime.parse(task.createdAt!);
+    DateTime deadLinedate = DateTime.parse(task.deadline!);
+    String formattedCreatedAtdate = DateFormat('dd MMM').format(createdAtdate);
+    String formattedDeadLinedate = DateFormat('dd MMM').format(deadLinedate);
     var height = MediaQuery.of(context).size.height;
     return Container(
       color: Colors.black,
@@ -19,7 +26,13 @@ class TaskDetailBody extends StatelessWidget {
               right: 0,
               bottom: 0,
               left: 0,
-              child: ListView.builder(itemBuilder: (ctx, indx) => SubTask())),
+              child: Column(
+                children: [
+                  Expanded(
+                      child: ListView.builder(
+                          itemCount: 3, itemBuilder: (ctx, indx) => SubTask())),
+                ],
+              )),
           Positioned(
             top: 0,
             bottom: height * 0.6,
@@ -35,8 +48,8 @@ class TaskDetailBody extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        "Creating Flutter Project and Work on it ",
+                      Text(
+                        "${task.description!} ",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -44,7 +57,7 @@ class TaskDetailBody extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
@@ -56,7 +69,7 @@ class TaskDetailBody extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "Date : 21 nov",
+                                "${formattedCreatedAtdate}",
                                 style: TextStyle(fontSize: 18),
                               ),
                             ],
@@ -70,42 +83,44 @@ class TaskDetailBody extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                "Date : 21 nov",
+                                "${formattedDeadLinedate}",
                                 style: TextStyle(fontSize: 18),
                               ),
                             ],
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 55,
-                        width: double.infinity,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ListView.separated(
-                                  //   physics: NeverScrollableScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (ctx, indx) => CircleAvatar(
-                                        radius: 35,
-                                        backgroundColor: kLightblue,
-                                        child: CircleAvatar(
-                                          backgroundColor: kMainColor,
-                                          radius: 25,
-                                          child: Image.asset(
-                                            "assets/images/Daco_5969784.png",
-                                            scale: 9,
-                                          ),
+                      Row(
+                        children: [
+                          for (int i = 0; i < 4; i++)
+                            i == 3
+                                ? Align(
+                                    widthFactor: 1 / 2,
+                                    child: CircleAvatar(
+                                      radius: 22.r,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                          radius: 20.r,
+                                          backgroundColor:
+                                              kItemsBackgroundColor,
+                                          child: IconButton(
+                                            icon: Icon(Icons.add),
+                                            onPressed: () {},
+                                          )),
+                                    ))
+                                : Align(
+                                    widthFactor: 1 / 2,
+                                    child: CircleAvatar(
+                                      radius: 22.r,
+                                      backgroundColor: Colors.white,
+                                      child: CircleAvatar(
+                                        radius: 20.r,
+                                        backgroundImage: const AssetImage(
+                                          "assets/images/Person_1.png",
                                         ),
                                       ),
-                                  separatorBuilder: (ctx, indx) =>
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                  itemCount: 3),
-                            )
-                          ],
-                        ),
+                                    )),
+                        ],
                       )
                     ],
                   ),
@@ -137,6 +152,7 @@ class _SubTaskState extends State<SubTask> {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
+          color: kItemsBackgroundColor.withOpacity(0.6),
           border: Border.all(color: Color.fromARGB(134, 82, 80, 80)),
           borderRadius: BorderRadius.circular(30)),
       child: Padding(

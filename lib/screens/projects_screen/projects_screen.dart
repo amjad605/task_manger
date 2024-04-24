@@ -26,6 +26,10 @@ class ProjectsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TasksCubit tasksCubit = TasksCubit.get(context);
     tasksCubit.getAllTasks();
+    Future<void> handleRefresh() async {
+      tasksCubit.getAllTasks();
+    }
+
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     return BlocConsumer<TasksCubit, TasksState>(
@@ -105,26 +109,32 @@ class ProjectsScreen extends StatelessWidget {
               ),
             ),
           ),
-          body: SafeArea(
-            child: ModalProgressHUD(
-              inAsyncCall: loading,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: tasks.length,
-                      itemBuilder: (context, index) {
-                        final task = tasks[index];
-                        return TaskWidget(task: task);
-                      },
+          body: RefreshIndicator.adaptive(
+            onRefresh: handleRefresh,
+            child: SafeArea(
+              child: ModalProgressHUD(
+                inAsyncCall: loading,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 10.h,
                     ),
-                  ),
-                ],
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: tasks.length,
+                        itemBuilder: (context, index) {
+                          final task = tasks[index];
+                          return TaskWidget(task: task);
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: 8,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

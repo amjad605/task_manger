@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/cubits/tasks/cubit.dart';
 import 'package:task_manger/screens/add_task_screen/models/user.dart';
 import 'package:task_manger/screens/add_task_screen/pages/user_selection_page.dart';
 
@@ -955,6 +957,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                     });
                                     await Future.delayed(
                                         const Duration(milliseconds: 1000));
+                                    BlocProvider.of<TasksCubit>(context)
+                                        .getAllTasks();
                                     Navigator.pop(context);
                                   },
                                   child: Center(

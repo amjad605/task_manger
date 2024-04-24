@@ -21,7 +21,7 @@ class TasksCubit extends Cubit<TasksState> {
     });
   }
 
-  void getAllTasks() async {
+  Future<void> getAllTasks() async {
     emit(DeleteTaskLoadingState());
     var result = await TaskRepo().getAllTasks();
 

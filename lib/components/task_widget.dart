@@ -24,7 +24,7 @@ class TaskWidget extends StatelessWidget {
         final offset = renderBox
             .localToGlobal(Offset(renderBox.size.width, renderBox.size.height));
 
-        Navigator.of(context).push(_createRoute(offset));
+        //  Navigator.of(context).push(_createRoute(offset));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -93,27 +93,27 @@ class TaskWidget extends StatelessWidget {
   }
 }
 
-Route _createRoute(Offset offset) {
-  return PageRouteBuilder(
-    transitionDuration: const Duration(milliseconds: 1000),
-    pageBuilder: (context, animation, secondaryAnimation) =>
-        const TaskDetailsScreen(),
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      var begin = Offset(offset.dx, offset.dy);
-      const end = Offset.zero;
-      const curve = Curves.ease;
+// Route _createRoute(Offset offset) {
+//   return PageRouteBuilder(
+//     transitionDuration: const Duration(milliseconds: 1000),
+//     pageBuilder: (context, animation, secondaryAnimation) =>
+//         const TaskDetailsScreen(task:  task,),
+//     transitionsBuilder: (context, animation, secondaryAnimation, child) {
+//       var begin = Offset(offset.dx, offset.dy);
+//       const end = Offset.zero;
+//       const curve = Curves.ease;
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+//       var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
-      return CircleTransition(
-        animation: animation,
-        startingPoint: offset,
-        startingRadius: 100,
-        child: child,
-      );
-    },
-  );
-}
+//       return CircleTransition(
+//         animation: animation,
+//         startingPoint: offset,
+//         startingRadius: 100,
+//         child: child,
+//       );
+//     },
+//   );
+// }
 
 Offset getOffset(GlobalKey key) {
   final renderBox = (key.currentContext?.findRenderObject() as RenderBox);
