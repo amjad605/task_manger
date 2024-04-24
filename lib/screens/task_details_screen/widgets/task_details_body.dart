@@ -22,7 +22,7 @@ class TaskDetailBody extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Positioned(
-              top: height * 0.3,
+              top: height * 0.4,
               right: 0,
               bottom: 0,
               left: 0,
@@ -35,7 +35,7 @@ class TaskDetailBody extends StatelessWidget {
               )),
           Positioned(
             top: 0,
-            bottom: height * 0.48,
+            bottom: height * 0.5,
             right: 0,
             left: 0,
             child: Container(
@@ -51,10 +51,10 @@ class TaskDetailBody extends StatelessWidget {
                       Text(
                         "${task.description!} ",
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
-                        maxLines: 2,
+                        maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Row(
@@ -90,37 +90,35 @@ class TaskDetailBody extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          for (int i = 0; i < 4; i++)
-                            i == 3
-                                ? Align(
-                                    widthFactor: 1 / 2,
-                                    child: CircleAvatar(
-                                      radius: 22.r,
-                                      backgroundColor: Colors.white,
-                                      child: CircleAvatar(
-                                          radius: 20.r,
-                                          backgroundColor:
-                                              kItemsBackgroundColor,
-                                          child: IconButton(
-                                            icon: Icon(Icons.add),
-                                            onPressed: () {},
-                                          )),
-                                    ))
-                                : Align(
-                                    widthFactor: 1 / 2,
-                                    child: CircleAvatar(
-                                      radius: 22.r,
-                                      backgroundColor: Colors.white,
-                                      child: CircleAvatar(
-                                        radius: 20.r,
-                                        backgroundImage: const AssetImage(
-                                          "assets/images/Person_1.png",
+                      SizedBox(
+                        height: 55,
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ListView.separated(
+                                  //   physics: NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (ctx, indx) => CircleAvatar(
+                                        radius: 35,
+                                        backgroundColor: kLightblue,
+                                        child: CircleAvatar(
+                                          backgroundColor: kMainColor,
+                                          radius: 25,
+                                          child: Image.asset(
+                                            "assets/images/Daco_5969784.png",
+                                            scale: 9,
+                                          ),
                                         ),
                                       ),
-                                    )),
-                        ],
+                                  separatorBuilder: (ctx, indx) =>
+                                      const SizedBox(
+                                        width: 1,
+                                      ),
+                                  itemCount: 3),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
