@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manger/screens/task_details_screen/task_detail.dart';
 import '../../cubits/nav_bottom_bar/change_screen_bottom_nav.dart';
 import '../../cubits/nav_bottom_bar/screens_states.dart';
 import '../add_task_screen/pages/add_task_screen.dart';

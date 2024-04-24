@@ -12,7 +12,6 @@ class ApiService {
       receiveDataWhenStatusError: true,
       headers: {
         'Content-Type': 'application/json',
-
       },
     ),
   );
@@ -27,7 +26,6 @@ class ApiService {
 
   Future<Map<String, dynamic>> post(
       {required String endPoint, required body}) async {
-
     var response = await _dio.post(endPoint, data: body);
     return response.data;
   }
@@ -35,9 +33,5 @@ class ApiService {
   Future<void> delete({required String endPoint}) async {
     var response = await _dio.delete(endPoint);
     print(response);
-  }
-  Future<Map<String, dynamic>> patch({required String endPoint}) async {
-    var response = await _dio.patch(endPoint);
-    return response.data;
   }
 }

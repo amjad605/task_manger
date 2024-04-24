@@ -21,87 +21,87 @@ class TaskDetailsScreen extends StatelessWidget {
     final fabKey = GlobalKey();
 
     return Scaffold(
-      key: fabKey,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        backgroundColor: Colors.black,
-      ),
-      body: TaskDetailBody(
-        task: task,
-      ),
-      floatingActionButton: BlocConsumer<TasksCubit, TasksState>(
-        listener: (context, state) {
-          if (state is DeleteTaskLoadingState) {
-          } else if (state is DeleteTaskSuccessState) {
-            Navigator.of(context).pop(
-              PageRouteBuilder(
-                pageBuilder: (context, animation, secondaryAnimation) =>
-                    TasksScreen(),
-                transitionDuration: const Duration(milliseconds: 400),
-                reverseTransitionDuration: const Duration(milliseconds: 400),
-                transitionsBuilder:
-                    (context, animation, secondaryAnimation, child) =>
-                        CircleTransition(
-                  animation: animation,
-                  startingPoint: getOffset(fabKey),
-                  startingRadius: 56.0,
-                  child: child,
+        key: fabKey,
+        extendBodyBehindAppBar: true,
+        extendBody: true,
+        appBar: AppBar(
+          forceMaterialTransparency: true,
+          backgroundColor: Colors.black,
+        ),
+        body: TaskDetailBody(
+          task: task,
+        ),
+        floatingActionButton: BlocConsumer<TasksCubit, TasksState>(
+          listener: (context, state) {
+            if (state is DeleteTaskLoadingState) {
+            } else if (state is DeleteTaskSuccessState) {
+              Navigator.of(context).pop(
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      TasksScreen(),
+                  transitionDuration: const Duration(milliseconds: 400),
+                  reverseTransitionDuration: const Duration(milliseconds: 400),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          CircleTransition(
+                    animation: animation,
+                    startingPoint: getOffset(fabKey),
+                    startingRadius: 56.0,
+                    child: child,
+                  ),
                 ),
-              ),
-            );
-          }
-          // TODO: implement listener
-        },
-        builder: (context, state) {
-          TasksCubit tasksCubit = TasksCubit.get(context);
-          return CircularMenu(
-              curve: Curves.easeInOut,
-              radius: 80,
-              alignment: Alignment.bottomRight,
-              animationDuration: Duration(milliseconds: 150),
-              toggleButtonColor: kMainColor,
-              // toggleButtonIconColor: kBackgroundColor,
-              items: [
-                CircularMenuItem(
-                  onTap: () {
-                    print(token);
-                    tasksCubit.deleteTask(id: tasksCubit.tasks.data![0].sId);
-                  },
-                  icon: Icons.delete,
-                  iconColor: kRed,
-                ),
-                CircularMenuItem(
-                  onTap: () {},
-                  icon: Icons.edit,
-                ),
-                CircularMenuItem(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const AddTaskScreen(),
-                        transitionDuration: const Duration(milliseconds: 400),
-                        reverseTransitionDuration:
-                            const Duration(milliseconds: 400),
-                        transitionsBuilder:
-                            (context, animation, secondaryAnimation, child) =>
-                                CircleTransition(
-                          animation: animation,
-                          startingPoint: getOffset(fabKey),
-                          startingRadius: 56.0,
-                          child: child,
+              );
+            }
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            TasksCubit tasksCubit = TasksCubit.get(context);
+            return CircularMenu(
+                curve: Curves.easeInOut,
+                radius: 80,
+                alignment: Alignment.bottomRight,
+                animationDuration: Duration(milliseconds: 150),
+                toggleButtonColor: kMainColor,
+                // toggleButtonIconColor: kBackgroundColor,
+                items: [
+                  CircularMenuItem(
+                    onTap: () {
+                      print(token);
+                      tasksCubit.deleteTask(id: '66198f9f75b249d421f12071');
+                    },
+                    icon: Icons.delete,
+                    iconColor: kRed,
+                  ),
+                  CircularMenuItem(
+                    onTap: () {},
+                    icon: Icons.edit,
+                  ),
+                  CircularMenuItem(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  const AddTaskScreen(),
+                          transitionDuration: const Duration(milliseconds: 400),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 400),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) =>
+                                  CircleTransition(
+                            animation: animation,
+                            startingPoint: getOffset(fabKey),
+                            startingRadius: 56.0,
+                            child: child,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  icon: Icons.add,
-                ),
-              ]);
-        },
-      ),
-    );
+                      );
+                    },
+                    icon: Icons.add,
+                  ),
+                ]);
+          },
+        ));
   }
 
   Offset getOffset(GlobalKey key) {

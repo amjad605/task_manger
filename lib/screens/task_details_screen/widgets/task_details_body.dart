@@ -35,7 +35,7 @@ class TaskDetailBody extends StatelessWidget {
               )),
           Positioned(
             top: 0,
-            bottom: height * 0.6,
+            bottom: height * 0.48,
             right: 0,
             left: 0,
             child: Container(
@@ -44,7 +44,7 @@ class TaskDetailBody extends StatelessWidget {
               child: SafeArea(
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 0),
+                      const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -156,7 +156,7 @@ class _SubTaskState extends State<SubTask> {
           border: Border.all(color: Color.fromARGB(134, 82, 80, 80)),
           borderRadius: BorderRadius.circular(30)),
       child: Padding(
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

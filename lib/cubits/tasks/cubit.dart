@@ -9,6 +9,7 @@ class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TaskInitialState());
   late TaskModel tasks;
   static TasksCubit get(context) => BlocProvider.of(context);
+
   void deleteTask({required String? id}) async {
     emit(DeleteTaskLoadingState());
     var result = await TaskRepo().deleteTask(id: id);
@@ -30,6 +31,17 @@ class TasksCubit extends Cubit<TasksState> {
     }, (data) {
       tasks = TaskModel.fromJson(data);
       emit(DeleteTaskSuccessState());
+    });
+  }
+
+  void updateTask(
+      {required String taskId, required Map<String, dynamic> taskData}) async {
+    emit(UpdateTaskLoadingState());
+    var result = await TaskRepo().updateTask(id: taskId, data: taskData);
+    result.fold((l) {
+      emit(UpdateTaskFailureState(l));
+    }, (data) {
+      emit(UpdateTaskSuccessState());
     });
   }
 }
