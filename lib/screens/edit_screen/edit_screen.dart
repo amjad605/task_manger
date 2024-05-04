@@ -12,24 +12,25 @@ import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
 import 'package:task_manger/cubits/tasks/cubit.dart';
+import 'package:task_manger/models/task_model.dart';
 import 'package:task_manger/screens/add_task_screen/models/user.dart';
 import 'package:task_manger/screens/add_task_screen/pages/user_selection_page.dart';
 
 import 'package:task_manger/Constants/constants.dart';
-import '../widgets/cross_fade.dart';
-import '../widgets/date_time.dart';
-import '../widgets/sequence_animation_builder.dart';
+import 'package:task_manger/screens/add_task_screen/widgets/cross_fade.dart';
+import 'package:task_manger/screens/add_task_screen/widgets/date_time.dart';
+import 'package:task_manger/screens/add_task_screen/widgets/sequence_animation_builder.dart';
 
 final PageController pageController = PageController(initialPage: 1);
 
-class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({super.key});
-
+class EditTaskScreen extends StatefulWidget {
+  EditTaskScreen({super.key, required this.task});
+  Data task;
   @override
-  State<AddTaskScreen> createState() => _AddTaskScreenState();
+  State<EditTaskScreen> createState() => _EditTaskScreenState();
 }
 
-class _AddTaskScreenState extends State<AddTaskScreen> {
+class _EditTaskScreenState extends State<EditTaskScreen> {
   bool built = false;
   bool assigningScreen = false;
   final SequenceAnimationController _animationController =
@@ -48,6 +49,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   int selectedPriority = -1;
   @override
   Widget build(BuildContext context) {
+    _titleController.text = widget.task.name ?? '';
+    _categoryController.text = widget.task.category ?? " ";
+    _descriptionController.text = widget.task.description ?? "";
+    _date = DateTime.parse(widget.task.deadline ?? '');
     final screenSize = MediaQuery.sizeOf(context);
     var route = ModalRoute.of(context);
 
@@ -168,7 +173,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                                     Alignment.bottomCenter,
                                                 value: Curves.easeOut
                                                     .transform(values[1]),
-                                                child: const Text('Add Task',
+                                                child: const Text('Edit Task',
                                                     style: TextStyle(
                                                         color: kBackgroundColor,
                                                         fontSize: 24.0,
@@ -1101,7 +1106,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   bool next = true;
   List<Widget> stages = [
     const Text(
-      'Create Task',
+      'Edit Task',
       style: TextStyle(
           color: Colors.white, fontWeight: FontWeight.w700, fontSize: 18.0),
     ),

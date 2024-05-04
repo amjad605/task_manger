@@ -7,6 +7,7 @@ import 'package:task_manger/cubits/change_friends_body/change_friends_body_cubit
 import 'package:task_manger/cubits/manage_friend_request/manage_friend_request_cubit.dart';
 import 'package:task_manger/cubits/search_friend/search_friend_cubit.dart';
 import 'package:task_manger/cubits/tasks/cubit.dart';
+import 'package:task_manger/cubits/tasks/update/cubit/update_cubit.dart';
 import 'package:task_manger/cubits/text_visibility_cubit/text_visibility_cubit.dart';
 import 'package:task_manger/screens/splash_screen/view.dart';
 import 'package:task_manger/theme.dart';
@@ -60,6 +61,7 @@ class MyTaskManger extends StatelessWidget {
           BlocProvider(
             create: (context) => SwitchDoneLeftTasks(),
           ),
+          BlocProvider(create: (context) => UpdateCubit())
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

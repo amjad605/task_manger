@@ -21,24 +21,35 @@ class TaskDetailBody extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned(
-              top: height * 0.4,
+          Positioned.fill(
+              top: height * 0.35,
               right: 0,
-              bottom: 0,
+              bottom: 10,
               left: 0,
-              child: Column(
-                children: [
-                  Expanded(
-                      child: ListView.builder(
-                          itemCount: 3, itemBuilder: (ctx, indx) => SubTask())),
-                ],
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            //shrinkWrap: true,
+                            //   reverse: true,
+                            itemCount: 10,
+                            itemBuilder: (ctx, indx) => SubTask()),
+                      ),
+                    ],
+                  ),
+                ),
               )),
           Positioned(
-            top: 0,
-            bottom: height * 0.5,
             right: 0,
+            //  top: 0,
             left: 0,
             child: Container(
+              width: double.infinity,
+              // height: 200,
               decoration: BoxDecoration(
                   color: kMainColor, borderRadius: BorderRadius.circular(30)),
               child: SafeArea(
@@ -46,7 +57,9 @@ class TaskDetailBody extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "${task.description!} ",
@@ -54,41 +67,45 @@ class TaskDetailBody extends StatelessWidget {
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
-                        maxLines: 3,
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.calendar_month,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "${formattedCreatedAtdate}",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.alarm,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "${formattedDeadLinedate}",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_month,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${formattedCreatedAtdate}",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.alarm,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${formattedDeadLinedate}",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 55,

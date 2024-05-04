@@ -8,8 +8,9 @@ class SwitchDoneLeftTasks extends Cubit<States> {
   SwitchDoneLeftTasks() : super(DoneTasksState([]));
 
   static SwitchDoneLeftTasks get(context) => BlocProvider.of(context);
-
+  int index = 1;
   void switched(int index) async {
+    emit(LoadingState());
     if (index == 1) {
       var tasks = await GetTasksRepo().getDoneTasks();
 

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/cubits/tasks/states.dart';
 import 'package:task_manger/models/task_model.dart';
@@ -8,6 +9,7 @@ import '../../screens/add_task_screen/models/task.dart';
 class TasksCubit extends Cubit<TasksState> {
   TasksCubit() : super(TaskInitialState());
   late TaskModel tasks;
+
   static TasksCubit get(context) => BlocProvider.of(context);
 
   void deleteTask({required String? id}) async {
@@ -23,25 +25,26 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   Future<void> getAllTasks() async {
-    emit(DeleteTaskLoadingState());
+    emit(GetAllTaskLoadingState());
     var result = await TaskRepo().getAllTasks();
 
     result.fold((l) {
-      emit(DeleteTaskFailureState(l));
+      emit(GetAllTaskFailureState(l));
     }, (data) {
       tasks = TaskModel.fromJson(data);
-      emit(DeleteTaskSuccessState());
+      emit(GetAllTaskSuccessState());
     });
   }
 
-  void updateTask(
-      {required String taskId, required Map<String, dynamic> taskData}) async {
-    emit(UpdateTaskLoadingState());
-    var result = await TaskRepo().updateTask(id: taskId, data: taskData);
+  void deleteTaskFromOutSide({required String? id}) async {
+    emit(DeleteTaskOutSideLoadingState());
+    var result = await TaskRepo().deleteTask(id: id);
+    print(result);
     result.fold((l) {
-      emit(UpdateTaskFailureState(l));
+      emit(DeleteTaskOutSideFailureState(l));
     }, (data) {
-      emit(UpdateTaskSuccessState());
+      tasks.data!.removeWhere((element) => element.sId == id);
+      emit(DeleteTaskOutSideSuccessState());
     });
   }
 }

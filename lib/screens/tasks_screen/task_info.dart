@@ -33,7 +33,7 @@ class TaskData {
       id: json['_id'],
       name: json['name'],
       description: json['description'] ?? "",
-      priority: json['priority'] ?? -1,
+      priority: json['priority'] ?? "",
       category: json['category'] ?? "",
       points: json['points'] ?? -1,
       deadline: json['deadline'] ?? "",
@@ -50,6 +50,6 @@ class TaskData {
 DateTime today = DateTime.now();
 
 List<DateTime> dates = List.generate(
-  1,
+  11,
   (index) => today.subtract(Duration(days: 5)).add(Duration(days: index)),
 );

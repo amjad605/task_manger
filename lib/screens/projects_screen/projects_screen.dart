@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,17 +35,17 @@ class ProjectsScreen extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
     return BlocConsumer<TasksCubit, TasksState>(
       listener: (context, state) {
-        if (state is DeleteTaskSuccessState) {
+        if (state is GetAllTaskSuccessState) {
           tasks = tasksCubit.tasks.data!;
           loading = false;
-        } else if (state is DeleteTaskLoadingState) {
+        } else if (state is GetAllTaskLoadingState) {
           loading = true;
-        } else if (state is DeleteTaskFailureState) {
+        } else if (state is GetAllTaskFailureState) {
           loading = false;
         }
       },
       builder: (context, state) {
-        if (state is DeleteTaskLoadingState) {
+        if (state is GetAllTaskLoadingState) {
           return Center(
             child: LoadingAnimationWidget.twistingDots(
                 leftDotColor: kMainColor, rightDotColor: kLightblue, size: 30),
@@ -97,48 +98,59 @@ class ProjectsScreen extends StatelessWidget {
               ),
             ),
           );
-        }
-        return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: Text(
-              "Tasks",
-              style: TextStyle(
-                fontSize: 28.sp,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          body: RefreshIndicator.adaptive(
-            onRefresh: handleRefresh,
-            child: SafeArea(
-              child: ModalProgressHUD(
-                inAsyncCall: loading,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: tasks.length,
-                        itemBuilder: (context, index) {
-                          final task = tasks[index];
-                          return TaskWidget(task: task);
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                          height: 8,
-                        ),
-                      ),
-                    ),
-                  ],
+        } else {
+          tasks.removeWhere((element) {
+            return DateTime.parse(element.deadline!) ==
+                DateTime.parse(element.startedAt ?? DateTime.now().toString());
+            ;
+          });
+          return Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              title: Text(
+                "Tasks",
+                style: TextStyle(
+                  fontSize: 28.sp,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-          ),
-        );
+            body: RefreshIndicator.adaptive(
+              onRefresh: handleRefresh,
+              child: SafeArea(
+                child: ModalProgressHUD(
+                  inAsyncCall: loading,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: tasks.length,
+                          itemBuilder: (context, index) {
+                            final task = tasks[index];
+
+                            return FadeInLeft(
+                                duration: Duration(milliseconds: 400),
+                                delay: Duration(
+                                    milliseconds: (index + 1) * 2 * 10),
+                                child: TaskWidget(task: task));
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                            height: 8,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
       },
     );
   }

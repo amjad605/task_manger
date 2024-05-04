@@ -29,378 +29,223 @@ class TasksScreen extends StatelessWidget {
     final ScrollController _controller = ScrollController();
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      body: BlocBuilder<ProfileCubit, ProfileEditingState>(
-        builder: (context, state) {
-          if (state is ProfileSuccessState) {
-            return Padding(
+    return Scaffold(body: BlocBuilder<ProfileCubit, ProfileEditingState>(
+      builder: (context, state) {
+        if (state is ProfileSuccessState) {
+          SwitchDoneLeftTasks.get(context).switched(1);
+          SwitchDoneLeftTasks.get(context).switched(0);
+          return Padding(
               padding: EdgeInsets.only(top: screenHeight * 0.04),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: screenWidth * 0.07),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        buildUserInfoWidget(screenWidth, screenHeight, context),
-                        SizedBox(
-                          height: screenHeight * 0.009,
-                        ),
-                        buildTaskCompleteWidget(screenWidth, screenHeight),
-                        SizedBox(
-                          height: screenHeight * 0.02,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.125,
-                    child: ListView.separated(
-                      controller: _controller,
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: dates.length,
-                      itemBuilder: (context, index) {
-                        _controller.animateTo((31 * index).toDouble(),
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.linear);
-                        return calendarWidget(
-                            screenHeight, screenWidth, dates[index]);
-                      },
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(
-                        width: screenWidth * 0.03,
+              child:
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      buildUserInfoWidget(screenWidth, screenHeight, context),
+                      SizedBox(
+                        height: screenHeight * 0.009,
                       ),
+                      buildTaskCompleteWidget(screenWidth, screenHeight),
+                      SizedBox(
+                        height: screenHeight * 0.02,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.125,
+                  child: ListView.separated(
+                    controller: _controller,
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    itemCount: dates.length,
+                    itemBuilder: (context, index) {
+                      _controller.animateTo((32 * index).toDouble(),
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.linear);
+                      return calendarWidget(
+                          screenHeight, screenWidth, dates[index]);
+                    },
+                    separatorBuilder: (BuildContext context, int index) =>
+                        SizedBox(
+                      width: screenWidth * 0.03,
                     ),
                   ),
-                  SizedBox(
-                    height: screenHeight * 0.04,
-                  ),
-                  Expanded(
+                ),
+                SizedBox(
+                  height: screenHeight * 0.04,
+                ),
+                Expanded(
                     child: Container(
-                      height: screenHeight * 0.6,
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(40.0),
-                          topLeft: Radius.circular(40.0),
-                        ),
-                        color: Color.fromRGBO(23, 23, 42, 0.824),
-                      ),
-                      child: Column(
+                  height: screenHeight * 0.6,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(40.0),
+                      topLeft: Radius.circular(40.0),
+                    ),
+                    color: Color.fromRGBO(23, 23, 42, 0.824),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
                         children: [
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: screenWidth * 0.06,
-                                      top: screenWidth * 0.06,
-                                    ),
-                                    child: const Text(
-                                      "Your Tasks",
-                                      style: TextStyle(
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      left: screenWidth * 0.06,
-                                    ),
-                                    child: const Text(
-                                      "(7/10)Completed",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.white38,
-                                      ),
-                                      textAlign: TextAlign.left,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Spacer(),
                               Padding(
                                 padding: EdgeInsets.only(
-                                  top: screenHeight * 0.03,
-                                  right: screenWidth * 0.03,
+                                  left: screenWidth * 0.06,
+                                  top: screenWidth * 0.06,
                                 ),
-                                child: ToggleSwitch(
-                                  minWidth: screenWidth * 0.18,
-                                  minHeight: screenHeight * 0.06,
-                                  cornerRadius: 35.0,
-                                  activeBgColors: const [
-                                    [kMainColor],
-                                    [kMainColor]
-                                  ],
-                                  customTextStyles: const [
-                                    TextStyle(
-                                      fontSize: 16,
-                                    )
-                                  ],
-                                  activeFgColor: Colors.white,
-                                  inactiveBgColor: kBackgroundColor,
-                                  inactiveFgColor: Colors.white,
-                                  initialLabelIndex: 1,
-                                  totalSwitches: 2,
-                                  labels: const ['Left', 'Done'],
-                                  radiusStyle: true,
-                                  animate: true,
-                                  borderColor: const [kMainColor],
+                                child: const Text(
+                                  "Your Tasks",
+                                  style: TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: screenWidth * 0.06,
+                                ),
+                                child: const Text(
+                                  "(7/10)Completed",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.white38,
+                                  ),
+                                  textAlign: TextAlign.left,
                                 ),
                               ),
                             ],
                           ),
-                          Expanded(
-                            child: ListView.builder(
-                              itemCount: tasks.length,
-                              itemBuilder: (context, index) {
-                                final task = tasks[index];
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 18.0),
-                                  child: TaskWidget(
-                                    percent: task.percent,
-                                    titleTask: task.titleTask,
-                                    deadlineDate: task.deadlineDate,
-                                    urlImages: task.urlImages,
-                                  ),
-                                );
+                          const Spacer(),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: screenHeight * 0.03,
+                              right: screenWidth * 0.03,
+                            ),
+                            child: ToggleSwitch(
+                              minWidth: screenWidth * 0.18,
+                              minHeight: screenHeight * 0.06,
+                              cornerRadius: 35.0,
+                              activeBgColors: const [
+                                [kMainColor],
+                                [kMainColor]
+                              ],
+                              customTextStyles: const [
+                                TextStyle(
+                                  fontSize: 16,
+                                )
+                              ],
+                              activeFgColor: Colors.white,
+                              inactiveBgColor: kBackgroundColor,
+                              inactiveFgColor: Colors.white,
+                              initialLabelIndex: 0,
+                              totalSwitches: 2,
+                              labels: const ['Left', 'Done'],
+                              radiusStyle: true,
+                              animate: true,
+                              borderColor: const [kMainColor],
+                              onToggle: (index) {
+                                SwitchDoneLeftTasks.get(context).index =
+                                    index ?? 1;
+                                print("Switched to: $index");
+                                SwitchDoneLeftTasks.get(context)
+                                    .switched(index ?? 1);
                               },
                             ),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          } else {
-            // if (state is ProfileFailureState)
-            //   BlocProvider.of<ProfileCubit>(context).getProfile();
-            return Center(
-              child: LoadingAnimationWidget.twistingDots(
-                  leftDotColor: kMainColor,
-                  rightDotColor: kLightblue,
-                  size: 30),
-            );
-          }
-        },
-      body: Padding(
-        padding: EdgeInsets.only(top: screenHeight * 0.04),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.07),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  buildUserInfoWidget(screenWidth, screenHeight),
-                  SizedBox(
-                    height: screenHeight * 0.009,
-                  ),
-                  buildTaskCompleteWidget(screenWidth, screenHeight),
-                  SizedBox(
-                    height: screenHeight * 0.02,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.125,
-              child: ListView.separated(
-                controller: _controller,
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: dates.length,
-                itemBuilder: (context, index) {
-                  _controller.animateTo((43 * index).toDouble(),
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.linear);
-                  return calendarWidget(
-                      screenHeight, screenWidth, dates[index]);
-                },
-                separatorBuilder: (BuildContext context, int index) => SizedBox(
-                  width: screenWidth * 0.03,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: screenHeight * 0.04,
-            ),
-            Expanded(
-              child: Container(
-                height: screenHeight * 0.6,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(40.0),
-                    topLeft: Radius.circular(40.0),
-                  ),
-                  color: Color.fromRGBO(23, 23, 42, 0.824),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: screenWidth * 0.06,
-                                top: screenWidth * 0.06,
+                      BlocBuilder<SwitchDoneLeftTasks, States>(
+                        builder: (context, state) {
+                          debugPrint("$state");
+                          List<TaskData> currentTasks = [];
+                          if (state is LoadingState) {
+                            return Expanded(
+                              child: Center(
+                                child: LoadingAnimationWidget.twistingDots(
+                                    leftDotColor: kMainColor,
+                                    rightDotColor: kLightblue,
+                                    size: 30),
                               ),
-                              child: const Text(
-                                "Your Tasks",
-                                style: TextStyle(
-                                  fontSize: 26,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            );
+                          }
+                          if (state is LeftTasksState) {
+                            currentTasks = state.leftTasks;
+
+                            return Expanded(
+                              child: ListView.builder(
+                                itemCount: currentTasks.length,
+                                itemBuilder: (context, index) {
+                                  print(currentTasks[index].name);
+                                  print(currentTasks[index].deadline);
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 18.0),
+                                    child: TaskWidget(
+                                      percent: -1,
+                                      titleTask: currentTasks[index].name,
+                                      deadlineDate: DateFormat.yMEd()
+                                          .format(DateTime.parse(
+                                              currentTasks[index].deadline))
+                                          .toString(),
+                                      urlImages: [],
+                                    ),
+                                  );
+                                },
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: screenWidth * 0.06,
+                            );
+                          } else if (state is DoneTasksState) {
+                            //DONE
+                            currentTasks = state.finishedTasks;
+                            return Expanded(
+                              child: ListView.builder(
+                                itemCount: currentTasks.length,
+                                itemBuilder: (context, index) {
+                                  print(currentTasks[index].name);
+                                  print(currentTasks[index].deadline);
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 18.0),
+                                    child: TaskWidget(
+                                      percent: 1,
+                                      titleTask: currentTasks[index].name,
+                                      deadlineDate: DateFormat.yMEd()
+                                          .format(DateTime.parse(
+                                              currentTasks[index].deadline))
+                                          .toString(),
+                                      urlImages: [],
+                                    ),
+                                  );
+                                },
                               ),
-                              child: const Text(
-                                "(7/10)Completed",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white38,
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: screenHeight * 0.03,
-                            right: screenWidth * 0.03,
-                          ),
-                          child: ToggleSwitch(
-                            minWidth: screenWidth * 0.18,
-                            minHeight: screenHeight * 0.06,
-                            cornerRadius: 35.0,
-                            activeBgColors: const [
-                              [kMainColor],
-                              [kMainColor]
-                            ],
-                            customTextStyles: const [
-                              TextStyle(
-                                fontSize: 16,
-                              )
-                            ],
-                            activeFgColor: Colors.white,
-                            inactiveBgColor: kBackgroundColor,
-                            inactiveFgColor: Colors.white,
-                            initialLabelIndex: 1,
-                            totalSwitches: 2,
-                            labels: const ['Left', 'Done'],
-                            radiusStyle: true,
-                            animate: true,
-                            borderColor: const [kMainColor],
-                            onToggle: (index) {
-                              print("Switched to: $index");
-                              SwitchDoneLeftTasks.get(context)
-                                  .switched(index ?? 1);
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    BlocBuilder<SwitchDoneLeftTasks, States>(
-                      builder: (context, state) {
-                        debugPrint("$state");
-                        List<TaskData> currentTasks = [];
-                        if (state is LeftTasksState) {
-                          currentTasks = state.leftTasks;
-                          return Expanded(
-                            child: ListView.builder(
-                              itemCount: currentTasks.length,
-                              itemBuilder: (context, index) {
-                                print(currentTasks[index].name);
-                                print(currentTasks[index].deadline);
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 18.0),
-                                  child: TaskWidget(
-                                    percent: -1,
-                                    titleTask: currentTasks[index].name,
-                                    deadlineDate: DateFormat.yMEd()
-                                        .format(DateTime.parse(
-                                            currentTasks[index].deadline))
-                                        .toString(),
-                                    urlImages: [],
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        } else if (state is DoneTasksState) {
-                          //DONE
-                          currentTasks = state.finishedTasks;
-                          return Expanded(
-                            child: ListView.builder(
-                              itemCount: currentTasks.length,
-                              itemBuilder: (context, index) {
-                                print(currentTasks[index].name);
-                                print(currentTasks[index].deadline);
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 18.0),
-                                  child: TaskWidget(
-                                    percent: 1,
-                                    titleTask: currentTasks[index].name,
-                                    deadlineDate: DateFormat.yMEd()
-                                        .format(DateTime.parse(
-                                            currentTasks[index].deadline))
-                                        .toString(),
-                                    urlImages: [],
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        } else {
-                          //EROR
-                          return Text("ERROR");
-                        }
-                        // return Expanded(
-                        //   child: ListView.builder(
-                        //     itemCount: currentTasks.length,
-                        //     itemBuilder: (context, index) {
-                        //       return Padding(
-                        //         padding:
-                        //             const EdgeInsets.symmetric(vertical: 18.0),
-                        //         child: TaskWidget(
-                        //           percent: state is DoneTasksState ? 1 : 0.4,
-                        //           titleTask: currentTasks[index].name,
-                        //           deadlineDate: DateFormat.yMd(
-                        //                   currentTasks[index].deadline)
-                        //               .toString(),
-                        //           urlImages: [],
-                        //         ),
-                        //       );
-                        //     },
-                        //   ),
-                        // );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                            );
+                          } else {
+                            //EROR
+                            return Text("ERROR");
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                )),
+              ]));
+        } else {
+          // if (state is ProfileFailureState)
+          //   BlocProvider.of<ProfileCubit>(context).getProfile();
+          return Center(
+            child: LoadingAnimationWidget.twistingDots(
+                leftDotColor: kMainColor, rightDotColor: kLightblue, size: 30),
+          );
+        }
+      },
+    ));
   }
 }
+//  height: height * 0.04,
+//             width: width * 0.25,

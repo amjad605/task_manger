@@ -13,6 +13,15 @@ class DeleteTaskFailureState extends TasksState {
   DeleteTaskFailureState(this.error);
 }
 
+class DeleteTaskOutSideLoadingState extends TasksState {}
+
+class DeleteTaskOutSideSuccessState extends TasksState {}
+
+class DeleteTaskOutSideFailureState extends TasksState {
+  Failure error;
+  DeleteTaskOutSideFailureState(this.error);
+}
+
 class UpdateTaskLoadingState extends TasksState {}
 
 class UpdateTaskSuccessState extends TasksState {}
@@ -20,4 +29,13 @@ class UpdateTaskSuccessState extends TasksState {}
 class UpdateTaskFailureState extends TasksState {
   Failure error;
   UpdateTaskFailureState(this.error);
+}
+
+class GetAllTaskLoadingState extends TasksState {}
+
+class GetAllTaskSuccessState extends TasksState {}
+
+class GetAllTaskFailureState extends TasksState {
+  Failure error;
+  GetAllTaskFailureState(this.error);
 }

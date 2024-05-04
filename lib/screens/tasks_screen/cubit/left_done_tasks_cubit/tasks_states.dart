@@ -16,3 +16,5 @@ class FailedToGetTasksState extends States {
   String msg;
   FailedToGetTasksState(this.msg);
 }
+
+class LoadingState extends States {}

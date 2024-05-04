@@ -44,20 +44,21 @@ class TaskRepo {
     }
   }
 
-Future<Either<Failure, Unit>> updateTask({required String id, required Map<String, dynamic> data}) async {
+  Future<Either<Failure, Unit>> updateTask(
+      {required String id, required Map<String, dynamic> data}) async {
     try {
       await ApiService().update(
-        endPoint: "$kTasksEndPount/$id",
+        endPoint: "$kTasksEndPount$id",
         body: data,
       );
       return right(unit);
     } catch (e) {
+      print(e);
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));
       } else {
         return left(ServerFailure(e.toString()));
       }
     }
-}
-
+  }
 }
