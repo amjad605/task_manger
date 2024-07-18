@@ -102,7 +102,6 @@ class ProjectsScreen extends StatelessWidget {
           tasks.removeWhere((element) {
             return DateTime.parse(element.deadline!) ==
                 DateTime.parse(element.startedAt ?? DateTime.now().toString());
-            ;
           });
           return Scaffold(
             appBar: AppBar(

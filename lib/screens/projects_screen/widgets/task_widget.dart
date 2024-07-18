@@ -5,21 +5,15 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:task_manger/Constants/constants.dart';
-import 'package:task_manger/components/task_widget.dart';
 import 'package:task_manger/cubits/tasks/cubit.dart';
-import 'package:task_manger/cubits/tasks/states.dart';
 import 'package:task_manger/models/task_model.dart';
+import 'package:task_manger/screens/add_task_screen/pages/add_sub_task.dart';
 import 'package:task_manger/screens/add_task_screen/pages/add_task_screen.dart';
 import 'package:task_manger/screens/add_task_screen/widgets/circle_transition.dart';
-
 import 'package:task_manger/screens/edit_screen/edit_screen.dart';
 import 'package:task_manger/screens/projects_screen/widgets/play_button.dart';
 import 'package:task_manger/screens/task_details_screen/task_detail.dart';
-
-import 'package:task_manger/screens/tasks_screen/task_info.dart';
-import 'package:task_manger/screens/tasks_screen/task_screen.dart';
 
 class TaskWidget extends StatelessWidget {
   const TaskWidget({super.key, required this.task});
@@ -175,7 +169,7 @@ class TaskWidget extends StatelessWidget {
                   curve: Curves.easeInOut,
                   alignment: Alignment.topRight,
                   radius: 70,
-                  animationDuration: Duration(milliseconds: 150),
+                  animationDuration: const Duration(milliseconds: 150),
                   toggleButtonColor: kBackgroundColor.withOpacity(0.6),
                   // toggleButtonIconColor: kBackgroundColor,
                   items: [
@@ -229,7 +223,9 @@ class TaskWidget extends StatelessWidget {
                           PageRouteBuilder(
                             pageBuilder:
                                 (context, animation, secondaryAnimation) =>
-                                    const AddTaskScreen(),
+                                    AddSubTaskScreen(
+                              task: task,
+                            ),
                             transitionDuration:
                                 const Duration(milliseconds: 400),
                             reverseTransitionDuration:

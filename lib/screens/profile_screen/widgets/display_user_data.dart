@@ -26,12 +26,13 @@ class DisplayUserData extends StatelessWidget {
         return Column(
           children: [
             CircleAvatar(
-              radius: 60.0.r, // Set your desired radius
+              radius: 60.0.r,
+              backgroundColor:
+                  Color.fromARGB(221, 67, 66, 66), // Set your desired radius
               child: img == null
-                  ? ClipOval(
-                      child: Image.asset(
-                        myUser.image,
-                      ),
+                  ? Text(
+                      "${myUser.name![0].toUpperCase()}",
+                      style: TextStyle(fontSize: 24.sp),
                     )
                   : ClipOval(
                       child: SizedBox(

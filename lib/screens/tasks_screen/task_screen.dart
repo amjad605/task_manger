@@ -1,12 +1,15 @@
 import 'dart:ui';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:task_manger/Constants/constants.dart';
@@ -32,7 +35,7 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(body: BlocBuilder<ProfileCubit, ProfileEditingState>(
       builder: (context, state) {
         if (state is ProfileSuccessState) {
-          SwitchDoneLeftTasks.get(context).switched(1);
+          //SwitchDoneLeftTasks.get(context).switched(1);
           SwitchDoneLeftTasks.get(context).switched(0);
           return Padding(
               padding: EdgeInsets.only(top: screenHeight * 0.04),
@@ -107,19 +110,6 @@ class TasksScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                  left: screenWidth * 0.06,
-                                ),
-                                child: const Text(
-                                  "(7/10)Completed",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.white38,
-                                  ),
-                                  textAlign: TextAlign.left,
-                                ),
-                              ),
                             ],
                           ),
                           const Spacer(),
@@ -177,54 +167,163 @@ class TasksScreen extends StatelessWidget {
                           }
                           if (state is LeftTasksState) {
                             currentTasks = state.leftTasks;
-
-                            return Expanded(
-                              child: ListView.builder(
-                                itemCount: currentTasks.length,
-                                itemBuilder: (context, index) {
-                                  print(currentTasks[index].name);
-                                  print(currentTasks[index].deadline);
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 18.0),
-                                    child: TaskWidget(
-                                      percent: -1,
-                                      titleTask: currentTasks[index].name,
-                                      deadlineDate: DateFormat.yMEd()
-                                          .format(DateTime.parse(
-                                              currentTasks[index].deadline))
-                                          .toString(),
-                                      urlImages: [],
+                            return currentTasks.isEmpty
+                                ? Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Lottie.asset(
+                                              width: 150.w,
+                                              height: 140.h,
+                                              "assets/images/Animation - 1713100638764.json"),
+                                          DefaultTextStyle(
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.grey,
+                                              shadows: [
+                                                Shadow(
+                                                  blurRadius: 2.0,
+                                                  color: Colors.grey,
+                                                  offset: Offset(0, 0),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: AnimatedTextKit(
+                                                displayFullTextOnTap: true,
+                                                isRepeatingAnimation: true,
+                                                pause: const Duration(
+                                                    milliseconds: 600),
+                                                totalRepeatCount: 1,
+                                                animatedTexts: [
+                                                  TyperAnimatedText(
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      'Empty task list! Time for a break or a new challenge? Add a task to get started!'),
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                          // const Text(
+                                          //   "Empty task list! Time for a break or a new challenge? Add a task to get started!",
+                                          //   style: TextStyle(
+                                          //     fontSize: 15,
+                                          //     color: Colors.grey,
+                                          //   ),
+                                          //   textAlign: TextAlign.center,
+                                          // )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Expanded(
+                                    child: ListView.builder(
+                                      itemCount: currentTasks.length,
+                                      itemBuilder: (context, index) {
+                                        print(currentTasks[index].name);
+                                        print(currentTasks[index].deadline);
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 18.0),
+                                          child: TaskWidget(
+                                            percent: (1 -
+                                                    currentTasks[index]
+                                                        .subtasks
+                                                        .length)
+                                                .toDouble(),
+                                            titleTask: currentTasks[index].name,
+                                            deadlineDate: DateFormat.yMEd()
+                                                .format(DateTime.parse(
+                                                    currentTasks[index]
+                                                        .deadline))
+                                                .toString(),
+                                            urlImages: [],
+                                          ),
+                                        );
+                                      },
                                     ),
                                   );
-                                },
-                              ),
-                            );
                           } else if (state is DoneTasksState) {
                             //DONE
                             currentTasks = state.finishedTasks;
-                            return Expanded(
-                              child: ListView.builder(
-                                itemCount: currentTasks.length,
-                                itemBuilder: (context, index) {
-                                  print(currentTasks[index].name);
-                                  print(currentTasks[index].deadline);
-                                  return Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 18.0),
-                                    child: TaskWidget(
-                                      percent: 1,
-                                      titleTask: currentTasks[index].name,
-                                      deadlineDate: DateFormat.yMEd()
-                                          .format(DateTime.parse(
-                                              currentTasks[index].deadline))
-                                          .toString(),
-                                      urlImages: [],
+                            return currentTasks.isEmpty
+                                ? Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Lottie.asset(
+                                              width: 150.w,
+                                              height: 140.h,
+                                              "assets/images/Animation - 1713100638764.json"),
+                                          DefaultTextStyle(
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.grey,
+                                              shadows: [
+                                                Shadow(
+                                                  blurRadius: 2.0,
+                                                  color: Colors.grey,
+                                                  offset: Offset(0, 0),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: AnimatedTextKit(
+                                                displayFullTextOnTap: true,
+                                                isRepeatingAnimation: true,
+                                                pause: const Duration(
+                                                    milliseconds: 600),
+                                                totalRepeatCount: 1,
+                                                animatedTexts: [
+                                                  TyperAnimatedText(
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      'Empty task list! Time for a break or a new challenge? Add a task to get started!'),
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                          // const Text(
+                                          //   "Empty task list! Time for a break or a new challenge? Add a task to get started!",
+                                          //   style: TextStyle(
+                                          //     fontSize: 15,
+                                          //     color: Colors.grey,
+                                          //   ),
+                                          //   textAlign: TextAlign.center,
+                                          // )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : Expanded(
+                                    child: ListView.builder(
+                                      itemCount: currentTasks.length,
+                                      itemBuilder: (context, index) {
+                                        return Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 18.0),
+                                          child: TaskWidget(
+                                            percent: 1,
+                                            titleTask: currentTasks[index].name,
+                                            deadlineDate: DateFormat.yMEd()
+                                                .format(DateTime.parse(
+                                                    currentTasks[index]
+                                                        .deadline))
+                                                .toString(),
+                                            urlImages: [],
+                                          ),
+                                        );
+                                      },
                                     ),
                                   );
-                                },
-                              ),
-                            );
                           } else {
                             //EROR
                             return Text("ERROR");

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:task_manger/screens/add_task_screen/widgets/circle_transition.dart';
 import 'package:task_manger/screens/task_details_screen/task_detail.dart';
@@ -58,11 +59,12 @@ class TaskWidget extends StatelessWidget {
                 children: [
                   Text(
                     titleTask,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
                   ),
                   Text(
                     "Deadline:$deadlineDate",
-                    style: const TextStyle(fontSize: 10),
+                    style: TextStyle(fontSize: 10.sp),
                   ),
                 ],
               ),

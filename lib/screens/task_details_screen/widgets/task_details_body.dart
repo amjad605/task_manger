@@ -36,8 +36,10 @@ class TaskDetailBody extends StatelessWidget {
                         child: ListView.builder(
                             //shrinkWrap: true,
                             //   reverse: true,
-                            itemCount: 10,
-                            itemBuilder: (ctx, indx) => SubTask()),
+                            itemCount: task.subTasks.length,
+                            itemBuilder: (ctx, indx) => SubTask(
+                                  title: task.subTasks[indx],
+                                )),
                       ),
                     ],
                   ),
@@ -152,8 +154,9 @@ class TaskDetailBody extends StatelessWidget {
 class SubTask extends StatefulWidget {
   const SubTask({
     super.key,
+    required this.title,
   });
-
+  final String title;
   @override
   State<SubTask> createState() => _SubTaskState();
 }
@@ -175,28 +178,28 @@ class _SubTaskState extends State<SubTask> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              "Sub Task 1 ",
+            Text(
+              widget.title,
               style: TextStyle(fontSize: 18),
             ),
-            Checkbox.adaptive(
-                activeColor: kLightblue,
-                checkColor: Colors.black,
-                tristate: true,
-                fillColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return kLightblue.withOpacity(.32);
-                  }
-                  return kLightblue;
-                }),
-                shape: const CircleBorder(),
-                value: isChecked,
-                onChanged: (value) {
-                  setState(() {
-                    isChecked = value ?? false;
-                  });
-                })
+            // Checkbox.adaptive(
+            //     activeColor: kLightblue,
+            //     checkColor: Colors.black,
+            //     tristate: true,
+            //     fillColor: MaterialStateProperty.resolveWith<Color>(
+            //         (Set<MaterialState> states) {
+            //       if (states.contains(MaterialState.disabled)) {
+            //         return kLightblue.withOpacity(.32);
+            //       }
+            //       return kLightblue;
+            //     }),
+            //     shape: const CircleBorder(),
+            //     value: isChecked,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         isChecked = value ?? false;
+            //       });
+            //     })
           ],
         ),
       ),

@@ -10,13 +10,10 @@ Widget buildUserInfoWidget(
     Row(
       children: [
         CircleAvatar(
-          radius: 33,
-          backgroundColor: Colors.transparent,
-          child: Image.asset(
-            "assets/images/Person_1.png",
-            fit: BoxFit.contain,
-          ),
-        ),
+            radius: 33,
+            backgroundColor: Color.fromARGB(221, 67, 66, 66),
+            child: Text(
+                "${BlocProvider.of<ProfileCubit>(context).myUser!.name![0].toUpperCase()}")),
         SizedBox(
           width: screenWidth * 0.05,
         ),
