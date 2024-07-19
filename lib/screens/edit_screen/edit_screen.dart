@@ -13,6 +13,7 @@ import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
 import 'package:task_manger/cubits/tasks/cubit.dart';
 import 'package:task_manger/models/task_model.dart';
+import 'package:task_manger/models/user_model.dart';
 import 'package:task_manger/screens/add_task_screen/models/user.dart';
 import 'package:task_manger/screens/add_task_screen/pages/user_selection_page.dart';
 
@@ -42,7 +43,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
   final _pageController2 = PageController();
   DateTime _date = DateTime.now();
   TimeOfDay _time = TimeOfDay.now();
-  List<User> _users = [];
+  List<Friend> _users = [];
   List<int> points = [1, 2, 3, 5, 8, 11, 13, 18, 21];
   int selectedPoint = -1;
   List<String> priority = ['Low', 'Medium', 'High'];
@@ -1023,7 +1024,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     return fibonacci(n - 1) + fibonacci(n - 2);
   }
 
-  _userWidget(User user) => Column(
+  _userWidget(Friend user) => Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
@@ -1040,16 +1041,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                   shape: BoxShape.circle,
                 ),
                 margin: const EdgeInsets.all(1.0),
-                child: Image.asset(
-                  user.image,
-                  fit: BoxFit.cover,
-                ),
+                child: Text(user.name![0])
               ),
             ),
           ),
           Expanded(
             child: Text(
-              user.name,
+              user.name!,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 10.0,

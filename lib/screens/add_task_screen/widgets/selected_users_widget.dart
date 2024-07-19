@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_manger/models/user_model.dart';
 
 import '../models/user.dart';
 
 class SelectedUsersWidget extends StatefulWidget {
-  final List<User> users;
+  final List<Friend> users;
   const SelectedUsersWidget({super.key, required this.users});
 
   @override
@@ -49,7 +50,7 @@ class _SelectedUsersWidgetState extends State<SelectedUsersWidget> {
     );
   }
 
-  _userWidget(User user) => Container(
+  _userWidget(Friend user) => Container(
         clipBehavior: Clip.antiAlias,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -65,10 +66,6 @@ class _SelectedUsersWidgetState extends State<SelectedUsersWidget> {
             alignment: Alignment.center,
             fit: StackFit.expand,
             children: [
-              Image.asset(
-                user.image,
-                fit: BoxFit.cover,
-              ),
               BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
                 child: Container(
@@ -78,7 +75,7 @@ class _SelectedUsersWidgetState extends State<SelectedUsersWidget> {
                     child: Transform.scale(
                       scale: .5,
                       child: Text(
-                        user.name[0].toUpperCase(),
+                        user.name![0].toUpperCase(),
                         style: const TextStyle(
                             fontSize: 100,
                             color: Colors.white,
