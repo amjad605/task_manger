@@ -16,7 +16,7 @@ class UsersSelectionPage extends StatefulWidget {
   final List<Friend> initialUsers;
   final Function(List<Friend> selectedUsers) callback;
   const UsersSelectionPage(
-      {super.key, this.initialUsers = const [], required this.callback});
+      {super.key, required this.initialUsers , required this.callback});
 
   @override
   State<UsersSelectionPage> createState() => _UsersSelectionPageState();
@@ -108,9 +108,8 @@ class _UsersSelectionPageState extends State<UsersSelectionPage> {
                                     onTap: () {
                                       setState(() {
                                         if (selectedUsers
-                                            .contains(currentUsers[index])) {
-                                          selectedUsers
-                                              .remove(currentUsers[index]);
+                                            .any((user) => user.id == currentUsers[index].id)) {
+                                         selectedUsers.removeWhere((user) => user.id == currentUsers[index].id);
                                         } else {
                                           selectedUsers
                                               .add(currentUsers[index]);
@@ -120,7 +119,7 @@ class _UsersSelectionPageState extends State<UsersSelectionPage> {
                                     },
                                     child: _userWidget(currentUsers[index],
                                         isSelected: selectedUsers
-                                            .contains(currentUsers[index])),
+                                        .any((user) => user.id == currentUsers[index].id)),
                                   ),
                                 ),
                         ),

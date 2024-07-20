@@ -129,12 +129,12 @@ class TaskWidget extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(left: 8.0.w),
                       child: Row(children: [
-                        for (int i = 0; i < 3; i++)
+                        for (int i = 0; i < task.userId!.length; i++)
                           Align(
                               widthFactor: 1 / 3,
                               child: CircleAvatar(
                                 radius: 12.r,
-                                backgroundColor: Colors.white,
+                                backgroundColor: Colors.grey,
                                 child: CircleAvatar(
                                   radius: 10.r,
                                   backgroundImage: const AssetImage(

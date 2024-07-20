@@ -933,7 +933,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                       "user_id": [
                                         BlocProvider.of<ProfileCubit>(context)
                                             .myUser!
-                                            .id
+                                            .id,
+                                            ..._users.map((user) => user.id)
                                       ],
                                       'name': _titleController.text,
                                       if (_descriptionController.text
