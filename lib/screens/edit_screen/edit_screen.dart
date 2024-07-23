@@ -112,6 +112,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                             });
                           },
                           initialUsers: _users,
+                          selectedID: widget.task.userId!,
                         ),
                         Stack(
                           children: [
@@ -936,9 +937,11 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                     ApiService api = ApiService();
                                     await api.post(endPoint: '/tasks', body: {
                                       "user_id": [
-                                        BlocProvider.of<ProfileCubit>(context)
-                                            .myUser!
-                                            .id
+                                     {
+                                        BlocProvider.of<ProfileCubit>(context).myUser!.id,
+                                        ..._users.map((user) => user.id),
+                                        ...widget.task.userId!
+                                      }.toSet().toList(),
                                       ],
                                       'name': _titleController.text,
                                       if (_descriptionController.text

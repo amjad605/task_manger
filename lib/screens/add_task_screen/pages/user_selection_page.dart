@@ -16,8 +16,8 @@ class UsersSelectionPage extends StatefulWidget {
   final List<Friend> initialUsers;
   final Function(List<Friend> selectedUsers) callback;
   const UsersSelectionPage(
-      {super.key, required this.initialUsers , required this.callback});
-
+      {super.key, required this.initialUsers , required this.callback,  this.selectedID=const[]});
+final List<String> selectedID;
   @override
   State<UsersSelectionPage> createState() => _UsersSelectionPageState();
 }
@@ -45,6 +45,8 @@ class _UsersSelectionPageState extends State<UsersSelectionPage> {
       builder: (context, state) {
        if(state is GetMyFriendsSuccessState) {
         currentUsers=state.Friends;
+       selectedUsers.addAll(currentUsers.where((user) => 
+        widget.selectedID.contains(user.id)).toList());
         return SafeArea(
           child: Padding(
             padding:
