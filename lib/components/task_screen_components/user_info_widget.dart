@@ -1,5 +1,4 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Constants/constants.dart';
@@ -8,12 +7,14 @@ import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
 Widget buildUserInfoWidget(
         double screenWidth, double screenHeight, BuildContext context) =>
     Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CircleAvatar(
-            radius: 33,
-            backgroundColor: Color.fromARGB(221, 67, 66, 66),
-            child: Text(
-                "${BlocProvider.of<ProfileCubit>(context).myUser!.name![0].toUpperCase()}")),
+          radius: 20,
+          backgroundColor: Color.fromARGB(221, 67, 66, 66),
+          child: Text(
+              "${BlocProvider.of<ProfileCubit>(context).myUser!.name![0].toUpperCase()}"),
+        ),
         SizedBox(
           width: screenWidth * 0.05,
         ),
@@ -40,7 +41,8 @@ Widget buildUserInfoWidget(
             ],
           ),
         ),
-        buildEmailNotificationWidget(screenWidth, screenHeight)
+
+        // buildEmailNotificationWidget(screenWidth, screenHeight)
       ],
     );
 
