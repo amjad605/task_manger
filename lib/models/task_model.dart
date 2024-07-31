@@ -23,6 +23,7 @@ class Data {
   String? category;
   int? points;
   List<String> subTasks = [];
+  List<String>? userId;
   String? deadline;
   String? finishedAt;
   String? startedAt;
@@ -42,6 +43,7 @@ class Data {
     deadline = json['deadline'];
     finishedAt = json['finished_at'];
     startedAt = json['started_at'];
+    userId = (json['user_id'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? [];
     createdAt = json['created_at'];
     iV = json['__v'];
   }

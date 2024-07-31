@@ -126,32 +126,32 @@ class TaskWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 8.0.w),
-                      child: Row(children: [
-                        for (int i = 0; i < 3; i++)
-                          Align(
-                              widthFactor: 1 / 3,
-                              child: CircleAvatar(
-                                radius: 12.r,
-                                backgroundColor: Colors.white,
-                                child: CircleAvatar(
-                                  radius: 10.r,
-                                  backgroundImage: const AssetImage(
-                                    "assets/images/Person_1.png",
-                                  ),
-                                ),
-                              )),
-                        const Spacer(),
-                        CirclePlay(
-                          taskId: task.sId!,
-                          started: task.startedAt,
-                          finshed: task.finishedAt,
-                        )
-                        //       ],
-                        //     ))
-                      ]),
-                    )
+                    Row(
+                      children: [
+                       Text("assigned to:",
+                     style: TextStyle(
+                          fontSize: 12.sp,
+                          fontFamily: mainFont,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),),
+                    SizedBox(width:2),
+                                         Text(
+                      "${task.userId!.length}",
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontFamily: mainFont,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                      const Spacer(),
+                      CirclePlay(
+                        taskId: task.sId!,
+                        started: task.startedAt,
+                        finshed: task.finishedAt,
+                      )
+                      //       ],
+                      //     ))
+                    ])
                   ],
                 )),
           ),
