@@ -10,7 +10,7 @@ Widget buildUserInfoWidget(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CircleAvatar(
-          radius: 20,
+          radius: 30,
           backgroundColor: Color.fromARGB(221, 67, 66, 66),
           child: Text(
               "${BlocProvider.of<ProfileCubit>(context).myUser!.name![0].toUpperCase()}"),

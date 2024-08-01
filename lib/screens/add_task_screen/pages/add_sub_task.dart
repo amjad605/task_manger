@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Api/api_servies.dart';
@@ -38,9 +38,8 @@ class _AddSubTaskScreenState extends State<AddSubTaskScreen> {
   final SequenceAnimationController _animationController =
       SequenceAnimationController();
 
-  final _categoryController = TextEditingController();
   final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
+
   final _pageController2 = PageController();
 
   int selectedPriority = -1;
@@ -193,12 +192,12 @@ class _AddSubTaskScreenState extends State<AddSubTaskScreen> {
                                                       MainAxisAlignment
                                                           .spaceAround,
                                                   children: [
-                                                    Column(
+                                                    const Column(
                                                       crossAxisAlignment:
                                                           CrossAxisAlignment
                                                               .start,
                                                       children: [
-                                                        const SizedBox(
+                                                        SizedBox(
                                                           height: 12.0,
                                                         ),
                                                       ],

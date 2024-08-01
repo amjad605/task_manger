@@ -126,23 +126,24 @@ class TaskWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                       Text("assigned to:",
-                     style: TextStyle(
-                          fontSize: 12.sp,
-                          fontFamily: mainFont,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),),
-                    SizedBox(width:2),
-                                         Text(
-                      "${task.userId!.length}",
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontFamily: mainFont,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
+                    Row(children: [
+                      Text(
+                        "assigned to:",
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontFamily: mainFont,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(width: 2),
+                      Text(
+                        "${task.userId!.length}",
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontFamily: mainFont,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                       const Spacer(),
                       CirclePlay(
                         taskId: task.sId!,
@@ -205,7 +206,7 @@ class TaskWidget extends StatelessWidget {
                                     secondaryAnimation, child) =>
                                 CircleTransition(
                               animation: animation,
-                              startingPoint: getOffsett(fabKey),
+                              startingPoint: Offset(width / 2, height / 2),
                               startingRadius: 56.0,
                               child: child,
                             ),
@@ -234,7 +235,7 @@ class TaskWidget extends StatelessWidget {
                                     secondaryAnimation, child) =>
                                 CircleTransition(
                               animation: animation,
-                              startingPoint: getOffsett(fabKey),
+                              startingPoint: Offset(width / 2, height / 2),
                               startingRadius: 56.0,
                               child: child,
                             ),
@@ -286,7 +287,7 @@ class TaskWidget extends StatelessWidget {
 }
 
 Offset getOffsett(GlobalKey key) {
-  final renderBox = (key.currentContext?.findRenderObject() as RenderBox);
+  RenderBox renderBox = key.currentContext!.findRenderObject()! as RenderBox;
   final offset = renderBox.localToGlobal(
       Offset(renderBox.size.width / 2, renderBox.size.height / 2));
   return offset;

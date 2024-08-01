@@ -28,7 +28,7 @@ class TasksScreen extends StatelessWidget {
           if (state is ProfileSuccessState) {
             SwitchDoneLeftTasks.get(context).switched(0);
             return Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.05),
+              padding: EdgeInsets.only(top: screenHeight * 0.1),
               child: Column(
                 children: [
                   Padding(
