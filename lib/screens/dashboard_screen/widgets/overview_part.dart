@@ -117,7 +117,7 @@ class OverviewPart extends StatelessWidget {
       ),
     );
   }*/
-  return const Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         CustomContainerWithTextImage(

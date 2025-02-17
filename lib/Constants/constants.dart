@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manger/models/user_account.dart';
 
 const kItemsBackgroundColor = Color.fromRGBO(32, 32, 36, 0.831);
 const kBackgroundColor = Color(0xFF131416);
@@ -17,3 +18,10 @@ final emailValid = RegExp(
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
 final nameValid = RegExp(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
+const kLoginEndPount = "/users/login";
+const kRegestierEndPoint = '/users/signup';
+const kTasksEndPount = "/tasks/";
+const String kAccessToken = "token";
+const String kUserData = "user";
+UserAccount? user;
+String? token;

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Constants/constants.dart';
 import 'package:task_manger/components/button.dart';
 import 'package:task_manger/components/login_widgets.dart';
+import 'package:task_manger/components/task_screen_components/show_toast.dart';
 import 'package:task_manger/cubits/auth/cubit.dart';
 import 'package:task_manger/cubits/auth/states.dart';
 import 'package:task_manger/screens/auth/login/login_email_screen.dart';
@@ -11,8 +12,8 @@ import 'package:task_manger/screens/controller_screen/controller_screen.dart';
 import 'package:task_manger/slide_page_route.dart';
 
 class LoginPasswordScreen extends StatelessWidget {
-  const LoginPasswordScreen({super.key});
-
+  const LoginPasswordScreen({super.key, required this.email});
+  final String email;
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
@@ -41,8 +42,8 @@ class LoginPasswordScreen extends StatelessWidget {
                         children: [
                           backIcon(
                             onPressed: () {
-                              Navigator.of(context).pop(
-                                  SlidePageRoute(page: const LoginEmailScreen()));
+                              Navigator.of(context).pop(SlidePageRoute(
+                                  page: const LoginEmailScreen()));
                             },
                           ),
                           SizedBox(
@@ -64,13 +65,13 @@ class LoginPasswordScreen extends StatelessWidget {
                           FadeInLeft(
                             child: TextButton(
                               onPressed: () {
-                                Navigator.of(context).pop(
-                                    SlidePageRoute(page: const LoginEmailScreen()));
+                                Navigator.of(context).pop(SlidePageRoute(
+                                    page: const LoginEmailScreen()));
                               },
-                              child: const Text.rich(
+                              child: Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: 'Using ',
                                       style: TextStyle(
                                         color: Colors.grey,
@@ -78,14 +79,14 @@ class LoginPasswordScreen extends StatelessWidget {
                                       ),
                                     ),
                                     TextSpan(
-                                      text: 'aya@gmail.com',
-                                      style: TextStyle(
+                                      text: email,
+                                      style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    TextSpan(
+                                    const TextSpan(
                                       text: ' to login',
                                       style: TextStyle(
                                         color: Colors.grey,
@@ -107,9 +108,9 @@ class LoginPasswordScreen extends StatelessWidget {
                                     if (value!.isEmpty) {
                                       return 'Password cannot be empty ';
                                     }
-                                    if (!passValid.hasMatch(value)) {
-                                      return 'Enter valid password';
-                                    }
+                                    // if (!passValid.hasMatch(value)) {
+                                    //   return 'Enter valid password';
+                                    // }
                                     return null;
                                   },
                                   password: password,
@@ -123,19 +124,64 @@ class LoginPasswordScreen extends StatelessWidget {
                                   },
                                 ),
                                 const SizedBox(height: 50),
-                                DefaultButton(
-                                    width: 0.7 * screenWidth,
-                                    height: 50.0,
-                                    onPressed: () {
-                                      if (formKey.currentState!.validate()) {
-                                        Navigator.of(context).pushAndRemoveUntil(
-                                            MaterialPageRoute(
-                                                builder: (ctx) =>
-                                                    const ControllerScreen()),
-                                            (route) => false);
-                                      }
-                                    },
-                                    text: "Sign In"),
+                                BlocConsumer<LoginCubit, LoginStates>(
+                                  listener: (context, state) {
+                                    if (state is LoginSuccessState) {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (ctx) =>
+                                                  const ControllerScreen()),
+                                          (route) => false);
+                                    }
+                                    if (state is LoginFailureState) {
+                                      showToast(text: state.error.errmsg);
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    var cubit =
+                                        BlocProvider.of<LoginCubit>(context);
+                                    if (state is LoginLoadingState) {
+                                      return DefaultButton(
+                                          width: 0.7 * screenWidth,
+                                          height: 50.0,
+                                          onPressed: () {
+                                            // if (formKey.currentState!
+                                            //     .validate()) {
+                                            cubit.login(
+                                                email: email,
+                                                pass: password.text);
+                                            //  }
+                                            // }
+                                          },
+                                          color: Colors.transparent,
+                                          child:
+                                              const CircularProgressIndicator(
+                                            color: kLightblue,
+                                          ));
+                                    } else {
+                                      return DefaultButton(
+                                        width: 0.7 * screenWidth,
+                                        height: 50.0,
+                                        onPressed: () {
+                                          // if (formKey.currentState!
+                                          //     .validate()) {
+                                          cubit.login(
+                                              email: email,
+                                              pass: password.text);
+                                          //  }
+                                          // }
+                                        },
+                                        child: const Text(
+                                          "Sign In",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 19,
+                                              color: Colors.white),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
                               ],
                             ),
                           ),

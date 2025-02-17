@@ -22,7 +22,7 @@ class ChangeScreenBottomNav extends Cubit<ScreenState> {
     this.index = index;
     pageController.animateToPage(index,
         duration: const Duration(milliseconds: 300), curve: Curves.ease);
-    _emitScreen(index);
+    //_emitScreen(index);
   }
 
   _emitScreen(int index) {

@@ -13,11 +13,11 @@ Widget calendarWidget(screenHeight, screenWidth, DateTime date) {
   colorContainer(DateTime date) {
     if (date.day == DateTime.now().day) {
       return [
-         kMainColor,
-      Color.lerp(kMainColor, kGradientOrange, 0.5)!,
-      kGradientOrange,
-      Color.lerp(kGradientOrange, kLightblue, 0.5)!,
-      kLightblue,
+        kMainColor,
+        Color.lerp(kMainColor, kGradientOrange, 0.5)!,
+        kGradientOrange,
+        Color.lerp(kGradientOrange, kLightblue, 0.5)!,
+        kLightblue,
       ];
     } else {
       return [const Color(0xff333333), kPriamaryColor];

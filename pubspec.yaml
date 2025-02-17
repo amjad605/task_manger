@@ -30,12 +30,17 @@ environment:
 dependencies:
   animate_do: ^3.3.3
   animated_text_kit: ^4.2.2
+  circular_menu: ^2.0.1
   cupertino_icons: ^1.0.6
+  dartz: ^0.10.1
+  dio: ^5.4.2+1
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
   flutter_screenutil: ^5.9.0
   flutter_svg: ^2.0.10+1
+  fluttertoast: ^8.2.4
   google_fonts: 6.0.0
   hexagon: ^0.2.0
   image_picker: ^1.0.7
@@ -43,6 +48,8 @@ dependencies:
   liquid_swipe: ^3.1.0
   modal_progress_hud_nsn: ^0.5.1
   percent_indicator: ^4.2.3
+  popup_menu: ^2.0.0
+  shared_preferences: ^2.2.2
   syncfusion_flutter_charts: ^24.2.7+1
   toggle_switch: ^2.1.0
 
@@ -64,6 +71,8 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/icons/completed_tasks.png
+    - assets/icons/total_tasks.png
     - assets/images/Person_1.png
     - assets/Icons/
   #   - images/a_dot_ham.jpeg

@@ -1,4 +1,3 @@
-
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manger/Constants/constants.dart';
@@ -88,11 +87,19 @@ class _LoginEmailScreenState extends State<LoginEmailScreen> {
                               DefaultButton(
                                 width: 0.7 * screenWidth,
                                 height: 0.06 * screenHeight,
-                                text: "Continue with email",
+                                child: const Text(
+                                  "Continue with email",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 19,
+                                      color: Colors.white),
+                                ),
                                 onPressed: () {
                                   if (_formKey.currentState!.validate()) {
                                     Navigator.of(context).push(SlidePageRoute(
-                                        page: const LoginPasswordScreen()));
+                                        page: LoginPasswordScreen(
+                                      email: email.text,
+                                    )));
                                   }
                                 },
                               ),

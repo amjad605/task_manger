@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -13,8 +15,8 @@ import 'package:task_manger/screens/tasks_screen/task_info.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({super.key});
-
+  TasksScreen({super.key});
+  var _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -34,8 +36,8 @@ class TasksScreen extends StatelessWidget {
                   SizedBox(
                     height: screenHeight * 0.009,
                   ),
-                  buildTaskCompleteWidget(screenWidth,screenHeight),
-                SizedBox(
+                  buildTaskCompleteWidget(screenWidth, screenHeight),
+                  SizedBox(
                     height: screenHeight * 0.02,
                   ),
                 ],
@@ -44,19 +46,24 @@ class TasksScreen extends StatelessWidget {
             SizedBox(
               height: screenHeight * 0.125,
               child: ListView.separated(
+                controller: _controller,
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 itemCount: dates.length,
-                itemBuilder: (context, index) =>
-                    calendarWidget(screenHeight, screenWidth, dates[index]),
-                separatorBuilder: (BuildContext context, int index) =>
-                     SizedBox(
-                  width: screenWidth*0.04,
+                itemBuilder: (context, index) {
+                  _controller.animateTo((43 * index).toDouble(),
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.linear);
+                  return calendarWidget(
+                      screenHeight, screenWidth, dates[index]);
+                },
+                separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  width: screenWidth * 0.03,
                 ),
               ),
             ),
-             SizedBox(
-              height: screenHeight*0.04,
+            SizedBox(
+              height: screenHeight * 0.04,
             ),
             Expanded(
               child: Container(
@@ -141,7 +148,7 @@ class TasksScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final task = tasks[index];
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(vertical: 18.0),
                             child: TaskWidget(
                               percent: task.percent,
                               titleTask: task.titleTask,
