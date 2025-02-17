@@ -4,5 +4,13 @@ part of 'add_friend_cubit.dart';
 abstract class AddFriendState {}
 
 class AddInitial extends AddFriendState {}
-class SearchingState extends AddFriendState {}
+
+
 class AddSucssesState extends AddFriendState {}
+
+class AddFriendLoadingState extends AddFriendState {}
+
+class AddFriendSuccsesState extends AddFriendState {}
+
+class AddFriendFailureState extends AddFriendState {}
+

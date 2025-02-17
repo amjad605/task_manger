@@ -19,8 +19,19 @@ final emailValid = RegExp(
 
 final nameValid = RegExp(r"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$");
 const kLoginEndPount = "/users/login";
+const kProfileEndPoint = "/users/profile";
+const kMyFriends = "/users/myFriends";
+const kSearchFriendEndPoint = "/users/searchUser";
 const kRegestierEndPoint = '/users/signup';
 const kTasksEndPount = "/tasks/";
+const kAddFriend = "/users/sendFriendRequest/";
+const kAcceptFriendRequests = "/users/acceptFriendRequest/";
+const kRejectFriendRequests = "/users/rejectFriendRequest/";
+const kGetFriendRequests = "/users/myRequests/";
+const kTasksEndPoint = "/tasks/";
+const kInProgressEndPoint = "in-progress";
+const kDoneEndPoint = "finished";
+
 const String kAccessToken = "token";
 const String kUserData = "user";
 UserAccount? user;

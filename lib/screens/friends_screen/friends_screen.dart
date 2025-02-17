@@ -3,12 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:task_manger/cubits/add_friend_cubit/add_friend_cubit.dart';
+import 'package:task_manger/cubits/change_friends_body/change_friends_body_cubit.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
 import 'package:task_manger/screens/add_friend_screen/add_friend_screen.dart';
 import 'package:task_manger/screens/friends_screen/widgets/friend_item.dart';
+import 'package:task_manger/screens/friends_screen/widgets/friends_view.dart';
+import 'package:task_manger/screens/friends_screen/widgets/requests_view.dart';
 
 import '../../Constants/constants.dart';
+import '../../cubits/friends/friends_cubit.dart';
+import '../../cubits/manage_friend_request/manage_friend_request_cubit.dart';
 import '../../models/user_model.dart';
 
 class FriendsScreen extends StatelessWidget {
@@ -16,75 +22,98 @@ class FriendsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    User myUser = BlocProvider.of<ProfileCubit>(context).myUser;
-    List<User> friends = myUser.friends;
+    // User myUser = BlocProvider.of<ProfileCubit>(context).myUser!;
+    List<User> friends = [];
     return Scaffold(
-      backgroundColor: kBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: BackButton(
-          onPressed: () => Navigator.pop(context),
+        backgroundColor: kBackgroundColor,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: Text(
+            "Friends",
+            style: TextStyle(
+                fontSize: 22.sp,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontFamily: mainFont),
+          ),
+          centerTitle: true,
         ),
-        title: Text(
-          "Friends",
-          style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontFamily: mainFont),
-        ),
-        centerTitle: true,
-      ),
-      body: BlocConsumer<AddFriendCubit, AddFriendState>(
-        listener: (context, state) {
-          myUser =BlocProvider.of<ProfileCubit>(context).myUser;
-        },
-        builder: (context, state) {
-          return Column(
-            children: [
-              SizedBox(
-                height: 8.h,
-              ),
-              Expanded(
-                child: ListView.separated(
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (context, index) => FriendItem(
-                          friend: friends[index],
+        body: BlocBuilder<ChangeFriendsBodyCubit, ChangeFriendsBodyState>(
+          builder: (context, state) {
+            if (state is RequestsViewState){
+              BlocProvider.of<FriendsCubit>(context).getMyRequests();
+            }
+            else{
+              BlocProvider.of<FriendsCubit>(context).getMyFriends();
+            }
+              return Column(
+                children: [
+                  SizedBox(height:10.h ,),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        InkWell(
+                          onTap: (){
+                            if (state is RequestsViewState) {
+                              BlocProvider.of<ChangeFriendsBodyCubit>(context)
+                                  .FriendsView();
+
+                            }
+                          },
+                          child: Text(
+                            "Friends",
+                            style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight:  FontWeight.w700,
+                              decoration:
+                              state is FriendsViewState ?
+                              TextDecoration.underline
+                                  : TextDecoration.none,
+                              color: state is FriendsViewState ? kLightblue
+                                  :null,
+                              decorationColor:kLightblue
+                            ),
+                          ),
                         ),
-                    separatorBuilder: (context, index) => SizedBox(
-                          height: 18.h,
+                        InkWell(
+                          onTap: (){
+                            if (state is FriendsViewState) {
+                              BlocProvider.of<ChangeFriendsBodyCubit>(context).RequestsView();
+
+                            }
+
+                          },
+                          child: Text(
+                            "Requests",
+                            style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w700,
+                                decoration:
+                                state is RequestsViewState ?
+                                TextDecoration.underline
+                                    : TextDecoration.none,
+                                color: state is RequestsViewState ? kLightblue
+                                    :null,
+                                decorationColor:kLightblue
+                            ),
+                          ),
                         ),
-                    itemCount: myUser.friends.length),
-              ),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AddFriendScreen(),
-                        ));
-                  },
-                  child: Text(
-                    "Invite a friend",
-                    style: TextStyle(
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                        fontFamily: mainFont),
+                      ]
                   ),
-                  style: ElevatedButton.styleFrom(
-                      fixedSize: Size(300.w, 50.h),
-                      backgroundColor: kLightblue),
-                ),
-              ),
-              SizedBox(
-                height: 18.h,
-              )
-            ],
-          );
-        },
-      ),
+                   SizedBox(height:15.h),
+                   Expanded(
+                      child: state is FriendsViewState?
+                        FriendsView()
+                          :RequestsView()
+                  )
+
+                ],
+              );
+            }
+        )
     );
   }
 }

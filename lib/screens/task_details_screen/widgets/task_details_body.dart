@@ -1,81 +1,113 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/models/task_model.dart';
 
 class TaskDetailBody extends StatelessWidget {
-  const TaskDetailBody({super.key});
-
+  const TaskDetailBody({super.key, required this.task});
+  final Data task;
   @override
   Widget build(BuildContext context) {
+    DateTime createdAtdate = DateTime.parse(task.createdAt!);
+    DateTime deadLinedate = DateTime.parse(task.deadline!);
+    String formattedCreatedAtdate = DateFormat('dd MMM').format(createdAtdate);
+    String formattedDeadLinedate = DateFormat('dd MMM').format(deadLinedate);
     var height = MediaQuery.of(context).size.height;
     return Container(
       color: Colors.black,
       child: Stack(
         fit: StackFit.expand,
         children: [
-          Positioned(
-              top: height * 0.3,
+          Positioned.fill(
+              top: height * 0.35,
               right: 0,
-              bottom: 0,
+              bottom: 10,
               left: 0,
-              child: ListView.builder(itemBuilder: (ctx, indx) => SubTask())),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  width: double.infinity,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            //shrinkWrap: true,
+                            //   reverse: true,
+                            itemCount: task.subTasks.length,
+                            itemBuilder: (ctx, indx) => SubTask(
+                                  title: task.subTasks[indx],
+                                )),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
           Positioned(
-            top: 0,
-            bottom: height * 0.6,
             right: 0,
+            //  top: 0,
             left: 0,
             child: Container(
+              width: double.infinity,
+              // height: 200,
               decoration: BoxDecoration(
                   color: kMainColor, borderRadius: BorderRadius.circular(30)),
               child: SafeArea(
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 0),
+                      const EdgeInsets.symmetric(horizontal: 30.0, vertical: 0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Creating Flutter Project and Work on it ",
+                      Text(
+                        "${task.description!} ",
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                         ),
-                        maxLines: 2,
+                        maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.calendar_month,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Date : 21 nov",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.alarm,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Date : 21 nov",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ],
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.calendar_month,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${formattedCreatedAtdate}",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.alarm,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${formattedDeadLinedate}",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 55,
@@ -100,7 +132,7 @@ class TaskDetailBody extends StatelessWidget {
                                       ),
                                   separatorBuilder: (ctx, indx) =>
                                       const SizedBox(
-                                        width: 5,
+                                        width: 1,
                                       ),
                                   itemCount: 3),
                             )
@@ -122,8 +154,9 @@ class TaskDetailBody extends StatelessWidget {
 class SubTask extends StatefulWidget {
   const SubTask({
     super.key,
+    required this.title,
   });
-
+  final String title;
   @override
   State<SubTask> createState() => _SubTaskState();
 }
@@ -137,35 +170,36 @@ class _SubTaskState extends State<SubTask> {
       padding: const EdgeInsets.all(10),
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
+          color: kItemsBackgroundColor.withOpacity(0.6),
           border: Border.all(color: Color.fromARGB(134, 82, 80, 80)),
           borderRadius: BorderRadius.circular(30)),
       child: Padding(
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              "Sub Task 1 ",
+            Text(
+              widget.title,
               style: TextStyle(fontSize: 18),
             ),
-            Checkbox.adaptive(
-                activeColor: kLightblue,
-                checkColor: Colors.black,
-                tristate: true,
-                fillColor: MaterialStateProperty.resolveWith<Color>(
-                    (Set<MaterialState> states) {
-                  if (states.contains(MaterialState.disabled)) {
-                    return kLightblue.withOpacity(.32);
-                  }
-                  return kLightblue;
-                }),
-                shape: const CircleBorder(),
-                value: isChecked,
-                onChanged: (value) {
-                  setState(() {
-                    isChecked = value ?? false;
-                  });
-                })
+            // Checkbox.adaptive(
+            //     activeColor: kLightblue,
+            //     checkColor: Colors.black,
+            //     tristate: true,
+            //     fillColor: MaterialStateProperty.resolveWith<Color>(
+            //         (Set<MaterialState> states) {
+            //       if (states.contains(MaterialState.disabled)) {
+            //         return kLightblue.withOpacity(.32);
+            //       }
+            //       return kLightblue;
+            //     }),
+            //     shape: const CircleBorder(),
+            //     value: isChecked,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         isChecked = value ?? false;
+            //       });
+            //     })
           ],
         ),
       ),

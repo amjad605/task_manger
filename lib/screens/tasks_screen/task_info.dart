@@ -1,41 +1,52 @@
 class TaskData {
-  final double percent;
-  final String titleTask;
-  final String deadlineDate;
-  final List<String> urlImages;
+  final String id;
+  final String name;
+  final String description;
+  final String priority;
+  final String category;
+  final int points;
+  final String deadline;
+  final String createdAt;
+  final String startedAt;
+  final String finishedAt;
+  final List<dynamic> subtasks;
+  final List<String> userId;
+  final int v;
 
   TaskData({
-    required this.percent,
-    required this.titleTask,
-    required this.deadlineDate,
-    required this.urlImages,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.priority,
+    required this.category,
+    required this.points,
+    required this.deadline,
+    required this.createdAt,
+    required this.startedAt,
+    required this.finishedAt,
+    required this.subtasks,
+    required this.userId,
+    required this.v,
   });
+  factory TaskData.fromJson(Map<String, dynamic> json) {
+    return TaskData(
+      id: json['_id'],
+      name: json['name'],
+      description: json['description'] ?? "",
+      priority: json['priority'] ?? "",
+      category: json['category'] ?? "",
+      points: json['points'] ?? -1,
+      deadline: json['deadline'] ?? "",
+      createdAt: json['createdAt'] ?? "",
+      startedAt: json['startedAt'] ?? "",
+      finishedAt: json['finishedAt'] ?? "",
+      subtasks: json['subtasks'] ?? [],
+      userId: json['userId'] ?? [],
+      v: json['__v'],
+    );
+  }
 }
 
-final List<TaskData> tasks = [
-  TaskData(
-    percent: 0.8,
-    titleTask: 'Lectures Study',
-    deadlineDate: '2024-03-15',
-    urlImages: [
-      'assets/images/Person_1.png',
-      'assets/images/Person_2.png',
-      'assets/images/Person_3.png'
-    ],
-  ),
-  TaskData(
-    percent: 0.5,
-    titleTask: 'Quiz Preparation',
-    deadlineDate: '2024-03-18',
-    urlImages: ['assets/images/Person_4.png'],
-  ),
-  TaskData(
-    percent: 0.3,
-    titleTask: 'Quiz Preparation',
-    deadlineDate: '2024-03-18',
-    urlImages: ['assets/images/Person_4.png', 'assets/images/Person_2.png'],
-  ),
-];
 DateTime today = DateTime.now();
 
 List<DateTime> dates = List.generate(

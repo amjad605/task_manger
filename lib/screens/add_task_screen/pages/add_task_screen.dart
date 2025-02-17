@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task_manger/Api/api_servies.dart';
 import 'package:task_manger/Constants/constants.dart';
-import 'package:task_manger/screens/add_task_screen/models/task.dart';
+import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
+import 'package:task_manger/cubits/tasks/cubit.dart';
+import 'package:task_manger/models/user_model.dart';
 import 'package:task_manger/screens/add_task_screen/models/user.dart';
 import 'package:task_manger/screens/add_task_screen/pages/user_selection_page.dart';
 
+import 'package:task_manger/Constants/constants.dart';
 import '../widgets/cross_fade.dart';
 import '../widgets/date_time.dart';
 import '../widgets/sequence_animation_builder.dart';
@@ -35,9 +38,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   final _categoryController = TextEditingController();
   final _titleController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _pageController2 = PageController();
   DateTime _date = DateTime.now();
   TimeOfDay _time = TimeOfDay.now();
-  List<User> _users = [];
+  List<Friend> _users = [];
+  List<int> points = [1, 2, 3, 5, 8, 11, 13, 18, 21];
+  int selectedPoint = -1;
+  List<String> priority = ['Low', 'Medium', 'High'];
+  int selectedPriority = -1;
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.sizeOf(context);
@@ -72,7 +81,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             AnimatedBuilder(
               animation: route!.animation!,
               builder: (context, child) => Opacity(
-                opacity: Curves.easeOut.transform(route!.animation!.value),
+                opacity: Curves.easeOut.transform(route.animation!.value),
                 child: Container(
                   color: kBackgroundColor,
                 ),
@@ -116,262 +125,744 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                       bottom: Radius.circular(
                                           screenSize.width * .1)),
                                 ),
-                                padding: EdgeInsets.symmetric(
-                                    vertical:
-                                        MediaQuery.of(context).padding.top *
-                                            1.5,
-                                    horizontal: 24.0),
-                                child: OverflowBox(
-                                  maxHeight: double.infinity,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Stack(
-                                        children: [
-                                          Positioned(
-                                            top: 4.0,
-                                            child: CrossFade(
-                                              direction: Alignment.centerRight,
-                                              value: Curves.easeOut
-                                                  .transform(values[1]),
-                                              child: GestureDetector(
-                                                onTap:
-                                                    Navigator.of(context).pop,
-                                                child: Container(
-                                                  color: Colors.transparent,
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: const Icon(
-                                                    Icons.arrow_back_rounded,
-                                                    color: kBackgroundColor,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Align(
-                                            alignment: Alignment.center,
-                                            child: CrossFade(
-                                              direction: Alignment.bottomCenter,
-                                              value: Curves.easeOut
-                                                  .transform(values[1]),
-                                              child: const Text('Add Task',
-                                                  style: TextStyle(
+                                padding: EdgeInsets.only(
+                                  top: MediaQuery.of(context).padding.top * 1.5,
+                                ),
+                                clipBehavior: Clip.none,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 24),
+                                        child: Stack(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: CrossFade(
+                                                direction:
+                                                    Alignment.centerRight,
+                                                value: Curves.easeOut
+                                                    .transform(values[1]),
+                                                child: GestureDetector(
+                                                  onTap:
+                                                      Navigator.of(context).pop,
+                                                  child: Container(
+                                                    color: Colors.transparent,
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            4.0),
+                                                    child: const Icon(
+                                                      Icons.arrow_back_rounded,
                                                       color: kBackgroundColor,
-                                                      fontSize: 24.0,
-                                                      fontWeight:
-                                                          FontWeight.w700)),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CrossFade(
-                                            value: Curves.easeOut
-                                                .transform(values[2]),
-                                            direction: Alignment.bottomCenter,
-                                            child: const Text(
-                                              'Category',
-                                              style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 12.0,
-                                          ),
-                                          FractionallySizedBox(
-                                            widthFactor: Curves.easeOut
-                                                .transform(values[2]),
-                                            alignment:
-                                                FractionalOffset.centerLeft,
-                                            child: Opacity(
-                                              opacity: Curves.easeOut
-                                                  .transform(values[2]),
-                                              child: TextFormField(
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 24.0,
-                                                          vertical: 20.0),
-                                                  hintText: 'UI/UX Design',
-                                                  hintStyle: const TextStyle(
-                                                      color: Colors.black54,
-                                                      fontWeight:
-                                                          FontWeight.w300),
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              16.0)),
+                                                    ),
+                                                  ),
                                                 ),
-                                                textInputAction:
-                                                    TextInputAction.next,
-                                                controller: _categoryController,
-                                                style: const TextStyle(
-                                                    color: Colors.black87),
                                               ),
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CrossFade(
-                                            value: Curves.easeOut
-                                                .transform(values[2]),
-                                            direction: Alignment.bottomCenter,
-                                            child: const Text(
-                                              'Title',
-                                              style: TextStyle(
-                                                color: Colors.black87,
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w700,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 12.0,
-                                          ),
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: FractionallySizedBox(
-                                              widthFactor: Curves.easeOut
-                                                  .transform(values[2]),
-                                              child: Opacity(
-                                                opacity: Curves.easeOut
-                                                    .transform(values[2]),
-                                                child: TextFormField(
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        const EdgeInsets
-                                                            .symmetric(
-                                                            horizontal: 24.0,
-                                                            vertical: 20.0),
-                                                    hintText:
-                                                        'Make Grocery Apps UI Design',
-                                                    hintStyle: const TextStyle(
-                                                        color: Colors.black54,
+                                            Align(
+                                              alignment: Alignment.center,
+                                              child: CrossFade(
+                                                direction:
+                                                    Alignment.bottomCenter,
+                                                value: Curves.easeOut
+                                                    .transform(values[1]),
+                                                child: const Text('Add Task',
+                                                    style: TextStyle(
+                                                        color: kBackgroundColor,
+                                                        fontSize: 24.0,
                                                         fontWeight:
-                                                            FontWeight.w300),
-                                                    border: OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    16.0)),
-                                                  ),
-                                                  controller: _titleController,
-                                                  style: const TextStyle(
-                                                      color: Colors.black87),
+                                                            FontWeight.w700)),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 24.0,
+                                    ),
+                                    Expanded(
+                                        flex: 9,
+                                        child: PageView(
+                                          clipBehavior: Clip.none,
+                                          controller: _pageController2,
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          children: [
+                                            OverflowBox(
+                                              maxHeight: double.infinity,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 24.0),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        CrossFade(
+                                                          value: Curves.easeOut
+                                                              .transform(
+                                                                  values[2]),
+                                                          direction: Alignment
+                                                              .bottomCenter,
+                                                          child: const Text(
+                                                            'Category',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black87,
+                                                              fontSize: 16.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 12.0,
+                                                        ),
+                                                        FractionallySizedBox(
+                                                          widthFactor: Curves
+                                                              .easeOut
+                                                              .transform(
+                                                                  values[2]),
+                                                          alignment:
+                                                              FractionalOffset
+                                                                  .centerLeft,
+                                                          child: Opacity(
+                                                            opacity: Curves
+                                                                .easeOut
+                                                                .transform(
+                                                                    values[2]),
+                                                            child:
+                                                                TextFormField(
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                contentPadding:
+                                                                    const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            24.0,
+                                                                        vertical:
+                                                                            20.0),
+                                                                hintText:
+                                                                    'UI/UX Design',
+                                                                hintStyle: const TextStyle(
+                                                                    color: Colors
+                                                                        .black54,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w300),
+                                                                border: OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            16.0)),
+                                                              ),
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .next,
+                                                              controller:
+                                                                  _categoryController,
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .black87),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        CrossFade(
+                                                          value: Curves.easeOut
+                                                              .transform(
+                                                                  values[2]),
+                                                          direction: Alignment
+                                                              .bottomCenter,
+                                                          child: const Text(
+                                                            'Title',
+                                                            style: TextStyle(
+                                                              color: Colors
+                                                                  .black87,
+                                                              fontSize: 16.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 12.0,
+                                                        ),
+                                                        Align(
+                                                          alignment: Alignment
+                                                              .centerRight,
+                                                          child:
+                                                              FractionallySizedBox(
+                                                            widthFactor: Curves
+                                                                .easeOut
+                                                                .transform(
+                                                                    values[2]),
+                                                            child: Opacity(
+                                                              opacity: Curves
+                                                                  .easeOut
+                                                                  .transform(
+                                                                      values[
+                                                                          2]),
+                                                              child:
+                                                                  TextFormField(
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  contentPadding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          24.0,
+                                                                      vertical:
+                                                                          20.0),
+                                                                  hintText:
+                                                                      'Make Grocery Apps UI Design',
+                                                                  hintStyle: const TextStyle(
+                                                                      color: Colors
+                                                                          .black54,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w300),
+                                                                  border: OutlineInputBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              16.0)),
+                                                                ),
+                                                                controller:
+                                                                    _titleController,
+                                                                style: const TextStyle(
+                                                                    color: Colors
+                                                                        .black87),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              CrossFade(
+                                                                value: Curves
+                                                                    .easeOut
+                                                                    .transform(
+                                                                        values[
+                                                                            3]),
+                                                                direction: Alignment
+                                                                    .bottomCenter,
+                                                                child:
+                                                                    const Text(
+                                                                  'Date',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .black87,
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 12.0,
+                                                              ),
+                                                              FractionallySizedBox(
+                                                                widthFactor: Curves
+                                                                    .easeOut
+                                                                    .transform(
+                                                                        values[
+                                                                            3]),
+                                                                alignment:
+                                                                    FractionalOffset
+                                                                        .centerLeft,
+                                                                child: Opacity(
+                                                                    opacity: Curves
+                                                                        .easeOut
+                                                                        .transform(
+                                                                            values[3]),
+                                                                    child: Date(
+                                                                      onSelectDate:
+                                                                          (newDate) =>
+                                                                              _date = newDate,
+                                                                    )),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 16.0,
+                                                        ),
+                                                        Expanded(
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              CrossFade(
+                                                                value: Curves
+                                                                    .easeOut
+                                                                    .transform(
+                                                                        values[
+                                                                            3]),
+                                                                direction: Alignment
+                                                                    .bottomCenter,
+                                                                child:
+                                                                    const Text(
+                                                                  'Time',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    color: Colors
+                                                                        .black87,
+                                                                    fontSize:
+                                                                        16.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                height: 12.0,
+                                                              ),
+                                                              Align(
+                                                                alignment: Alignment
+                                                                    .centerRight,
+                                                                child:
+                                                                    FractionallySizedBox(
+                                                                  widthFactor: Curves
+                                                                      .easeOut
+                                                                      .transform(
+                                                                          values[
+                                                                              3]),
+                                                                  child: Opacity(
+                                                                      opacity: Curves.easeOut.transform(values[3]),
+                                                                      child: Time(
+                                                                        onSelectTime:
+                                                                            (newTime) =>
+                                                                                _time = newTime,
+                                                                      )),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  ],
                                                 ),
                                               ),
                                             ),
-                                          )
-                                        ],
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 24.0),
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceAround,
+                                                children: [
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        'Points',
+                                                        style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 12.0,
+                                                      ),
+                                                      Row(
+                                                          children:
+                                                              List.generate(
+                                                        9,
+                                                        (index) => Expanded(
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                if (selectedPoint ==
+                                                                    index) {
+                                                                  selectedPoint =
+                                                                      -1;
+                                                                } else {
+                                                                  selectedPoint =
+                                                                      index;
+                                                                }
+                                                              });
+                                                            },
+                                                            child: Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          2.0),
+                                                              child:
+                                                                  AspectRatio(
+                                                                aspectRatio:
+                                                                    1.0,
+                                                                child:
+                                                                    AnimatedContainer(
+                                                                  duration: const Duration(
+                                                                      milliseconds:
+                                                                          300),
+                                                                  curve: Curves
+                                                                      .easeOut,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              12.0),
+                                                                      color: kBackgroundColor.withOpacity(selectedPoint ==
+                                                                              index
+                                                                          ? 1.0
+                                                                          : 0.0)),
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  child:
+                                                                      AnimatedDefaultTextStyle(
+                                                                    duration: const Duration(
+                                                                        milliseconds:
+                                                                            300),
+                                                                    curve: Curves
+                                                                        .easeOut,
+                                                                    style: TextStyle(
+                                                                        color: selectedPoint ==
+                                                                                index
+                                                                            ? Colors
+                                                                                .white
+                                                                            : kBackgroundColor.withOpacity(
+                                                                                .5),
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w700,
+                                                                        fontSize:
+                                                                            16.0),
+                                                                    child: Text(
+                                                                      points[index]
+                                                                          .toString(),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ))
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        'Priority',
+                                                        style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 12.0,
+                                                      ),
+                                                      SizedBox(
+                                                        height:
+                                                            (screenSize.width -
+                                                                    48.0) /
+                                                                3 *
+                                                                .4,
+                                                        child: Stack(
+                                                            clipBehavior:
+                                                                Clip.none,
+                                                            children: [
+                                                              AnimatedPositioned(
+                                                                duration:
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            300),
+                                                                curve: Curves
+                                                                    .easeOutBack,
+                                                                width: selectedPriority ==
+                                                                        -1
+                                                                    ? 0.0
+                                                                    : (screenSize.width -
+                                                                            48.0) /
+                                                                        3,
+                                                                height: (screenSize
+                                                                            .width -
+                                                                        48.0) /
+                                                                    3 *
+                                                                    .4,
+                                                                left: (screenSize
+                                                                            .width -
+                                                                        48.0) /
+                                                                    3 *
+                                                                    (selectedPriority ==
+                                                                            -1
+                                                                        ? selectedPriority -
+                                                                            .25
+                                                                        : selectedPriority),
+                                                                child:
+                                                                    Container(
+                                                                  decoration: BoxDecoration(
+                                                                      color:
+                                                                          kBackgroundColor,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              16.0)),
+                                                                ),
+                                                              ),
+                                                              Row(
+                                                                children: List
+                                                                    .generate(
+                                                                  3,
+                                                                  (index) =>
+                                                                      Expanded(
+                                                                          child:
+                                                                              GestureDetector(
+                                                                    onTap: () {
+                                                                      setState(
+                                                                          () {
+                                                                        if (selectedPriority ==
+                                                                            index) {
+                                                                          selectedPriority =
+                                                                              -1;
+                                                                        } else {
+                                                                          selectedPriority =
+                                                                              index;
+                                                                        }
+                                                                      });
+                                                                    },
+                                                                    child:
+                                                                        Container(
+                                                                      color: Colors
+                                                                          .transparent,
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      child:
+                                                                          AnimatedDefaultTextStyle(
+                                                                        duration:
+                                                                            const Duration(milliseconds: 300),
+                                                                        style:
+                                                                            TextStyle(
+                                                                          color: selectedPriority == index
+                                                                              ? Colors.white
+                                                                              : kBackgroundColor.withOpacity(.5),
+                                                                          fontSize:
+                                                                              16.0,
+                                                                          fontWeight:
+                                                                              FontWeight.w700,
+                                                                        ),
+                                                                        child:
+                                                                            Text(
+                                                                          priority[
+                                                                              index],
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  )),
+                                                                ),
+                                                              )
+                                                            ]),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const Text(
+                                                        'Description',
+                                                        style: TextStyle(
+                                                          color: Colors.black87,
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 12.0,
+                                                      ),
+                                                      TextFormField(
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  horizontal:
+                                                                      24.0,
+                                                                  vertical:
+                                                                      20.0),
+                                                          hintText:
+                                                              'This task is about creating the entire design for the product...',
+                                                          hintStyle:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .black54,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300),
+                                                          border: OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          16.0)),
+                                                        ),
+                                                        textInputAction:
+                                                            TextInputAction
+                                                                .next,
+                                                        controller:
+                                                            _descriptionController,
+                                                        style: const TextStyle(
+                                                            color:
+                                                                Colors.black87),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        )),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 32.0),
+                                      child: AnimatedBuilder(
+                                        animation: _pageController2,
+                                        builder: (context, child) => SizedBox(
+                                          height: 16,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              GestureDetector(
+                                                onTap: () => _pageController2
+                                                    .animateToPage(0,
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.easeOut),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                            color:
+                                                                kBackgroundColor,
+                                                            width: 2.0)),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.easeOut,
+                                                        width: (_pageController2
+                                                                        .page ??
+                                                                    0.0) <=
+                                                                .5
+                                                            ? 8.0
+                                                            : 0.0,
+                                                        height: (_pageController2
+                                                                        .page ??
+                                                                    0.0) <=
+                                                                .5
+                                                            ? 8.0
+                                                            : 0.0,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color:
+                                                              kBackgroundColor,
+                                                        ))),
+                                              ),
+                                              const SizedBox(width: 8.0),
+                                              GestureDetector(
+                                                onTap: () => _pageController2
+                                                    .animateToPage(1,
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.easeOut),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                            color:
+                                                                kBackgroundColor,
+                                                            width: 2.0)),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            2.0),
+                                                    child: AnimatedContainer(
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        curve: Curves.easeOut,
+                                                        width: (_pageController2
+                                                                        .page ??
+                                                                    0.0) >=
+                                                                .5
+                                                            ? 8.0
+                                                            : 0.0,
+                                                        height: (_pageController2
+                                                                        .page ??
+                                                                    0.0) >=
+                                                                .5
+                                                            ? 8.0
+                                                            : 0.0,
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
+                                                          color:
+                                                              kBackgroundColor,
+                                                        ))),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CrossFade(
-                                                  value: Curves.easeOut
-                                                      .transform(values[3]),
-                                                  direction:
-                                                      Alignment.bottomCenter,
-                                                  child: const Text(
-                                                    'Date',
-                                                    style: TextStyle(
-                                                      color: Colors.black87,
-                                                      fontSize: 16.0,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 12.0,
-                                                ),
-                                                FractionallySizedBox(
-                                                  widthFactor: Curves.easeOut
-                                                      .transform(values[3]),
-                                                  alignment: FractionalOffset
-                                                      .centerLeft,
-                                                  child: Opacity(
-                                                      opacity: Curves.easeOut
-                                                          .transform(values[3]),
-                                                      child: Date(
-                                                        onSelectDate:
-                                                            (newDate) =>
-                                                                _date = newDate,
-                                                      )),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 16.0,
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                CrossFade(
-                                                  value: Curves.easeOut
-                                                      .transform(values[3]),
-                                                  direction:
-                                                      Alignment.bottomCenter,
-                                                  child: const Text(
-                                                    'Time',
-                                                    style: TextStyle(
-                                                      color: Colors.black87,
-                                                      fontSize: 16.0,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 12.0,
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      Alignment.centerRight,
-                                                  child: FractionallySizedBox(
-                                                    widthFactor: Curves.easeOut
-                                                        .transform(values[3]),
-                                                    child: Opacity(
-                                                        opacity: Curves.easeOut
-                                                            .transform(
-                                                                values[3]),
-                                                        child: Time(
-                                                          onSelectTime:
-                                                              (newTime) =>
-                                                                  _time =
-                                                                      newTime,
-                                                        )),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  ),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
@@ -429,10 +920,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 value: Curves.easeOutBack.transform(values[5]),
                                 child: GestureDetector(
                                   onTap: () async {
-                                    if (_categoryController.text.isEmpty) {
-                                      showSnackBar('Enter valid category');
-                                      return;
-                                    }
                                     if (_titleController.text.isEmpty) {
                                       showSnackBar('Enter valid title');
                                       return;
@@ -441,28 +928,45 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                       next = true;
                                       stage = 1;
                                     });
-                                    Task task = Task(
-                                        category: _categoryController.text,
-                                        title: _titleController.text,
-                                        date: DateTime(
-                                            _date.year,
-                                            _date.month,
-                                            _date.day,
-                                            _time.hour,
-                                            _time.minute),
-                                        users: _users);
-
-                                    // TODO: Replace timers with async functions to load data from database
-
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 1000));
+                                    ApiService api = ApiService();
+                                    await api.post(endPoint: '/tasks', body: {
+                                      "user_id": [
+                                        BlocProvider.of<ProfileCubit>(context)
+                                            .myUser!
+                                            .id,
+                                            ..._users.map((user) => user.id)
+                                      ],
+                                      'name': _titleController.text,
+                                      if (_descriptionController.text
+                                          .trim()
+                                          .isNotEmpty)
+                                        'description':
+                                            _descriptionController.text,
+                                      if (_categoryController.text
+                                          .trim()
+                                          .isNotEmpty)
+                                        'category': _categoryController.text,
+                                      if (selectedPriority != -1)
+                                        'priority': priority[selectedPriority]
+                                            .toLowerCase(),
+                                      if (selectedPoint != -1)
+                                        'points': points[selectedPoint],
+                                      'deadline': DateTime(
+                                              _date.year,
+                                              _date.month,
+                                              _date.day,
+                                              _time.hour,
+                                              _time.minute)
+                                          .toIso8601String(),
+                                    });
                                     setState(() {
                                       next = true;
                                       stage = 2;
                                     });
                                     await Future.delayed(
                                         const Duration(milliseconds: 1000));
-                                    print(task);
+                                    BlocProvider.of<TasksCubit>(context)
+                                        .getAllTasks();
                                     Navigator.pop(context);
                                   },
                                   child: Center(
@@ -508,7 +1012,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     );
   }
 
-  _userWidget(User user) => Column(
+  int fibonacci(int n) {
+    if (n == 0 || n == 1) {
+      return n;
+    }
+
+    return fibonacci(n - 1) + fibonacci(n - 2);
+  }
+
+  _userWidget(Friend user) => Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
@@ -525,16 +1037,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   shape: BoxShape.circle,
                 ),
                 margin: const EdgeInsets.all(1.0),
-                child: Image.asset(
-                  user.image,
-                  fit: BoxFit.cover,
-                ),
+                child: Text(user.name![0])
               ),
             ),
           ),
           Expanded(
             child: Text(
-              user.name,
+              user.name!,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 10.0,

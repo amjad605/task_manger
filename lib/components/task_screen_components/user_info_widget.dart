@@ -1,17 +1,19 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_manger/Constants/constants.dart';
+import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
 
-Widget buildUserInfoWidget(double screenWidth, double screenHeight) => Row(
+Widget buildUserInfoWidget(
+        double screenWidth, double screenHeight, BuildContext context) =>
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CircleAvatar(
-          radius: 33,
-          backgroundColor: Colors.transparent,
-          child: Image.asset(
-            "assets/images/Person_1.png",
-            fit: BoxFit.contain,
-          ),
+          radius: 30,
+          backgroundColor: Color.fromARGB(221, 67, 66, 66),
+          child: Text(
+              "${BlocProvider.of<ProfileCubit>(context).myUser!.name![0].toUpperCase()}"),
         ),
         SizedBox(
           width: screenWidth * 0.05,
@@ -28,7 +30,7 @@ Widget buildUserInfoWidget(double screenWidth, double screenHeight) => Row(
                   animatedTexts: [
                     TypewriterAnimatedText(
                       speed: const Duration(milliseconds: 150),
-                      "Hello ${user!.name}👋",
+                      "Hello ${BlocProvider.of<ProfileCubit>(context).myUser!.name}👋",
                       textStyle: TextStyle(fontSize: screenHeight * 0.018),
                     )
                   ]),
@@ -39,7 +41,8 @@ Widget buildUserInfoWidget(double screenWidth, double screenHeight) => Row(
             ],
           ),
         ),
-        buildEmailNotificationWidget(screenWidth, screenHeight)
+
+        // buildEmailNotificationWidget(screenWidth, screenHeight)
       ],
     );
 

@@ -22,7 +22,7 @@ class EditProfileScreen extends StatelessWidget {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
-    User myUser= BlocProvider.of<ProfileCubit>(context).myUser;
+    User myUser = BlocProvider.of<ProfileCubit>(context).myUser!;
     var img = BlocProvider.of<ProfileCubit>(context).img;
     return BlocConsumer<ProfileCubit, ProfileEditingState>(
       listener: (context, state) {
@@ -49,7 +49,10 @@ class EditProfileScreen extends StatelessWidget {
                 SizedBox(
                   height: 30.h,
                 ),
-                ProfilePic(img: img, myUser: myUser,),
+                ProfilePic(
+                  img: img,
+                  myUser: myUser,
+                ),
                 Form(
                     key: keyForm,
                     autovalidateMode: mode,
@@ -58,23 +61,34 @@ class EditProfileScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 30.h,),
+                          SizedBox(
+                            height: 30.h,
+                          ),
                           CustomProfileTextFormField(
                             fieldName: "Your Email",
-                            controller: mailController..text = myUser.email,
+                            controller: mailController..text = myUser.email!,
                           ),
-                          SizedBox(height: 30.h,),
+                          SizedBox(
+                            height: 30.h,
+                          ),
                           CustomProfileTextFormField(
                             fieldName: "Your Name",
-                            controller: nameController..text = myUser.name,
+                            controller: nameController..text = myUser.name!,
                           ),
-                          SizedBox(height: 30.h,),
+                          SizedBox(
+                            height: 30.h,
+                          ),
                           CustomProfileTextFormField(
                             fieldName: "Password",
-                            controller: passwordController..text = myUser.password==null?"":myUser.password!,
+                            controller: passwordController
+                              ..text = myUser.password == null
+                                  ? ""
+                                  : myUser.password!,
                             needObscure: true,
                           ),
-                          SizedBox(height: 50.h,),
+                          SizedBox(
+                            height: 50.h,
+                          ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 50.w),
                             child: ElevatedButton(
