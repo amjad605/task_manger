@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:task_manger/cubits/add_friend_cubit/add_friend_cubit.dart';
 import 'package:task_manger/cubits/change_friends_body/change_friends_body_cubit.dart';
 import 'package:task_manger/cubits/profile_cubit/profile_cubit.dart';
